@@ -1,10 +1,9 @@
 package main;
 
 public class GameLogic {
-	private static Character waitingLetter;
+	private Character waitingLetter;
 
-	public static String answer(String a) {
-		var data = new Data();
+	public String answer(String a, Data data) {
 		var firstLetter = a.toUpperCase().charAt(0);
 		var lastLetter = a.toUpperCase().charAt(a.length() - 1);
 		var yourCity = firstLetter + a.toLowerCase().substring(1);
@@ -24,7 +23,7 @@ public class GameLogic {
 			return computeCity(lastLetter, data);
 		}
 		
-	private static String computeCity(char lastLetter, Data data) 
+	private String computeCity(char lastLetter, Data data) 
 	{
 		var myCities = data.cities.get(lastLetter).iterator();
 		var min = 1e10;

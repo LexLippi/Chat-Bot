@@ -7,6 +7,8 @@ public class CityGameChatBot {
 				+ " Я чат бот, который умеет играть в города."
 				+ " Если хочешь играть в города, введи команду \"Играть\"";
 		System.out.println(message);
+		var data = new Data();
+		var logic = new GameLogic();
 		var input = new Scanner(System.in);
 		while (true) 
 		{
@@ -22,7 +24,7 @@ public class CityGameChatBot {
 						isEnding = true;
 						break;
 					}
-					var result = GameLogic.answer(inputString);
+					var result = logic.answer(inputString, data);
 					System.out.println("Гена говорит: " + result);
 					if (result.compareTo("Я проиграл") == 0) 
 					{
