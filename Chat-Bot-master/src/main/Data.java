@@ -17,15 +17,15 @@ public class Data {
 	
 	private void getData() 
 	{
-		for (var i = '¿'; i <= 'ﬂ'; ++i)
+		for (var i = '–ê'; i <= '–Ø'; ++i)
 		{
 			cities.put(i, new HashSet<String>());
 			countCities.put(i, 0);
 			stopLetters.add(i);
 		}
-		stopLetters.add('®');
-		countCities.put('®', 0);
-		cities.put('®', new HashSet<String>());
+		stopLetters.add('–Å');
+		countCities.put('–Å', 0);
+		cities.put('–Å', new HashSet<String>());
 		try {
 			var reader = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\main\\resources\\input.txt"));
 			String line;
