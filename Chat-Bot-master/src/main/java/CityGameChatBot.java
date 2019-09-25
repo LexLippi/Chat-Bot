@@ -5,10 +5,9 @@ public class CityGameChatBot {
 	public static void main(String[] args) {
 		var message = "Привет, меня зовут Гена."
 				+ " Я чат бот, который умеет играть в города."
-				+ " Если хочешь играть в города, введи команду \\\"Играть\\\"";
+				+ " Если хочешь играть в города, введи команду \"Играть\"";
 		System.out.println(message);
 		var data = new Data();
-		System.out.println(data.stopLetters);
 		var logic = new GameLogic();
 		var input = new Scanner(System.in);
 		while (true) 
@@ -25,7 +24,7 @@ public class CityGameChatBot {
 						isEnding = true;
 						break;
 					}
-					var result = logic.answer(inputString, data);
+					var result = logic.getAnswer(inputString, data);
 					System.out.println("Гена говорит: " + result);
 					if (result.compareTo("Я проиграл") == 0) 
 					{

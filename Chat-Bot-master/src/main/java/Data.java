@@ -12,12 +12,25 @@ public class Data {
 	public HashSet<Character> stopLetters = new HashSet<Character>();
 	
 	public Data() {
+		initialize();
 		getData();
+	}
+	
+	public Data(String[] cities) 
+	{
+		initialize();
+		for (var city: cities) 
+		{
+			var firstLetter = city.toUpperCase().charAt(0);
+			this.cities.get(firstLetter).add(city);
+			countCities.put(firstLetter, countCities.get(firstLetter) + 1);
+			if (stopLetters.contains(firstLetter)) 
+				stopLetters.remove(firstLetter);
+		}
 	}
 	
 	private void getData() 
 	{
-		initialize();
 		try {
 			var reader = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\main\\resources\\input.txt"));
 			String line;
