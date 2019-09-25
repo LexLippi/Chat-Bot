@@ -31,12 +31,12 @@ public class GameLogic {
 		while (myCities.hasNext()) 
 		{
 			var currentCity = myCities.next();
-			var currentLastLetter = currentCity.toUpperCase().charAt(currentCity.length() - 1);
-			while (currentLastLetter == 'Ü' || currentLastLetter == 'Û' || currentLastLetter == '¨' || currentLastLetter == 'Ú') 
+			var i = 1;
+			var currentLastLetter = currentCity.toUpperCase().charAt(currentCity.length() - i);
+			while (data.stopLetters.contains(currentLastLetter)) 
 			{
-				var i = 2;
-				currentLastLetter = currentCity.toUpperCase().charAt(currentCity.length() - i);
 				++i;
+				currentLastLetter = currentCity.toUpperCase().charAt(currentCity.length() - i);
 			}
 			if (data.countCities.get(currentLastLetter) == 0) 
 			{

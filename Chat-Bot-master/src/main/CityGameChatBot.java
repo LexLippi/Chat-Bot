@@ -8,6 +8,7 @@ public class CityGameChatBot {
 				+ " Если хочешь играть в города, введи команду \\\"Играть\\\"";
 		System.out.println(message);
 		var data = new Data();
+		System.out.println(data.stopLetters);
 		var logic = new GameLogic();
 		var input = new Scanner(System.in);
 		while (true) 
