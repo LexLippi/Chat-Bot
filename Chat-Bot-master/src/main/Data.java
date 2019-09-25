@@ -17,15 +17,7 @@ public class Data {
 	
 	private void getData() 
 	{
-		for (var i = 'А'; i <= 'Я'; ++i)
-		{
-			cities.put(i, new HashSet<String>());
-			countCities.put(i, 0);
-			stopLetters.add(i);
-		}
-		stopLetters.add('Ё');
-		countCities.put('Ё', 0);
-		cities.put('Ё', new HashSet<String>());
+		initialize();
 		try {
 			var reader = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\main\\resources\\input.txt"));
 			String line;
@@ -41,5 +33,18 @@ public class Data {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void initialize() 
+	{
+		for (var i = 'А'; i <= 'Я'; ++i)
+		{
+			cities.put(i, new HashSet<String>());
+			countCities.put(i, 0);
+			stopLetters.add(i);
+		}
+		stopLetters.add('Ё');
+		countCities.put('Ё', 0);
+		cities.put('Ё', new HashSet<String>());
 	}
 }
