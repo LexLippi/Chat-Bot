@@ -2,3 +2,9 @@
 /Data.class
 /GameLogic.class
 /ComputeCity.class
+/ChatBot.class
+/CityGame.class
+/ExitType.class
+/GameExitType.class
+/AnswerType.class
+/CityAnswerType.class
