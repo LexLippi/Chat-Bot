@@ -32,18 +32,26 @@ public class GameLogic {
 		{
 			var currentCity = myCities.next();
 			var currentLastLetter = currentCity.toUpperCase().charAt(currentCity.length() - 1);
+			while (currentLastLetter == 'Ü' || currentLastLetter == 'Û' || currentLastLetter == '¨' || currentLastLetter == 'Ú') 
+			{
+				var i = 2;
+				currentLastLetter = currentCity.toUpperCase().charAt(currentCity.length() - i);
+				++i;
+			}
 			if (data.countCities.get(currentLastLetter) == 0) 
 			{
 				bestCity = currentCity;
+				waitingLetter = currentLastLetter;
 				break;
 			}
 			if (data.countCities.get(currentLastLetter) < min) 
 			{
 				min = data.countCities.get(currentLastLetter);
 				bestCity = currentCity;
+				waitingLetter = currentLastLetter;
 			}
 		}
-		waitingLetter = bestCity.toUpperCase().charAt(bestCity.length() - 1);
+		data.cities.get(lastLetter).remove(bestCity);
 		return bestCity;
 	}
 }

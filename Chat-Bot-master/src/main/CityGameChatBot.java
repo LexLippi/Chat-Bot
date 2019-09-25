@@ -3,9 +3,9 @@ import java.util.Scanner;
 
 public class CityGameChatBot {
 	public static void main(String[] args) {
-		var message = "Привет, меня зовут Гена."
-				+ " Я чат бот, который умеет играть в города."
-				+ " Если хочешь играть в города, введи команду \"Играть\"";
+		var message = "РџСЂРёРІРµС‚, РјРµРЅСЏ Р·РѕРІСѓС‚ Р“РµРЅР°."
+				+ " РЇ С‡Р°С‚ Р±РѕС‚, РєРѕС‚РѕСЂС‹Р№ СѓРјРµРµС‚ РёРіСЂР°С‚СЊ РІ РіРѕСЂРѕРґР°."
+				+ " Р•СЃР»Рё С…РѕС‡РµС€СЊ РёРіСЂР°С‚СЊ РІ РіРѕСЂРѕРґР°, РІРІРµРґРё РєРѕРјР°РЅРґСѓ \\\"РРіСЂР°С‚СЊ\\\"";
 		System.out.println(message);
 		var data = new Data();
 		var logic = new GameLogic();
@@ -14,19 +14,19 @@ public class CityGameChatBot {
 		{
 			var isEnding = false;
 			var title = input.next();
-			if (title.toLowerCase().compareTo("играть") == 0) 
+			if (title.toLowerCase().compareTo("РёРіСЂР°С‚СЊ") == 0) 
 			{
 				while (true) 
 				{
-					System.out.print("Твой ход: ");
+					System.out.print("РўРІРѕР№ С…РѕРґ: ");
 					var inputString = input.next();
-					if (inputString.toLowerCase().compareTo("стоп") == 0) {
+					if (inputString.toLowerCase().compareTo("СЃС‚РѕРї") == 0) {
 						isEnding = true;
 						break;
 					}
 					var result = logic.answer(inputString, data);
-					System.out.println("Гена говорит: " + result);
-					if (result.compareTo("Я проиграл") == 0) 
+					System.out.println("Р“РµРЅР° РіРѕРІРѕСЂРёС‚: " + result);
+					if (result.compareTo("РЇ РїСЂРѕРёРіСЂР°Р»") == 0) 
 					{
 						isEnding = true;
 						break;
@@ -35,7 +35,7 @@ public class CityGameChatBot {
 			}
 			else 
 			{
-				System.out.println("Я ещё не умею делать то, что ты хочешь.");
+				System.out.println("РЇ РµС‰С‘ РЅРµ СѓРјРµСЋ РґРµР»Р°С‚СЊ С‚Рѕ, С‡С‚Рѕ С‚С‹ С…РѕС‡РµС€СЊ.");
 				isEnding = true;
 				break;
 			}
