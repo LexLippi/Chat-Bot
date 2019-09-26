@@ -4,23 +4,25 @@ public class CityGame {
 	private static Character waitingLetter;
 	
 	public static void main(String[] args) {
-		StartGame();
+		var game = new CityGame();
+		var console = new Console();
+		game.StartGame(console);
 	}
 	
-	public static GameExitType StartGame() {
+	public GameExitType StartGame(Api api) {
 		waitingLetter = null;
 		String[] c = {"Москва", "Абакан", "Новосибирск"};
 		var data = new Data(c);
 		while (true) 
 		{
-			ChatBot.say("Твой ход: ");
-			var inputString = ChatBot.getInput();
+			api.out("Твой ход: ");
+			var inputString = api.in();
 			if (inputString.toLowerCase().compareTo("стоп") == 0) {
-				ChatBot.say("Гена говорит: приходи еще!");
+				api.out("Гена говорит: приходи еще!");
 				return GameExitType.GAME_INTERRUPTED;
 			}
 			else if (inputString.toLowerCase().compareTo("сдаюсь") == 0) {
-				ChatBot.say("Гена говорит: ничего, в другой раз повезет!");
+				api.out("Гена говорит: ничего, в другой раз повезет!");
 				return GameExitType.PLAYER_LOOSE;
 			}
 			
@@ -28,19 +30,19 @@ public class CityGame {
 			switch(answer) 
 			{
 				case INCORRECT_INPUT:
-					ChatBot.say("Гена говорит: врешь, не уйдешь!");
+					api.out("Гена говорит: врешь, не уйдешь!");
 					break;
 				case INCORRECT_CITY:
-					ChatBot.say("Гена говорит: я не знаю такого города, попробуйте снова");
+					api.out("Гена говорит: я не знаю такого города, попробуйте снова");
 					break;
 				case CORRECT_INPUT:
 					var lastLetter = inputString.toUpperCase().charAt(inputString.length() - 1);
 					var resultCity = computeCity(lastLetter, data);
 					if (resultCity == null) {
-						ChatBot.say("Гена говорит: я проиграл :(");
+						api.out("Гена говорит: я проиграл :(");
 						return GameExitType.PLAYER_WIN;
 					}
-					ChatBot.say("Гена говорит: " + resultCity);
+					api.out("Гена говорит: " + resultCity);
 					break;
 				default:
 					throw new IllegalStateException("incorrect CityAnswerType");
