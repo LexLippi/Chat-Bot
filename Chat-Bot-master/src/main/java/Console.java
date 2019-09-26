@@ -13,7 +13,7 @@ public class Console implements Api {
 
 	@Override
 	public void out(String massage) {
-		System.out.print(massage);
+		System.out.println(massage);
 	}
 
 }
