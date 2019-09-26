@@ -1,7 +1,7 @@
 package main.java;
 
 public class CityGame {
-	private static Character waitingLetter;
+	private Character waitingLetter;
 	
 	public static void main(String[] args) {
 		var game = new CityGame();
@@ -50,7 +50,7 @@ public class CityGame {
 		}
 	}
 	
-	private static CityAnswerType checkAnswer(String city, Data data) {
+	public CityAnswerType checkAnswer(String city, Data data) {
 		var firstLetter = city.toUpperCase().charAt(0);
 		var yourCity = firstLetter + city.toLowerCase().substring(1);
 		if (waitingLetter != null && waitingLetter != firstLetter)
@@ -64,7 +64,7 @@ public class CityGame {
 		return CityAnswerType.INCORRECT_CITY;
 	}
 
-	public static String computeCity(char lastLetter, Data data) 
+	public String computeCity(char lastLetter, Data data) 
 	{
 		if (data.cities.get(lastLetter).isEmpty())
 			return null;
