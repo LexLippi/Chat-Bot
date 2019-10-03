@@ -22,7 +22,7 @@ public class ChatBot {
 		while (run) {
 			var title = getInput();
 			if (title.toLowerCase().compareTo("играть") == 0) {
-				StartCityGame();
+				startCityGame();
 			}
 			else if (title.toLowerCase().compareTo("пока") == 0) {
 				exit("до встречи");
@@ -42,9 +42,9 @@ public class ChatBot {
 		return text;
 	}
 	
-	private void StartCityGame() {
+	private void startCityGame() {
 		var game = new CityGame();
-		var exitType = game.StartGame(api);
+		var exitType = game.startGame(api);
 		if (exitType == GameExitType.PLAYER_WIN) {
 			say("вам понравилась игра?");
 			var answer = getInput();

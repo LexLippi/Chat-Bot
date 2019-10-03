@@ -6,10 +6,10 @@ public class CityGame {
 	public static void main(String[] args) {
 		var game = new CityGame();
 		var console = new Console();
-		game.StartGame(console);
+		game.startGame(console);
 	}
 	
-	public GameExitType StartGame(Api api) {
+	public GameExitType startGame(Api api) {
 		waitingLetter = null;
 		String[] c = {"Москва", "Абакан", "Новосибирск"};
 		var data = new Data(c);
@@ -27,8 +27,7 @@ public class CityGame {
 			}
 			
 			var answer = checkAnswer(inputString, data);
-			switch(answer) 
-			{
+			switch(answer) {
 				case INCORRECT_INPUT:
 					api.out("Гена говорит: врешь, не уйдешь!");
 					break;
@@ -64,31 +63,26 @@ public class CityGame {
 		return CityAnswerType.INCORRECT_CITY;
 	}
 
-	public String computeCity(char lastLetter, Data data) 
-	{
+	public String computeCity(char lastLetter, Data data) {
 		if (data.cities.get(lastLetter).isEmpty())
 			return null;
 		var myCities = data.cities.get(lastLetter).iterator();
 		var min = 1e10;
 		String bestCity = "";
-		while (myCities.hasNext()) 
-		{
+		while (myCities.hasNext()) {
 			var currentCity = myCities.next();
 			var i = 1;
 			var currentLastLetter = currentCity.toUpperCase().charAt(currentCity.length() - i);
-			while (data.stopLetters.contains(currentLastLetter)) 
-			{
+			while (data.stopLetters.contains(currentLastLetter)) {
 				++i;
 				currentLastLetter = currentCity.toUpperCase().charAt(currentCity.length() - i);
 			}
-			if (data.countCities.get(currentLastLetter) == 0) 
-			{
+			if (data.countCities.get(currentLastLetter) == 0) {
 				bestCity = currentCity;
 				waitingLetter = currentLastLetter;
 				break;
 			}
-			if (data.countCities.get(currentLastLetter) < min) 
-			{
+			if (data.countCities.get(currentLastLetter) < min) {
 				min = data.countCities.get(currentLastLetter);
 				bestCity = currentCity;
 				waitingLetter = currentLastLetter;
@@ -97,5 +91,4 @@ public class CityGame {
 		data.cities.get(lastLetter).remove(bestCity);
 		return bestCity;
 	}
-
 }
