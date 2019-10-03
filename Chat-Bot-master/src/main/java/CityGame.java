@@ -11,8 +11,8 @@ public class CityGame {
 	
 	public GameExitType startGame(Api api) {
 		waitingLetter = null;
-		String[] c = {"Москва", "Абакан", "Новосибирск"};
-		var data = new Data(c);
+		String[] a = new String[] {"Йошкар-Ола", "Удачный"};
+		var data = new Data(a);
 		while (true) 
 		{
 			api.out("Твой ход: ");
@@ -21,7 +21,7 @@ public class CityGame {
 				api.out("Гена говорит: приходи еще!");
 				return GameExitType.GAME_INTERRUPTED;
 			}
-			else if (inputString.toLowerCase().compareTo("сдаюсь") == 0) {
+			if (inputString.toLowerCase().compareTo("сдаюсь") == 0) {
 				api.out("Гена говорит: ничего, в другой раз повезет!");
 				return GameExitType.PLAYER_LOOSE;
 			}
@@ -52,8 +52,9 @@ public class CityGame {
 	public CityAnswerType checkAnswer(String city, Data data) {
 		var firstLetter = city.toUpperCase().charAt(0);
 		var yourCity = firstLetter + city.toLowerCase().substring(1);
-		if (waitingLetter != null && waitingLetter != firstLetter)
+		if (waitingLetter != null && waitingLetter != firstLetter) {
 			return CityAnswerType.INCORRECT_INPUT;
+		}
 		if (data.cities.containsKey(firstLetter) && data.cities.get(firstLetter).contains(yourCity)) 
 		{
 			data.cities.get(firstLetter).remove(yourCity);
@@ -64,8 +65,9 @@ public class CityGame {
 	}
 
 	public String computeCity(char lastLetter, Data data) {
-		if (data.cities.get(lastLetter).isEmpty())
+		if (data.cities.get(lastLetter).isEmpty()) {
 			return null;
+		}
 		var myCities = data.cities.get(lastLetter).iterator();
 		var min = 1e10;
 		String bestCity = "";
@@ -73,7 +75,8 @@ public class CityGame {
 			var currentCity = myCities.next();
 			var i = 1;
 			var currentLastLetter = currentCity.toUpperCase().charAt(currentCity.length() - i);
-			while (data.stopLetters.contains(currentLastLetter)) {
+			while (data.stopLetters.contains(currentLastLetter) || 
+					!Character.isAlphabetic(currentLastLetter)) {
 				++i;
 				currentLastLetter = currentCity.toUpperCase().charAt(currentCity.length() - i);
 			}
