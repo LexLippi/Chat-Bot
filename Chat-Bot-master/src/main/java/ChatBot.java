@@ -2,6 +2,7 @@ package main.java;
 
 public class ChatBot {
 	private Api api;
+	private boolean run = true;
 
 	public static void main(String[] args) {
 		var console = new Console();
@@ -18,15 +19,15 @@ public class ChatBot {
 				+ " Я чат бот, который умеет играть в города."
 				+ " Если хочешь играть в города, введи команду \"Играть\"";
 		say(message);
-		while (true) 
-		{
+		while (run) {
 			var title = getInput();
-			if (title.toLowerCase().compareTo("играть") == 0) 
-			{
+			if (title.toLowerCase().compareTo("играть") == 0) {
 				StartCityGame();
 			}
-			else 
-			{
+			else if (title.toLowerCase().compareTo("пока") == 0) {
+				exit("до встречи");
+			}
+			else {
 				incorrectCommand();
 			}
 		}
@@ -37,9 +38,7 @@ public class ChatBot {
 	}
 	
 	public String getInput() {
-		var text = api.in();
-		if (text.toLowerCase().compareTo("пока") == 0)
-			exit("до встречи");
+		var text = api.in();		
 		return text;
 	}
 	
@@ -62,7 +61,7 @@ public class ChatBot {
 	
 	private void exit(String massage) {
 		say(massage);
-		System.exit(0);
+		run = false;
 	}
 
 }
