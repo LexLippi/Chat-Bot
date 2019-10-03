@@ -48,10 +48,12 @@ public class ChatBot {
 		if (exitType == GameExitType.PLAYER_WIN) {
 			say("вам понравилась игра?");
 			var answer = getInput();
-			if (answer.toLowerCase().compareTo("да") == 0)
+			if (answer.toLowerCase().compareTo("да") == 0) {
 				say("замечательно");
-			if (answer.toLowerCase().compareTo("нет") == 0)
+			}
+			if (answer.toLowerCase().compareTo("нет") == 0) {
 				say("жаль");
+			}
 		}
 	}
 	
