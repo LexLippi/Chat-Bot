@@ -33,7 +33,7 @@ class Test_Logic {
 	void testCityStartsOnWrongLetter() {
 		var api = new TestingApi(new String[] {"Москва", "стоп"});
 		var game = new CityGame();
-		game.StartGame(api);
+		game.startGame(api);
 		var cities = new String[2];
 		cities[0] = "Мальорка";
 		cities[1] = "Актюбинск";
@@ -44,7 +44,7 @@ class Test_Logic {
 	void testPlayerWin() {
 		var api = new TestingApi(new String[] {"Новосибирск"});
 		var game = new CityGame();
-		Assert.assertEquals(GameExitType.PLAYER_WIN, game.StartGame(api));
+		Assert.assertEquals(GameExitType.PLAYER_WIN, game.startGame(api));
 	}
 	
 	@Test
@@ -79,13 +79,17 @@ class Test_Logic {
 	void TestInterruptGame() {
 		var api = new TestingApi(new String[] {"стоп"});
 		var game = new CityGame();
-		Assert.assertEquals(GameExitType.GAME_INTERRUPTED, game.StartGame(api));	
+		Assert.assertEquals(GameExitType.GAME_INTERRUPTED, game.startGame(api));	
 	}
 	
 	@Test
 	void TestStopGame() {
 		var api = new TestingApi(new String[] {"сдаюсь"});
 		var game = new CityGame();
+<<<<<<< HEAD:Chat-Bot-master/src/test/java/test/Test_Logic.java
 		Assert.assertEquals(GameExitType.PLAYER_LOOSE, game.StartGame(api));
+=======
+		Assert.assertEquals(GameExitType.PLAYER_LOOSE, game.startGame(api));	
+>>>>>>> 544a96c84182b64c7d1b13c642b1bb990bdb7684:Chat-Bot-master/src/test/Test_Logic.java
 	}
 }

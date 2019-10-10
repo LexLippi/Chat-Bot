@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import main.resources.*;
 
 public class Data {
 	public HashMap<Character, HashSet<String>> cities = new HashMap<Character, HashSet<String>>();
@@ -16,11 +17,14 @@ public class Data {
 		getData();
 	}
 	
-	public Data(String[] cities) 
-	{
+	public Data(String[] cities) {
 		initialize();
+<<<<<<< HEAD:Chat-Bot-master/src/main/java/chat_bot/Data.java
 		for (String city: cities)
 		{
+=======
+		for (var city: cities) {
+>>>>>>> 544a96c84182b64c7d1b13c642b1bb990bdb7684:Chat-Bot-master/src/main/java/Data.java
 			var firstLetter = city.toUpperCase().charAt(0);
 			this.cities.get(firstLetter).add(city);
 			countCities.put(firstLetter, countCities.get(firstLetter) + 1);
@@ -29,13 +33,11 @@ public class Data {
 		}
 	}
 	
-	private void getData() 
-	{
+	private void getData() {
 		try {
-			var reader = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\main\\resources\\input.txt"));
+			var reader = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\src\\main\\resources\\input.txt"));
 			String line;
-			while((line = reader.readLine()) != null) 
-			{
+			while((line = reader.readLine()) != null) {
 				var firstLetter = line.charAt(0);
 				cities.get(firstLetter).add(line);
 				countCities.put(firstLetter, countCities.get(firstLetter) + 1);
@@ -48,10 +50,15 @@ public class Data {
 		}
 	}
 	
+<<<<<<< HEAD:Chat-Bot-master/src/main/java/chat_bot/Data.java
 	private void initialize() 
 	{
 		for (Character i = 'А'; i <= 'Я'; ++i)
 		{
+=======
+	private void initialize() {
+		for (var i = 'А'; i <= 'Я'; ++i) {
+>>>>>>> 544a96c84182b64c7d1b13c642b1bb990bdb7684:Chat-Bot-master/src/main/java/Data.java
 			cities.put(i, new HashSet<String>());
 			countCities.put(i, 0);
 			stopLetters.add(i);
