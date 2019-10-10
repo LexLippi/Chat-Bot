@@ -5,6 +5,8 @@ public class ChatBot {
 	private Api api;
 	private boolean run = true;
 
+	public CityGame game = null;
+
 	public static void main(String[] args) {
 		var console = new Console();
 		new ChatBot(console);
@@ -44,7 +46,7 @@ public class ChatBot {
 	}
 	
 	private void StartCityGame() {
-		var game = new CityGame();
+		game = new CityGame();
 		var exitType = game.StartGame(api);
 		if (exitType == GameExitType.PLAYER_WIN) {
 			say("вам понравилась игра?");
@@ -60,7 +62,7 @@ public class ChatBot {
 		say("Я ещё не умею делать то, что ты хочешь.");
 	}
 	
-	private void exit(String massage) {
+	public void exit(String massage) {
 		say(massage);
 		run = false;
 	}
