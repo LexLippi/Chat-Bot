@@ -1,4 +1,4 @@
-package chat_bot;
+package chat_bot.game;
 
 public enum CityAnswerType {
 	INCORRECT_INPUT,

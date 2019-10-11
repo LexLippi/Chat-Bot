@@ -1,6 +1,9 @@
 package chat_bot;
 
 
+import chat_bot.game.CityGame;
+import chat_bot.game.GameExitType;
+
 public class ChatBot {
 	private Api api;
 	private boolean run = true;

@@ -1,9 +1,9 @@
 
 package test;
 import chat_bot.Data;
-import chat_bot.CityAnswerType;
-import chat_bot.GameExitType;
-import chat_bot.CityGame;
+import chat_bot.game.CityAnswerType;
+import chat_bot.game.GameExitType;
+import chat_bot.game.CityGame;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
