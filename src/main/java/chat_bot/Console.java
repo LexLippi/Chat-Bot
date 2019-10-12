@@ -8,7 +8,7 @@ public class Console implements Api {
 
 	@Override
 	public String in() {
-		return input.next();
+		return input.nextLine();
 	}
 
 	@Override

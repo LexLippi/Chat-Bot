@@ -44,13 +44,18 @@ public class ChatBot {
 	}
 	
 	public String getInput() {
-		var text = api.in();
-		return text;
+		try {
+			var text = api.in();
+			return text;
+		}
+		catch (Exception e) {
+			return null;
+		}
 	}
 	
 	private void StartCityGame() {
-		game = new CityGame();
-		var exitType = game.StartGame(api);
+		game = new CityGame(api);
+		var exitType = game.startGame();
 		if (exitType == GameExitType.PLAYER_WIN) {
 			say("вам понравилась игра?");
 			var answer = getInput();

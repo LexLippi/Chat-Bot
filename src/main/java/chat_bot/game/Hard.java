@@ -11,7 +11,7 @@ public class Hard extends GameLevel{
     public String computeCity(Character lastLetter) {
         if (data.cities.get(lastLetter).isEmpty())
             return null;
-        var min = Integer.MIN_VALUE;
+        var min = Integer.MAX_VALUE;
         var myCities = data.cities.get(lastLetter).iterator();
         var bestCity = "";
         while (myCities.hasNext())
@@ -33,16 +33,5 @@ public class Hard extends GameLevel{
         }
         data.cities.get(lastLetter).remove(bestCity);
         return bestCity;
-    }
-
-    private Character getCityLastLetter(String city) {
-        var i = 1;
-        var currentLastLetter = city.toUpperCase().charAt(city.length() - i);
-        while (data.stopLetters.contains(currentLastLetter))
-        {
-            ++i;
-            currentLastLetter = city.toUpperCase().charAt(city.length() - i);
-        }
-        return currentLastLetter;
     }
 }
