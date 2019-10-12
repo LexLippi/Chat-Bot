@@ -2,7 +2,7 @@ package chat_bot;
 
 
 import chat_bot.game.CityGame;
-import chat_bot.game.GameExitType;
+import chat_bot.game.return_types.GameExitType;
 
 public class ChatBot {
 	private Api api;

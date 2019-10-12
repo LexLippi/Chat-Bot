@@ -1,4 +1,4 @@
-package chat_bot.game;
+package chat_bot.game.return_types;
 
 public enum GameExitType {
 	PLAYER_WIN,

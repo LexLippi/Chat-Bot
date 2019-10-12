@@ -1,11 +1,5 @@
 
 package test;
-import chat_bot.Data;
-import chat_bot.game.CityAnswerType;
-import chat_bot.game.GameExitType;
-import chat_bot.game.CityGame;
-import org.junit.Assert;
-import org.junit.jupiter.api.Test;
 
 class Test_Logic {
 

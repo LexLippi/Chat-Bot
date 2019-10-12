@@ -1,9 +1,13 @@
-package chat_bot.game;
+package chat_bot.game.levels;
 
 import chat_bot.Data;
+import chat_bot.game.levels.GameLevel;
 
-public class Hard extends GameLevel{
-    protected Hard(Data data) {
+import java.util.ArrayList;
+
+public class Hard extends GameLevel {
+    public Hard(Data data) {
+        step_counter = 100;
         this.data = data;
     }
 
@@ -13,24 +17,24 @@ public class Hard extends GameLevel{
             return null;
         var min = Integer.MAX_VALUE;
         var myCities = data.cities.get(lastLetter).iterator();
-        var bestCity = "";
+        var bestCities = new ArrayList<String>();
         while (myCities.hasNext())
         {
             var currentCity = myCities.next();
             var currentLastLetter = getCityLastLetter(currentCity);
-            if (data.countCities.get(currentLastLetter) == 0)
-            {
-                bestCity = currentCity;
-                waitingLetter = currentLastLetter;
-                break;
-            }
             if (data.countCities.get(currentLastLetter) < min)
             {
                 min = data.countCities.get(currentLastLetter);
-                bestCity = currentCity;
-                waitingLetter = currentLastLetter;
+                bestCities.clear();
+                bestCities.add(currentCity);
+            }
+            else if (data.countCities.get(currentLastLetter) == min) {
+                bestCities.add(currentCity);
             }
         }
+        var cityIndex = rnd.nextInt(bestCities.size());
+        var bestCity = bestCities.get(cityIndex);
+        waitingLetter = getCityLastLetter(bestCity);
         data.cities.get(lastLetter).remove(bestCity);
         return bestCity;
     }

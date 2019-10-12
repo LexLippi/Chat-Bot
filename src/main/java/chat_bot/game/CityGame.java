@@ -1,6 +1,12 @@
 package chat_bot.game;
 
 import chat_bot.*;
+import chat_bot.game.levels.Easy;
+import chat_bot.game.levels.GameLevel;
+import chat_bot.game.levels.Hard;
+import chat_bot.game.levels.Medium;
+import chat_bot.game.return_types.CityAnswerType;
+import chat_bot.game.return_types.GameExitType;
 
 import java.util.Random;
 
@@ -10,7 +16,6 @@ public class CityGame {
 	private Api api;
 	private GameLevel level;
 
-	
 	public static void main(String[] args) {
 		var game = new CityGame(new Console());
 		game.startGame();
@@ -118,8 +123,13 @@ public class CityGame {
 
 	public GameExitType getBotCourse(String userCity)
 	{
+		if (level.is_step_counter_empty()) {
+			api.out("Гена говорит: я проиграл :(");
+			return GameExitType.PLAYER_WIN;
+		}
 		var lastLetter = level.getCityLastLetter(userCity);
 		var resultCity = level.computeCity(lastLetter);
+		level.inc_step_counter();
 		if (resultCity == null) {
 			api.out("Гена говорит: я проиграл :(");
 			return GameExitType.PLAYER_WIN;

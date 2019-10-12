@@ -1,10 +1,10 @@
-package chat_bot.game;
+package chat_bot.game.levels;
 
 import chat_bot.Data;
-import java.util.Random;
 
 public class Medium extends GameLevel {
-    protected Medium(Data data) {
+    public Medium(Data data) {
+        step_counter = 50;
         this.data = data;
     }
 
@@ -14,7 +14,6 @@ public class Medium extends GameLevel {
         if (myCities.isEmpty()) {
             return null;
         }
-        var rnd = new Random();
         var cityIndex = rnd.nextInt(myCities.size());
         var answerCity = (String) myCities.toArray()[cityIndex];
         waitingLetter = getCityLastLetter(answerCity);
