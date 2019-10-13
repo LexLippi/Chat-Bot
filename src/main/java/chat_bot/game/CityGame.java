@@ -8,6 +8,7 @@ import chat_bot.game.levels.Medium;
 import chat_bot.game.return_types.CityAnswerType;
 import chat_bot.game.return_types.GameExitType;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class CityGame {
@@ -30,7 +31,19 @@ public class CityGame {
 	
 	public GameExitType startGame() {
 		if (getDrawResult()) {
-			getBotCourse("");
+			var cities = new ArrayList<String>();
+			// think about letter Ё
+			for (var i = 'А'; i <= 'Я'; ++i) {
+				if (!data.stopLetters.contains(i)) {
+					var result = level.computeCity(i);
+					if (result != null) {
+						cities.add(result);
+					}
+				}
+			}
+			var index = level.rnd.nextInt(cities.size());
+			level.inc_step_counter();
+			api.out("Гена говорит: " + cities.get(index));
 		}
 		while (true)
 		{
@@ -121,7 +134,7 @@ public class CityGame {
 		return null;
 	}
 
-	public GameExitType getBotCourse(String userCity)
+	private GameExitType getBotCourse(String userCity)
 	{
 		if (level.is_step_counter_empty()) {
 			api.out("Гена говорит: я проиграл :(");
@@ -138,7 +151,7 @@ public class CityGame {
 		return null;
 	}
 	
-	public CityAnswerType checkAnswer(String city, Data data) {
+	private CityAnswerType checkAnswer(String city, Data data) {
 		var firstLetter = city.toUpperCase().charAt(0);
 		var yourCity = firstLetter + city.toLowerCase().substring(1);
 		if (waitingLetter != null && waitingLetter != firstLetter)

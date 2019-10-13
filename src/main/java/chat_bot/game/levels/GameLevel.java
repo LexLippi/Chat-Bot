@@ -9,7 +9,7 @@ abstract public class GameLevel implements DifficultLevel {
     protected Data data;
     protected Character waitingLetter = null;
     protected Integer step_counter;
-    protected Random rnd = new Random();
+    public Random rnd = new Random();
 
     abstract public String computeCity(Character lastLetter);
 

@@ -3,16 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="0a0c3eca-f79f-4e9b-8c3d-8f8a63686671" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/ChatBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/ChatBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/CityAnswerType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/return_types/CityAnswerType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/CityGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/CityGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/DifficultLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/DifficultLevel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/Easy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Easy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/GameExitType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/return_types/GameExitType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/GameLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/GameLevel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/Hard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Hard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/Medium.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Medium.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/test/Test_Logic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/test/Test_Logic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/GameLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/GameLevel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/ChatBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/ChatBot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/test/Test_Logic.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/test/Test_Logic.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
