@@ -3,13 +3,14 @@ package chat_bot.game.levels;
 import chat_bot.Data;
 import chat_bot.game.levels.DifficultLevel;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 abstract public class GameLevel implements DifficultLevel {
     protected Data data;
     protected Character waitingLetter = null;
     protected Integer step_counter;
-    public Random rnd = new Random();
+    private Random rnd = new Random();
 
     abstract public String computeCity(Character lastLetter);
 
@@ -24,13 +25,18 @@ abstract public class GameLevel implements DifficultLevel {
         return currentLastLetter;
     }
 
-    public void inc_step_counter() {
+    public void incStepCounter() {
         if (step_counter > 0) {
             step_counter--;
         }
     }
 
-    public Boolean is_step_counter_empty() {
+    public Boolean isStepCounterEmpty() {
         return step_counter == 0;
+    }
+
+    public String getRandomListElement(ArrayList<String> list) {
+        var index = rnd.nextInt(list.size());
+        return list.get(index);
     }
 }

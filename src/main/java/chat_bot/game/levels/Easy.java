@@ -30,8 +30,7 @@ public class Easy extends GameLevel {
                 bestCities.add(currentCity);
             }
         }
-        var cityIndex = rnd.nextInt(bestCities.size());
-        var bestCity = bestCities.get(cityIndex);
+        var bestCity = getRandomListElement(bestCities);
         waitingLetter = getCityLastLetter(bestCity);
         return bestCity;
     }

@@ -2,6 +2,8 @@ package chat_bot.game.levels;
 
 import chat_bot.Data;
 
+import java.util.ArrayList;
+
 public class Medium extends GameLevel {
     public Medium(Data data) {
         step_counter = 50;
@@ -14,8 +16,7 @@ public class Medium extends GameLevel {
         if (myCities.isEmpty()) {
             return null;
         }
-        var cityIndex = rnd.nextInt(myCities.size());
-        var answerCity = (String) myCities.toArray()[cityIndex];
+        var answerCity = getRandomListElement(new ArrayList<>(myCities));
         waitingLetter = getCityLastLetter(answerCity);
         return answerCity;
     }

@@ -41,9 +41,13 @@ public class CityGame {
 					}
 				}
 			}
-			var index = level.rnd.nextInt(cities.size());
-			level.inc_step_counter();
-			api.out("Гена говорит: " + cities.get(index));
+			if (cities.isEmpty()) {
+				api.out("Гена говорит: я проиграл :(");
+				return GameExitType.PLAYER_WIN;
+			}
+			var city = level.getRandomListElement(cities);
+			level.incStepCounter();
+			api.out("Гена говорит: " + city);
 		}
 		while (true)
 		{
@@ -136,13 +140,13 @@ public class CityGame {
 
 	private GameExitType getBotCourse(String userCity)
 	{
-		if (level.is_step_counter_empty()) {
+		if (level.isStepCounterEmpty()) {
 			api.out("Гена говорит: я проиграл :(");
 			return GameExitType.PLAYER_WIN;
 		}
 		var lastLetter = level.getCityLastLetter(userCity);
 		var resultCity = level.computeCity(lastLetter);
-		level.inc_step_counter();
+		level.incStepCounter();
 		if (resultCity == null) {
 			api.out("Гена говорит: я проиграл :(");
 			return GameExitType.PLAYER_WIN;
