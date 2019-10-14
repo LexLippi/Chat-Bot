@@ -37,5 +37,11 @@ public class TestHardGameLevel {
         Assert.assertNull(level.computeCity('А'));
     }
 
+    @Test
+    void testStepCounter() {
+        var data = new Data(new String[] {"Мальорка", "Москва", "Минск", "Анапа", "Краснодар", "Рига", "Агдам"});
+        var level = new Hard(data);
+        Assert.assertFalse(level.isStepCounterEmpty());
+    }
 
 }

@@ -3,10 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="0a0c3eca-f79f-4e9b-8c3d-8f8a63686671" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Easy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Easy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Hard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Hard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Medium.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Medium.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/test/Test_Logic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/test/game_test/Test_Logic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/test/game_test/game_level_test/TestCommonGameLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/test/game_test/game_level_test/TestCommonGameLevel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/test/game_test/game_level_test/TestEasyGameLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/test/game_test/game_level_test/TestEasyGameLevel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/test/game_test/game_level_test/TestHardGameLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/test/game_test/game_level_test/TestHardGameLevel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/test/game_test/game_level_test/TestMediumGameLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/test/game_test/game_level_test/TestMediumGameLevel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/test/game_test/game_level_test/TestCommonGameLevel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/test/game_test/game_level_test/TestCommonGameLevel.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -151,9 +152,9 @@
       <list>
         <item itemvalue="JUnit.TestCommonGameLevel" />
         <item itemvalue="JUnit.TestMediumGameLevel" />
-        <item itemvalue="JUnit.TestMediumGameLevel.testSimpleComputeCity" />
         <item itemvalue="JUnit.TestEasyGameLevel" />
         <item itemvalue="JUnit.TestHardGameLevel" />
+        <item itemvalue="JUnit.TestMediumGameLevel.testSimpleComputeCity" />
       </list>
     </recent_temporary>
   </component>
