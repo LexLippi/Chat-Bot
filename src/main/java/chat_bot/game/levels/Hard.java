@@ -35,6 +35,7 @@ public class Hard extends GameLevel {
         var bestCity = getRandomListElement(bestCities);
         waitingLetter = getCityLastLetter(bestCity);
         data.cities.get(lastLetter).remove(bestCity);
+        data.countCities.put(lastLetter, data.countCities.get(lastLetter) - 1);
         return bestCity;
     }
 }

@@ -18,6 +18,8 @@ public class Medium extends GameLevel {
         }
         var answerCity = getRandomListElement(new ArrayList<>(myCities));
         waitingLetter = getCityLastLetter(answerCity);
+        data.cities.get(lastLetter).remove(answerCity);
+        data.countCities.put(lastLetter, data.countCities.get(lastLetter) - 1);
         return answerCity;
     }
 }

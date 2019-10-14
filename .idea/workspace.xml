@@ -3,11 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="0a0c3eca-f79f-4e9b-8c3d-8f8a63686671" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/CityGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/CityGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Easy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Easy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/GameLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/GameLevel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Hard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Hard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Medium.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Medium.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/test/Test_Logic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/test/game_test/Test_Logic.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,20 +47,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.ChatBot">
-    <configuration name="Bot" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="chat_bot.Bot" />
-      <module name="Chat-Bot" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="chat_bot.game.levels.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.TestCommonGameLevel">
     <configuration name="ChatBot" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="12" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -77,77 +63,97 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CityGame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="chat_bot.game.CityGame" />
+    <configuration name="TestCommonGameLevel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="chat_bot.game.levels.*" />
+          <option name="PATTERN" value="test.game_test.game_level_test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Telegram" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="chat_bot.Telegram" />
-      <module name="Chat-Bot" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="chat_bot.game.levels.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Test_Bot" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Chat_Bot" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.Test_Bot" />
+      <option name="PACKAGE_NAME" value="test.game_test.game_level_test" />
+      <option name="MAIN_CLASS_NAME" value="test.game_test.game_level_test.TestCommonGameLevel" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test_Logic" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Chat_Bot" />
+    <configuration name="TestEasyGameLevel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="test.*" />
+          <option name="PATTERN" value="test.game_test.game_level_test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.Test_Logic" />
+      <option name="PACKAGE_NAME" value="test.game_test.game_level_test" />
+      <option name="MAIN_CLASS_NAME" value="test.game_test.game_level_test.TestEasyGameLevel" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestHardGameLevel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.game_test.game_level_test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test.game_test.game_level_test" />
+      <option name="MAIN_CLASS_NAME" value="test.game_test.game_level_test.TestHardGameLevel" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestMediumGameLevel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.game_test.game_level_test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test.game_test.game_level_test" />
+      <option name="MAIN_CLASS_NAME" value="test.game_test.game_level_test.TestMediumGameLevel" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestMediumGameLevel.testSimpleComputeCity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.game_test.game_level_test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test.game_test.game_level_test" />
+      <option name="MAIN_CLASS_NAME" value="test.game_test.game_level_test.TestMediumGameLevel" />
+      <option name="METHOD_NAME" value="testSimpleComputeCity" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
       <item itemvalue="Application.ChatBot" />
-      <item itemvalue="Application.Bot" />
-      <item itemvalue="Application.Telegram" />
-      <item itemvalue="JUnit.Test_Bot" />
-      <item itemvalue="JUnit.Test_Logic" />
-      <item itemvalue="Application.CityGame" />
+      <item itemvalue="JUnit.TestHardGameLevel" />
+      <item itemvalue="JUnit.TestEasyGameLevel" />
+      <item itemvalue="JUnit.TestMediumGameLevel" />
+      <item itemvalue="JUnit.TestMediumGameLevel.testSimpleComputeCity" />
+      <item itemvalue="JUnit.TestCommonGameLevel" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.CityGame" />
-        <item itemvalue="Application.Telegram" />
-        <item itemvalue="Application.Bot" />
-        <item itemvalue="JUnit.Test_Logic" />
-        <item itemvalue="JUnit.Test_Bot" />
+        <item itemvalue="JUnit.TestCommonGameLevel" />
+        <item itemvalue="JUnit.TestMediumGameLevel" />
+        <item itemvalue="JUnit.TestMediumGameLevel.testSimpleComputeCity" />
+        <item itemvalue="JUnit.TestEasyGameLevel" />
+        <item itemvalue="JUnit.TestHardGameLevel" />
       </list>
     </recent_temporary>
   </component>

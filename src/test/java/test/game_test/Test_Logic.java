@@ -1,5 +1,5 @@
 
-package test;
+package test.game_test;
 
 class Test_Logic {
 
