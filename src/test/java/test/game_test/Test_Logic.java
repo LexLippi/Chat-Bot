@@ -1,85 +1,36 @@
 
 package test.game_test;
 
-class Test_Logic {
+import chat_bot.Data;
+import chat_bot.game.CityGame;
+import chat_bot.game.return_types.CityAnswerType;
+import chat_bot.game.return_types.GameExitType;
+import org.junit.Assert;
+import org.junit.jupiter.api.Test;
+import test.TestingApi;
 
-	
-	
-//	@Test
-//	void testNoCity() {
-//		var game = new CityGame();
-//		var cities = new String[2];
-//		cities[0] = "Мальорка";
-//		cities[1] = "Актюбинск";
-//		Assert.assertEquals(CityAnswerType.INCORRECT_CITY, game.checkAnswer("Новосибирск", new Data(cities)));
-//	}
-//
-//	@Test
-//	void testRightCity() {
-//		var game = new CityGame();
-//		var cities = new String[2];
-//		cities[0] = "Мальорка";
-//		cities[1] = "Актюбинск";
-//		Assert.assertEquals(CityAnswerType.CORRECT_INPUT, game.checkAnswer("Мальорка", new Data(cities)));
-//	}
-//
-//	@Test
-//	void testCityStartsOnWrongLetter() {
-//		var api = new TestingApi(new String[] {"Москва", "стоп"});
-//		var game = new CityGame();
-//		game.StartGame(api);
-//		var cities = new String[2];
-//		cities[0] = "Мальорка";
-//		cities[1] = "Актюбинск";
-//		Assert.assertEquals(CityAnswerType.INCORRECT_INPUT, game.checkAnswer("Мальорка", new Data(cities)));
-//	}
-//
-//	@Test
-//	void testPlayerWin() {
-//		var api = new TestingApi(new String[] {"Новосибирск"});
-//		var game = new CityGame();
-//		Assert.assertEquals(GameExitType.PLAYER_WIN, game.StartGame(api));
-//	}
-//
-//	@Test
-//	void testComputeCityOnNotExistLetter() {
-//		var game = new CityGame();
-//		var cities = new String[2];
-//		cities[0] = "Мальорка";
-//		cities[1] = "Актюбинск";
-//		Assert.assertNull(game.computeCity('Л', new Data(cities)));
-//	}
-//
-//	@Test
-//	void testComputeAnyCity() {
-//		var game = new CityGame();
-//		var cities = new String[2];
-//		cities[0] = "Мальорка";
-//		cities[1] = "Актюбинск";
-//		Assert.assertEquals("Мальорка", game.computeCity('М', new Data(cities)));
-//	}
-//
-//	@Test
-//	void testComputeBestCity() {
-//		var game = new CityGame();
-//		var cities = new String[3];
-//		cities[0] = "Мальорка";
-//		cities[1] = "Актюбинск";
-//		cities[2] = "Анапа";
-//		Assert.assertEquals("Актюбинск", game.computeCity('А', new Data(cities)));
-//	}
-//
-//	@Test
-//	void TestInterruptGame() {
-//		var api = new TestingApi(new String[] {"стоп"});
-//		var game = new CityGame();
-//		Assert.assertEquals(GameExitType.GAME_INTERRUPTED, game.StartGame(api));
-//	}
-//
-//	@Test
-//	void TestStopGame() {
-//		var api = new TestingApi(new String[] {"сдаюсь"});
-//		var game = new CityGame();
-//		Assert.assertEquals(GameExitType.PLAYER_LOOSE, game.StartGame(api));
-//	}
+class Test_Logic {
+	@Test
+	void testPlayerWin() {
+		var api = new TestingApi(new String[] {"легкий", "орёл", "Актюбинск"});
+        var data = new Data(new String[] {"Мальорка", "Актюбинск"});
+		var game = new CityGame(api, data);
+		Assert.assertEquals(GameExitType.PLAYER_WIN, game.startGame());
+	}
+
+	@Test
+	void TestInterruptGame() {
+		var api = new TestingApi(new String[] {"легкий", "орёл", "стоп"});
+        var data = new Data(new String[] {"Мальорка", "Актюбинск"});
+		var game = new CityGame(api, data);
+		Assert.assertEquals(GameExitType.GAME_INTERRUPTED, game.startGame());
+	}
+
+    @Test
+	void TestStopGame() {
+		var api = new TestingApi(new String[] {"легкий", "орёл", "сдаюсь"});
+        var data = new Data(new String[] {"Мальорка", "Актюбинск"});
+		var game = new CityGame(api, data);
+		Assert.assertEquals(GameExitType.PLAYER_LOOSE, game.startGame());
+	}
 }

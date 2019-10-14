@@ -15,16 +15,23 @@ public class CityGame {
 	private Character waitingLetter;
 	private Data data;
 	private Api api;
-	private GameLevel level;
+	protected GameLevel level;
 
 	public static void main(String[] args) {
-		var game = new CityGame(new Console());
+		var game = new CityGame(new Console(), new Data(new String[] {"Москва", "Минск"}));
 		game.startGame();
+	}
+
+	public CityGame(Api api, Data data) {
+		waitingLetter = null;
+		this.data = data;
+		this.api = api;
+		selectDifficultLevel();
 	}
 
 	public CityGame(Api api) {
 		waitingLetter = null;
-		data = new Data(new String[] {"Москва", "Минск"});
+		this.data = new Data();
 		this.api = api;
 		selectDifficultLevel();
 	}
@@ -46,6 +53,7 @@ public class CityGame {
 				return GameExitType.PLAYER_WIN;
 			}
 			var city = level.getRandomListElement(cities);
+			System.out.println(city);
 			level.incStepCounter();
 			api.out("Гена говорит: " + city);
 		}
