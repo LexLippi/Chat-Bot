@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class CityGame {
-	private Data data;
 	private Api api;
 	protected GameLevel level;
 
@@ -22,15 +21,14 @@ public class CityGame {
 	}
 
 	public CityGame(Api api, Data data) {
-		this.data = data;
 		this.api = api;
-		selectDifficultLevel();
+		selectDifficultLevel(data);
 	}
 
 	public CityGame(Api api) {
-		this.data = new Data();
+		var data = new Data();
 		this.api = api;
-		selectDifficultLevel();
+		selectDifficultLevel(data);
 	}
 	
 	public GameExitType startGame() {
@@ -49,7 +47,7 @@ public class CityGame {
 		}
 	}
 
-	private void selectDifficultLevel() {
+	private void selectDifficultLevel(Data data) {
 		api.out("Выбери уровень сложности: легкий, средний, тяжелый");
 		try {
 			var userLevel = api.in().toLowerCase();
@@ -64,7 +62,7 @@ public class CityGame {
 			}
 			else {
 				api.out("У меня еще нет такого уровня. Попробуй выбрать уровень снова!");
-				selectDifficultLevel();
+				selectDifficultLevel(data);
 			}
 		}
 		catch (Exception e) {
