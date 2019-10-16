@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a0c3eca-f79f-4e9b-8c3d-8f8a63686671" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/chat_bot/City.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/chat_bot/DataNew.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/CityGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/CityGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/test/game_test/Test_Logic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/test/game_test/Test_Logic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/Data.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,6 +33,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -45,7 +47,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.Test_Logic">
+  <component name="RunManager" selected="Application.ChatBot">
     <configuration name="ChatBot" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="12" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />

@@ -32,7 +32,7 @@ public class Data {
 	private void getData() 
 	{
 		try {
-			var reader = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\main\\resources\\input.txt"));
+			var reader = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\scr\\main\\resources\\input.txt"));
 			String line;
 			while((line = reader.readLine()) != null) 
 			{
