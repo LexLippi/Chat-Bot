@@ -3,7 +3,6 @@ package test.game_test;
 
 import chat_bot.Data;
 import chat_bot.game.CityGame;
-import chat_bot.game.return_types.CityAnswerType;
 import chat_bot.game.return_types.GameExitType;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;

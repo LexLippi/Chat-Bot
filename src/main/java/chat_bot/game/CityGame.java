@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class CityGame {
-	private Character waitingLetter;
 	private Data data;
 	private Api api;
 	protected GameLevel level;
@@ -23,14 +22,12 @@ public class CityGame {
 	}
 
 	public CityGame(Api api, Data data) {
-		waitingLetter = null;
 		this.data = data;
 		this.api = api;
 		selectDifficultLevel();
 	}
 
 	public CityGame(Api api) {
-		waitingLetter = null;
 		this.data = new Data();
 		this.api = api;
 		selectDifficultLevel();
@@ -38,28 +35,14 @@ public class CityGame {
 	
 	public GameExitType startGame() {
 		if (getDrawResult()) {
-			var cities = new ArrayList<String>();
-			// think about letter Ё
-			for (var i = 'А'; i <= 'Я'; ++i) {
-				if (!data.stopLetters.contains(i)) {
-					var result = level.computeCity(i);
-					if (result != null) {
-						cities.add(result);
-					}
-				}
+			var result = level.getBotFirstCourse(api);
+			if (result != null) {
+				return result;
 			}
-			if (cities.isEmpty()) {
-				api.out("Гена говорит: я проиграл :(");
-				return GameExitType.PLAYER_WIN;
-			}
-			var city = level.getRandomListElement(cities);
-			System.out.println(city);
-			level.incStepCounter();
-			api.out("Гена говорит: " + city);
 		}
 		while (true)
 		{
-			var result = processingUserCourse();
+			var result = level.processingUserCourse(api);
 			if (result != null) {
 				return result;
 			}
@@ -107,73 +90,5 @@ public class CityGame {
 		catch (Exception e) {
 			return false;
 		}
-	}
-
-	private GameExitType processingUserCourse() throws IllegalStateException{
-		api.out("Твой ход: ");
-		try {
-			var inputString = api.in().toLowerCase();
-			if (inputString.compareTo("стоп") == 0) {
-				api.out("Гена говорит: приходи еще!");
-				return GameExitType.GAME_INTERRUPTED;
-			}
-			else if (inputString.compareTo("сдаюсь") == 0) {
-				api.out("Гена говорит: ничего, в другой раз повезет!");
-				return GameExitType.PLAYER_LOOSE;
-			}
-			var answer = checkAnswer(inputString, data);
-			switch(answer)
-			{
-				case INCORRECT_INPUT:
-					api.out("Гена говорит: врешь, не уйдешь!");
-					break;
-				case INCORRECT_CITY:
-					api.out("Гена говорит: я не знаю такого города, попробуйте снова");
-					break;
-				case CORRECT_INPUT:
-					var result = getBotCourse(inputString);
-					if (result != null) {
-						return result;
-					}
-					break;
-				default:
-					throw new IllegalStateException("incorrect CityAnswerType");
-			}
-		}
-		catch (Exception e) {
-			return null;
-		}
-		return null;
-	}
-
-	private GameExitType getBotCourse(String userCity)
-	{
-		if (level.isStepCounterEmpty()) {
-			api.out("Гена говорит: я проиграл :(");
-			return GameExitType.PLAYER_WIN;
-		}
-		var lastLetter = level.getCityLastLetter(userCity);
-		var resultCity = level.computeCity(lastLetter);
-		level.incStepCounter();
-		if (resultCity == null) {
-			api.out("Гена говорит: я проиграл :(");
-			return GameExitType.PLAYER_WIN;
-		}
-		api.out("Гена говорит: " + resultCity);
-		return null;
-	}
-	
-	private CityAnswerType checkAnswer(String city, Data data) {
-		var firstLetter = city.toUpperCase().charAt(0);
-		var yourCity = firstLetter + city.toLowerCase().substring(1);
-		if (waitingLetter != null && waitingLetter != firstLetter)
-			return CityAnswerType.INCORRECT_INPUT;
-		if (data.cities.containsKey(firstLetter) && data.cities.get(firstLetter).contains(yourCity)) 
-		{
-			data.cities.get(firstLetter).remove(yourCity);
-			data.countCities.put(firstLetter, data.countCities.get(firstLetter) - 1);
-			return CityAnswerType.CORRECT_INPUT;
-		}
-		return CityAnswerType.INCORRECT_CITY;
 	}
 }
