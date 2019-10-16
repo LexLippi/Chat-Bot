@@ -14,10 +14,11 @@ abstract public class GameLevel implements DifficultLevel {
     protected Character waitingLetter = null;
     protected Integer step_counter;
     private Random rnd = new Random();
+    protected Api api;
 
     abstract public String computeCity(Character lastLetter);
 
-    public GameExitType processingUserCourse(Api api) throws IllegalStateException{
+    public GameExitType processingUserCourse() throws IllegalStateException{
         api.out("Твой ход: ");
         try {
             var inputString = api.in().toLowerCase();
@@ -39,7 +40,7 @@ abstract public class GameLevel implements DifficultLevel {
                     api.out("Гена говорит: я не знаю такого города, попробуйте снова");
                     break;
                 case CORRECT_INPUT:
-                    var result = getBotCourse(inputString, api);
+                    var result = getBotCourse(inputString);
                     if (result != null) {
                         return result;
                     }
@@ -54,7 +55,7 @@ abstract public class GameLevel implements DifficultLevel {
         return null;
     }
 
-    public GameExitType getBotFirstCourse(Api api) {
+    public GameExitType getBotFirstCourse() {
         var cities = new ArrayList<String>();
         // think about letter Ё
         for (var i = 'А'; i <= 'Я'; ++i) {
@@ -96,7 +97,7 @@ abstract public class GameLevel implements DifficultLevel {
         return list.get(index);
     }
 
-    private GameExitType getBotCourse(String userCity, Api api)
+    private GameExitType getBotCourse(String userCity)
     {
         if (isStepCounterEmpty()) {
             api.out("Гена говорит: я проиграл :(");

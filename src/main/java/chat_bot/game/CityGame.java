@@ -33,14 +33,14 @@ public class CityGame {
 	
 	public GameExitType startGame() {
 		if (getDrawResult()) {
-			var result = level.getBotFirstCourse(api);
+			var result = level.getBotFirstCourse();
 			if (result != null) {
 				return result;
 			}
 		}
 		while (true)
 		{
-			var result = level.processingUserCourse(api);
+			var result = level.processingUserCourse();
 			if (result != null) {
 				return result;
 			}
@@ -52,13 +52,13 @@ public class CityGame {
 		try {
 			var userLevel = api.in().toLowerCase();
 			if (userLevel.compareTo("легкий") == 0) {
-				level = new Easy(data);
+				level = new Easy(data, api);
 			}
 			else if (userLevel.compareTo("средний") == 0) {
-				level = new Medium(data);
+				level = new Medium(data, api);
 			}
 			else if (userLevel.compareTo("тяжелый") == 0) {
-				level = new Hard(data);
+				level = new Hard(data, api);
 			}
 			else {
 				api.out("У меня еще нет такого уровня. Попробуй выбрать уровень снова!");
