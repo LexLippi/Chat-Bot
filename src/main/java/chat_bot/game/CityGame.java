@@ -16,7 +16,12 @@ public class CityGame {
 	protected GameLevel level;
 
 	public static void main(String[] args) {
-		var game = new CityGame(new Console(), new Data(new String[] {"Москва", "Минск"}));
+		//var game = new CityGame(new Console(), new Data(new String[] {"Москва", "Минск"}));
+		var game = new CityGame(new Console(), new Data(new City[]
+				{
+						new City ("Москва", 1000000),
+						new City ("Минск", 50000)
+				}));
 		game.startGame();
 	}
 

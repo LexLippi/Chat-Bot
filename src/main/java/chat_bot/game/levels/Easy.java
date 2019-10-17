@@ -14,28 +14,28 @@ public class Easy extends GameLevel {
 
     @Override
     public String computeCity(Character lastLetter) {
-        if (data.cities.get(lastLetter).isEmpty()) {
+        if (data.getCities().get(lastLetter).isEmpty()) {
             return null;
         }
         var max = Integer.MIN_VALUE;
-        var myCities = data.cities.get(lastLetter).iterator();
+        var myCities = data.getCities().get(lastLetter).keySet().iterator();
         var bestCities = new ArrayList<String>();
         while (myCities.hasNext()) {
             var currentCity = myCities.next();
             var currentLastLetter = getCityLastLetter(currentCity);
-            if (data.countCities.get(currentLastLetter) > max) {
-                max = data.countCities.get(currentLastLetter);
+            if (data.getCountCities().get(currentLastLetter) > max) {
+                max = data.getCountCities().get(currentLastLetter);
                 bestCities.clear();
                 bestCities.add(currentCity);
             }
-            else if (data.countCities.get(currentLastLetter) == max) {
+            else if (data.getCountCities().get(currentLastLetter) == max) {
                 bestCities.add(currentCity);
             }
         }
         var bestCity = getRandomListElement(bestCities);
         waitingLetter = getCityLastLetter(bestCity);
-        data.cities.get(lastLetter).remove(bestCity);
-        data.countCities.put(lastLetter, data.countCities.get(lastLetter) - 1);
+        data.getCities().get(lastLetter).remove(bestCity);
+        data.getCountCities().put(lastLetter, data.getCountCities().get(lastLetter) - 1);
         return bestCity;
     }
 }
