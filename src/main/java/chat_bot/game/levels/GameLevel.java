@@ -2,6 +2,7 @@ package chat_bot.game.levels;
 
 import chat_bot.Api;
 import chat_bot.Data;
+import chat_bot.DataNew;
 import chat_bot.game.levels.DifficultLevel;
 import chat_bot.game.return_types.CityAnswerType;
 import chat_bot.game.return_types.GameExitType;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 abstract public class GameLevel implements DifficultLevel {
-    protected Data data;
+    protected DataNew data;
     protected Character waitingLetter = null;
     protected Integer step_counter;
     private Random rnd = new Random();
@@ -59,7 +60,7 @@ abstract public class GameLevel implements DifficultLevel {
         var cities = new ArrayList<String>();
         // think about letter Ё
         for (var i = 'А'; i <= 'Я'; ++i) {
-            if (!data.stopLetters.contains(i)) {
+            if (!data.getStopLetters().contains(i)) {
                 var result = computeCity(i);
                 if (result != null) {
                     cities.add(result);
@@ -80,7 +81,7 @@ abstract public class GameLevel implements DifficultLevel {
     public Character getCityLastLetter(String city) {
         var i = 1;
         var currentLastLetter = city.toUpperCase().charAt(city.length() - i);
-        while (data.stopLetters.contains(currentLastLetter))
+        while (data.getStopLetters().contains(currentLastLetter))
         {
             ++i;
             currentLastLetter = city.toUpperCase().charAt(city.length() - i);
@@ -119,10 +120,10 @@ abstract public class GameLevel implements DifficultLevel {
         var yourCity = firstLetter + city.toLowerCase().substring(1);
         if (waitingLetter != null && waitingLetter != firstLetter)
             return CityAnswerType.INCORRECT_INPUT;
-        if (data.cities.containsKey(firstLetter) && data.cities.get(firstLetter).contains(yourCity))
+        if (data.getCities().containsKey(firstLetter) && data.getCities().get(firstLetter).containsKey(yourCity))
         {
-            data.cities.get(firstLetter).remove(yourCity);
-            data.countCities.put(firstLetter, data.countCities.get(firstLetter) - 1);
+            data.getCities().get(firstLetter).remove(yourCity);
+            data.putCountCities(firstLetter, data.getCountCities().get(firstLetter) - 1);
             return CityAnswerType.CORRECT_INPUT;
         }
         return CityAnswerType.INCORRECT_CITY;

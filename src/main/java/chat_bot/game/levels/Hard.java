@@ -2,12 +2,13 @@ package chat_bot.game.levels;
 
 import chat_bot.Api;
 import chat_bot.Data;
+import chat_bot.DataNew;
 import chat_bot.game.levels.GameLevel;
 
 import java.util.ArrayList;
 
 public class Hard extends GameLevel {
-    public Hard(Data data, Api api) {
+    public Hard(DataNew data, Api api) {
         step_counter = 100;
         this.data = data;
         this.api = api;
@@ -15,29 +16,29 @@ public class Hard extends GameLevel {
 
     @Override
     public String computeCity(Character lastLetter) {
-        if (data.cities.get(lastLetter).isEmpty())
+        if (data.getCities().get(lastLetter).isEmpty())
             return null;
         var min = Integer.MAX_VALUE;
-        var myCities = data.cities.get(lastLetter).iterator();
+        var myCities = data.getCities().get(lastLetter).keySet().iterator();
         var bestCities = new ArrayList<String>();
         while (myCities.hasNext())
         {
             var currentCity = myCities.next();
             var currentLastLetter = getCityLastLetter(currentCity);
-            if (data.countCities.get(currentLastLetter) < min)
+            if (data.getCountCities().get(currentLastLetter) < min)
             {
-                min = data.countCities.get(currentLastLetter);
+                min = data.getCountCities().get(currentLastLetter);
                 bestCities.clear();
                 bestCities.add(currentCity);
             }
-            else if (data.countCities.get(currentLastLetter) == min) {
+            else if (data.getCountCities().get(currentLastLetter) == min) {
                 bestCities.add(currentCity);
             }
         }
         var bestCity = getRandomListElement(bestCities);
         waitingLetter = getCityLastLetter(bestCity);
-        data.cities.get(lastLetter).remove(bestCity);
-        data.countCities.put(lastLetter, data.countCities.get(lastLetter) - 1);
+        data.getCities().get(lastLetter).remove(bestCity);
+        data.putCountCities(lastLetter, data.getCountCities().get(lastLetter) - 1);
         return bestCity;
     }
 }

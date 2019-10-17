@@ -8,23 +8,6 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/GameLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/GameLevel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Hard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Hard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Medium.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Medium.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/test/game_test/game_level_test/TestCommonGameLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/test/game_test/game_level_test/TestCommonGameLevel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/test/game_test/game_level_test/TestEasyGameLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/test/game_test/game_level_test/TestEasyGameLevel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/test/game_test/game_level_test/TestHardGameLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/test/game_test/game_level_test/TestHardGameLevel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/test/game_test/game_level_test/TestMediumGameLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/test/game_test/game_level_test/TestMediumGameLevel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/Data.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/Data.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/DataNew.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/DataNew.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/CityGame$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/CityGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/CityGame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Easy.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Easy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/GameLevel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/GameLevel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Hard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Hard.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Medium.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Medium.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/test/game_test/Test_Logic.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/test/game_test/Test_Logic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/test/game_test/game_level_test/TestCommonGameLevel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/test/game_test/game_level_test/TestCommonGameLevel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/test/game_test/game_level_test/TestEasyGameLevel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/test/game_test/game_level_test/TestEasyGameLevel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/test/game_test/game_level_test/TestHardGameLevel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/test/game_test/game_level_test/TestHardGameLevel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/test/game_test/game_level_test/TestMediumGameLevel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/test/game_test/game_level_test/TestMediumGameLevel.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
