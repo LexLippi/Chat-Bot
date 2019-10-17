@@ -1,0 +1,7 @@
+test\game_test\Test_Logic.class
+test\TestingApi.class
+test\game_test\game_level_test\TestHardGameLevel.class
+test\game_test\game_level_test\TestMediumGameLevel.class
+test\Test_Bot.class
+test\game_test\game_level_test\TestEasyGameLevel.class
+test\game_test\game_level_test\TestCommonGameLevel.class

@@ -3,11 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="0a0c3eca-f79f-4e9b-8c3d-8f8a63686671" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/CityGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/CityGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Easy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Easy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/GameLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/GameLevel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Hard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Hard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Medium.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Medium.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/ChatBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/ChatBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/Telegram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/Telegram.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/CityGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/CityGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Easy.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Easy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/GameLevel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/GameLevel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/GameLevel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/GameLevel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Hard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Hard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Medium.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Medium.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/test/Test_Bot.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/test/TestingApi.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/test/game_test/Test_Logic.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/test/game_test/game_level_test/TestCommonGameLevel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/test/game_test/game_level_test/TestEasyGameLevel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/test/game_test/game_level_test/TestHardGameLevel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/test/game_test/game_level_test/TestMediumGameLevel.class" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +59,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TestCommonGameLevel">
+  <component name="RunManager" selected="Application.Telegram">
     <configuration name="ChatBot" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="12" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -58,6 +68,19 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="chat_bot.game.levels.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Telegram" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="chat_bot.Telegram" />
+      <module name="Chat-Bot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="chat_bot.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -95,21 +118,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestHardGameLevel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="test.game_test.game_level_test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="test.game_test.game_level_test" />
-      <option name="MAIN_CLASS_NAME" value="test.game_test.game_level_test.TestHardGameLevel" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TestMediumGameLevel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="test" />
       <extension name="coverage">
@@ -142,19 +150,19 @@
     </configuration>
     <list>
       <item itemvalue="Application.ChatBot" />
-      <item itemvalue="JUnit.TestHardGameLevel" />
       <item itemvalue="JUnit.TestEasyGameLevel" />
       <item itemvalue="JUnit.TestMediumGameLevel" />
       <item itemvalue="JUnit.TestCommonGameLevel" />
       <item itemvalue="JUnit.Test_Logic" />
+      <item itemvalue="Application.Telegram" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Telegram" />
         <item itemvalue="JUnit.TestCommonGameLevel" />
         <item itemvalue="JUnit.Test_Logic" />
         <item itemvalue="JUnit.TestMediumGameLevel" />
         <item itemvalue="JUnit.TestEasyGameLevel" />
-        <item itemvalue="JUnit.TestHardGameLevel" />
       </list>
     </recent_temporary>
   </component>
