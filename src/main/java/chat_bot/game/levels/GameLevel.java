@@ -2,6 +2,7 @@ package chat_bot.game.levels;
 
 import chat_bot.Api;
 import chat_bot.Data;
+import chat_bot.DataNew;
 import chat_bot.game.levels.DifficultLevel;
 import chat_bot.game.return_types.CityAnswerType;
 import chat_bot.game.return_types.GameExitType;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 abstract public class GameLevel implements DifficultLevel {
-    protected Data data;
+    protected DataNew data;
     protected Character waitingLetter = null;
     protected Integer step_counter;
     private Random rnd = new Random();
@@ -122,7 +123,7 @@ abstract public class GameLevel implements DifficultLevel {
         if (data.getCities().containsKey(firstLetter) && data.getCities().get(firstLetter).containsKey(yourCity))
         {
             data.getCities().get(firstLetter).remove(yourCity);
-            data.getCountCities().put(firstLetter, data.getCountCities().get(firstLetter) - 1);
+            data.putCountCities(firstLetter, data.getCountCities().get(firstLetter) - 1);
             return CityAnswerType.CORRECT_INPUT;
         }
         return CityAnswerType.INCORRECT_CITY;
