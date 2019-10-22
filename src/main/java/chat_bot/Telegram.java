@@ -60,7 +60,8 @@ public class Telegram extends TelegramLongPollingBot {
                         sendMsg(id, "для начала напишите /start");
                     }
                     else{
-                        answers.get(id).add(msg.getText());
+                        //answers.get(id).add(msg.getText());
+                        bots.get(id).process(msg.getText());
                     }
             }
         }
@@ -78,7 +79,7 @@ public class Telegram extends TelegramLongPollingBot {
         if (!bots.containsKey(id)){
             return;
         }
-        bots.get(id).exit("пока");
+        bots.get(id).process("пока");
         bots.remove(id);
         answers.remove(id);
     }
@@ -90,7 +91,6 @@ public class Telegram extends TelegramLongPollingBot {
         answers.put(id, new LinkedList<String>());
         var api = new TelegramApi(id, this);
         var bot = new ChatBot(api);
-        bot.start();
         bots.put(id, bot);
     }
 
