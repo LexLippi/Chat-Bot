@@ -25,13 +25,13 @@ public class CityGame {
 		game.startGame();
 	}
 
-	public CityGame(Api api, DataNew data) {
+	public CityGame(Api api, Data data) {
 		this.api = api;
 		selectDifficultLevel(data);
 	}
 
 	public CityGame(Api api) {
-		var data = new DataNew();
+		var data = new Data();
 		this.api = api;
 		selectDifficultLevel(data);
 	}
@@ -52,7 +52,7 @@ public class CityGame {
 		}
 	}
 
-	private void selectDifficultLevel(DataNew data) {
+	private void selectDifficultLevel(Data data) {
 		api.out("Выбери уровень сложности: легкий, средний, тяжелый");
 		try {
 			var userLevel = api.in().toLowerCase();

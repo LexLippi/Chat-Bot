@@ -11,6 +11,7 @@ public class Data
     private HashMap<Character, HashMap<String, Integer>> cities = new HashMap<Character, HashMap<String, Integer>>();
     private HashMap<Character, Integer> countCities = new HashMap<Character, Integer>();
     private HashSet<Character> stopLetters = new HashSet<Character>();
+    private Integer totalCitiesCount = 0;
 
     public Data()
     {
@@ -26,6 +27,7 @@ public class Data
             var firstLetter = city.name.toUpperCase().charAt(0);
             this.cities.get(firstLetter).put(city.name, city.population);
             countCities.put(firstLetter, countCities.get(firstLetter) + 1);
+            totalCitiesCount++;
             if (stopLetters.contains(firstLetter))
                 stopLetters.remove(firstLetter);
         }
@@ -41,18 +43,21 @@ public class Data
             {
                 var firstLetter = line.charAt(0);
                 var nameAndPopulation = line.split(" ");
-                try
+                var name = nameAndPopulation[0];
+                var population = 0;
+                if (nameAndPopulation.length > 2)
                 {
-                    cities.get(firstLetter).put(nameAndPopulation[0], Integer.parseInt(nameAndPopulation[1]));
+                    for (var i = 1; i < nameAndPopulation.length - 1; i++)
+                        name += " " + nameAndPopulation[i];
+                    population = Integer.parseInt(nameAndPopulation[nameAndPopulation.length - 1]);
                 }
-                catch (NumberFormatException e)
+                else if (nameAndPopulation.length == 2)
                 {
+                    population = Integer.parseInt(nameAndPopulation[1]);
+                }
 
-                }
-                catch (ArrayIndexOutOfBoundsException e)
-                {
-
-                }
+                cities.get(firstLetter).put(name, population);
+                totalCitiesCount++;
                 countCities.put(firstLetter, countCities.get(firstLetter) + 1);
                 if (stopLetters.contains(firstLetter))
                     stopLetters.remove(firstLetter);
@@ -70,19 +75,19 @@ public class Data
         return cities;
     }
 
-    public HashMap<Character, Integer> getCountCities()
-    {
-        return countCities;
-    }
-
     public HashSet<Character> getStopLetters()
     {
         return stopLetters;
     }
 
-    public void putCountCities(Character key, Integer value)
+    public void updateStatistics (Character letter)
     {
-        countCities.put(key, value);
+        countCities.put(letter, countCities.get(letter) - 1);
+    }
+
+    public Integer getStatistics(Character letter)
+    {
+        return countCities.get(letter) / totalCitiesCount;
     }
 
     private void initialize()

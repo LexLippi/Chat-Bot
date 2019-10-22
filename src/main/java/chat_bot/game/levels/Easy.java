@@ -2,12 +2,11 @@ package chat_bot.game.levels;
 
 import chat_bot.Api;
 import chat_bot.Data;
-import chat_bot.DataNew;
 
 import java.util.ArrayList;
 
 public class Easy extends GameLevel {
-    public Easy(DataNew data, Api api) {
+    public Easy(Data data, Api api) {
         step_counter = 10;
         this.data = data;
         this.api = api;
@@ -24,19 +23,19 @@ public class Easy extends GameLevel {
         while (myCities.hasNext()) {
             var currentCity = myCities.next();
             var currentLastLetter = getCityLastLetter(currentCity);
-            if (data.getCountCities().get(currentLastLetter) > max) {
-                max = data.getCountCities().get(currentLastLetter);
+            if (data.getStatistics(currentLastLetter) > max) {
+                max = data.getStatistics(currentLastLetter);
                 bestCities.clear();
                 bestCities.add(currentCity);
             }
-            else if (data.getCountCities().get(currentLastLetter) == max) {
+            else if (data.getStatistics(currentLastLetter) == max) {
                 bestCities.add(currentCity);
             }
         }
         var bestCity = getRandomListElement(bestCities);
         waitingLetter = getCityLastLetter(bestCity);
         data.getCities().get(lastLetter).remove(bestCity);
-        data.putCountCities(lastLetter, data.getCountCities().get(lastLetter) - 1);
+        data.updateStatistics(lastLetter);
         return bestCity;
     }
 }
