@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a0c3eca-f79f-4e9b-8c3d-8f8a63686671" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/LevelFactory.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/return_types/GameReturnedValue.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/return_types/GameState.java" afterDir="false" />
@@ -15,16 +16,28 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Medium.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Medium.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/return_types/GameExitType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/return_types/GameExitType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/test/game_test/game_level_test/TestCommonGameLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/test/game_test/game_level_test/TestCommonGameLevel.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/ChatBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/ChatBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/Telegram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/Telegram.java" afterDir="false" />
+>>>>>>> 80fe016f123a7b218c823d05356eab08889f0a80
       <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/Api.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/Api.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/ChatBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/ChatBot.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/Data.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/Data.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/Telegram.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/Telegram.class" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/CityGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/CityGame.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Easy.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/GameLevel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/GameLevel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Hard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Hard.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Medium.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Medium.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/test/Test_Bot.class" beforeDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Easy.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Easy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/GameLevel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/GameLevel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Hard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Hard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Medium.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Medium.class" afterDir="false" />
+>>>>>>> 80fe016f123a7b218c823d05356eab08889f0a80
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -84,12 +97,16 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="RunManager" selected="Application.CityGame">
+=======
+  <component name="RunManager" selected="Application.Telegram">
+>>>>>>> 80fe016f123a7b218c823d05356eab08889f0a80
     <configuration name="ChatBot" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="12" />
+      <option name="ALTERNATIVE_JRE_PATH" value="12.0.2" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="chat_bot.ChatBot" />
-      <module name="test" />
+      <module name="Chat-Bot" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="chat_bot.game.levels.*" />
@@ -100,12 +117,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< HEAD
     <configuration name="CityGame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="chat_bot.game.CityGame" />
       <module name="Chat Bot" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="chat_bot.game.return_types.*" />
+=======
+    <configuration name="Telegram" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="chat_bot.Telegram" />
+      <module name="Chat-Bot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="chat_bot.*" />
+>>>>>>> 80fe016f123a7b218c823d05356eab08889f0a80
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -179,11 +205,19 @@
       <item itemvalue="JUnit.TestMediumGameLevel" />
       <item itemvalue="JUnit.TestCommonGameLevel" />
       <item itemvalue="JUnit.Test_Logic" />
+<<<<<<< HEAD
       <item itemvalue="Application.CityGame" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.CityGame" />
+=======
+      <item itemvalue="Application.Telegram" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Telegram" />
+>>>>>>> 80fe016f123a7b218c823d05356eab08889f0a80
         <item itemvalue="JUnit.TestCommonGameLevel" />
         <item itemvalue="JUnit.Test_Logic" />
         <item itemvalue="JUnit.TestMediumGameLevel" />

@@ -47,7 +47,6 @@ public class Telegram extends TelegramLongPollingBot {
         var msg = update.getMessage();
         if (msg != null && msg.hasText()){
             var id = msg.getChatId().toString();
-            sendMsg(id, msg.getText());
             switch (msg.getText()) {
                 case "/start":
                     registerNewBot(id);
