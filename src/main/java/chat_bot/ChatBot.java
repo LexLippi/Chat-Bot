@@ -45,7 +45,7 @@ public class ChatBot {
 	private void StartCityGame() {
 		game = new CityGame(api);
 		game.startGame();
-		}
+	}
 	
 	private void incorrectCommand() {
 		say("Я ещё не умею делать то, что ты хочешь.");
