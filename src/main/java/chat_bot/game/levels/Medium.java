@@ -18,10 +18,6 @@ public class Medium extends GameLevel {
         if (myCities.isEmpty()) {
             return null;
         }
-        var answerCity = getRandomListElement(new ArrayList<>(myCities.keySet()));
-        waitingLetter = getCityLastLetter(answerCity);
-        data.getCities().get(lastLetter).remove(answerCity);
-        data.updateStatistics(lastLetter);
-        return answerCity;
+        return getRandomListElement(new ArrayList<>(myCities.keySet()));
     }
 }

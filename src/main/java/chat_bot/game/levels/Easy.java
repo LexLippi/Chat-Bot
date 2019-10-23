@@ -32,10 +32,6 @@ public class Easy extends GameLevel {
                 bestCities.add(currentCity);
             }
         }
-        var bestCity = getRandomListElement(bestCities);
-        waitingLetter = getCityLastLetter(bestCity);
-        data.getCities().get(lastLetter).remove(bestCity);
-        data.updateStatistics(lastLetter);
-        return bestCity;
+        return getRandomListElement(bestCities);
     }
 }

@@ -2,7 +2,6 @@ package chat_bot;
 
 
 import chat_bot.game.CityGame;
-import chat_bot.game.return_types.GameExitType;
 
 public class ChatBot {
 	private Api api;
@@ -45,7 +44,7 @@ public class ChatBot {
 	private void StartCityGame() {
 		game = new CityGame(api);
 		game.startGame();
-		}
+	}
 	
 	private void incorrectCommand() {
 		say("Я ещё не умею делать то, что ты хочешь.");

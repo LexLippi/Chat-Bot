@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0a0c3eca-f79f-4e9b-8c3d-8f8a63686671" name="Default Changelist" comment="" />
+    <list default="true" id="0a0c3eca-f79f-4e9b-8c3d-8f8a63686671" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/LevelFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/return_types/GameReturnedValue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/return_types/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/ChatBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/ChatBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/CityGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/CityGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Easy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Easy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/GameLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/GameLevel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Hard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Hard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Medium.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Medium.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/return_types/GameExitType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/return_types/GameExitType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/test/game_test/game_level_test/TestCommonGameLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/test/game_test/game_level_test/TestCommonGameLevel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/Api.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/Api.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/ChatBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/ChatBot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/Data.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/Data.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/Telegram.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/Telegram.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/CityGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/CityGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Easy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/GameLevel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/GameLevel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Hard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Hard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Medium.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Medium.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/test/Test_Bot.class" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,6 +36,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -19,16 +44,33 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="createModuleGroups" value="true" />
+        <option name="dedicatedModuleDir" value="C:\Users\aleks\Desktop\Универ\Java\Chat Bot" />
+        <option name="importAutomatically" value="true" />
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="delegateBuildToMaven" value="true" />
+  </component>
   <component name="ProjectId" id="1RyebnOMDdwXRI8ENgaRPWlhkOm" />
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="true" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.importing" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -42,7 +84,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TestCommonGameLevel">
+  <component name="RunManager" selected="Application.CityGame">
     <configuration name="ChatBot" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="12" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -51,6 +93,19 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="chat_bot.game.levels.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CityGame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="chat_bot.game.CityGame" />
+      <module name="Chat Bot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="chat_bot.game.return_types.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -88,21 +143,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestHardGameLevel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="test.game_test.game_level_test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="test.game_test.game_level_test" />
-      <option name="MAIN_CLASS_NAME" value="test.game_test.game_level_test.TestHardGameLevel" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TestMediumGameLevel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="test" />
       <extension name="coverage">
@@ -135,19 +175,19 @@
     </configuration>
     <list>
       <item itemvalue="Application.ChatBot" />
-      <item itemvalue="JUnit.TestHardGameLevel" />
       <item itemvalue="JUnit.TestEasyGameLevel" />
       <item itemvalue="JUnit.TestMediumGameLevel" />
       <item itemvalue="JUnit.TestCommonGameLevel" />
       <item itemvalue="JUnit.Test_Logic" />
+      <item itemvalue="Application.CityGame" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.CityGame" />
         <item itemvalue="JUnit.TestCommonGameLevel" />
         <item itemvalue="JUnit.Test_Logic" />
         <item itemvalue="JUnit.TestMediumGameLevel" />
         <item itemvalue="JUnit.TestEasyGameLevel" />
-        <item itemvalue="JUnit.TestHardGameLevel" />
       </list>
     </recent_temporary>
   </component>

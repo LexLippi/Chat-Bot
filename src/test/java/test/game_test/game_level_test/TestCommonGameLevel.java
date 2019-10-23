@@ -2,7 +2,6 @@ package test.game_test.game_level_test;
 
 import chat_bot.City;
 import chat_bot.Data;
-import chat_bot.game.levels.Easy;
 import chat_bot.game.levels.Medium;
 import chat_bot.game.return_types.GameExitType;
 import org.junit.Assert;
@@ -72,7 +71,7 @@ public class TestCommonGameLevel {
         var data = new Data(new City[] {});
         var api = new TestingApi(new String[] {});
         var level = new Medium(data, api);
-        Assert.assertEquals(GameExitType.PLAYER_WIN, level.getBotFirstCourse());
+        Assert.assertEquals(GameExitType.PLAYER_WIN, level.getBotCourse());
     }
 
     @Test
@@ -83,6 +82,6 @@ public class TestCommonGameLevel {
                 });
         var api = new TestingApi(new String[] {});
         var level = new Medium(data, api);
-        Assert.assertNull(level.getBotFirstCourse());
+        Assert.assertNull(level.getBotCourse());
     }
 }

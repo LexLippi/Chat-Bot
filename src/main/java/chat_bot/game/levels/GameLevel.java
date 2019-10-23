@@ -5,6 +5,7 @@ import chat_bot.Data;
 import chat_bot.game.levels.DifficultLevel;
 import chat_bot.game.return_types.CityAnswerType;
 import chat_bot.game.return_types.GameExitType;
+import chat_bot.game.return_types.GameReturnedValue;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -18,46 +19,31 @@ abstract public class GameLevel implements DifficultLevel {
 
     abstract public String computeCity(Character lastLetter);
 
-    public GameExitType processingUserCourse() throws IllegalStateException{
-        api.out("Твой ход: ");
-        try {
-            var inputString = api.in().toLowerCase();
-            if (inputString.compareTo("стоп") == 0) {
-                api.out("Гена говорит: приходи еще!");
-                return GameExitType.GAME_INTERRUPTED;
-            }
-            else if (inputString.compareTo("сдаюсь") == 0) {
-                api.out("Гена говорит: ничего, в другой раз повезет!");
-                return GameExitType.PLAYER_LOOSE;
-            }
-            var answer = checkAnswer(inputString);
-            switch(answer)
-            {
-                case INCORRECT_INPUT:
-                    api.out("Гена говорит: врешь, не уйдешь!");
-                    break;
-                case INCORRECT_CITY:
-                    api.out("Гена говорит: я не знаю такого города, попробуйте снова");
-                    break;
-                case CORRECT_INPUT:
-                    var result = getBotCourse(inputString);
-                    if (result != null) {
-                        return result;
-                    }
-                    break;
-                default:
-                    throw new IllegalStateException("incorrect CityAnswerType");
-            }
+    public GameReturnedValue processingUserCourse(String inputString) throws IllegalStateException{
+        if (inputString.compareTo("стоп") == 0) {
+            return new GameReturnedValue(GameExitType.GAME_INTERRUPTED, "Гена говорит: приходи еще!");
         }
-        catch (Exception e) {
-            return null;
+        else if (inputString.compareTo("сдаюсь") == 0) {
+            return new GameReturnedValue(GameExitType.PLAYER_LOOSE,
+                    "Гена говорит: ничего, в другой раз повезет!");
         }
-        return null;
+        var answer = checkAnswer(inputString);
+        switch(answer)
+        {
+            case INCORRECT_INPUT:
+                return new GameReturnedValue(null, "Гена говорит: врешь, не уйдешь!");
+            case INCORRECT_CITY:
+                return new GameReturnedValue(null,
+                        "Гена говорит: я не знаю такого города, попробуйте снова");
+            case CORRECT_INPUT:
+                return getBotCourse(inputString);
+            default:
+                throw new IllegalStateException("incorrect CityAnswerType");
+        }
     }
 
-    public GameExitType getBotFirstCourse() {
+    public GameReturnedValue getBotCourse() {
         var cities = new ArrayList<String>();
-        // think about letter Ё
         for (var i = 'А'; i <= 'Я'; ++i) {
             if (!data.getStopLetters().contains(i)) {
                 var result = computeCity(i);
@@ -66,15 +52,18 @@ abstract public class GameLevel implements DifficultLevel {
                 }
             }
         }
+        if (!data.getStopLetters().contains('Ё')) {
+            var result = computeCity('Ё');
+            if (result != null) {
+                cities.add(result);
+            }
+        }
         if (cities.isEmpty()) {
-            api.out("Гена говорит: я проиграл :(");
-            return GameExitType.PLAYER_WIN;
+            return new GameReturnedValue(GameExitType.PLAYER_WIN, "Гена говорит: я проиграл :(");
         }
         var city = getRandomListElement(cities);
-        System.out.println(city);
-        incStepCounter();
-        api.out("Гена говорит: " + city);
-        return null;
+        updateGameFields(city);
+        return new GameReturnedValue(null, "Гена говорит: " + city);
     }
 
     public Character getCityLastLetter(String city) {
@@ -97,21 +86,26 @@ abstract public class GameLevel implements DifficultLevel {
         return list.get(index);
     }
 
-    private GameExitType getBotCourse(String userCity)
+    private GameReturnedValue getBotCourse(String userCity)
     {
         if (isStepCounterEmpty()) {
-            api.out("Гена говорит: я проиграл :(");
-            return GameExitType.PLAYER_WIN;
+            return new GameReturnedValue(GameExitType.PLAYER_WIN, "Гена говорит: я проиграл :(");
         }
-        var lastLetter = getCityLastLetter(userCity);
-        var resultCity = computeCity(lastLetter);
-        incStepCounter();
+        var userLastLetter = getCityLastLetter(userCity);
+        var resultCity = computeCity(userLastLetter);
         if (resultCity == null) {
-            api.out("Гена говорит: я проиграл :(");
-            return GameExitType.PLAYER_WIN;
+            return new GameReturnedValue(GameExitType.PLAYER_WIN, "Гена говорит: я проиграл :(");
         }
-        api.out("Гена говорит: " + resultCity);
-        return null;
+        updateGameFields(resultCity);
+        return new GameReturnedValue(null, "Гена говорит: " + resultCity);
+    }
+
+    private void updateGameFields(String resultCity) {
+        var lastLetter = getCityLastLetter(resultCity);
+        incStepCounter();
+        waitingLetter = lastLetter;
+        data.updateStatistics(lastLetter);
+        data.getCities().get(lastLetter).keySet().remove(resultCity);
     }
 
     private CityAnswerType checkAnswer(String city) {
