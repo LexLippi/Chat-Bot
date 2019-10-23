@@ -24,7 +24,7 @@ public class Hard extends GameLevel {
         {
             var currentCity = myCities.next();
             var currentLastLetter = getCityLastLetter(currentCity);
-            if (data.getStatistics(currentLastLetter) < min)
+            if (data.getStatistics(currentLastLetter) < 0.3)
             {
                 min = data.getStatistics(currentLastLetter);
                 bestCities.clear();

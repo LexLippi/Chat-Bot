@@ -14,10 +14,18 @@ public class Medium extends GameLevel {
 
     @Override
     public String computeCity(Character lastLetter) {
-        var myCities = data.getCities().get(lastLetter);
-        if (myCities.isEmpty()) {
+        if (data.getCities().get(lastLetter).isEmpty()) {
             return null;
         }
-        return getRandomListElement(new ArrayList<>(myCities.keySet()));
+        var cities = new ArrayList<String>();
+        var myCities = data.getCities().get(lastLetter).keySet().iterator();
+        while (myCities.hasNext()) {
+            var currentCity = myCities.next();
+            var currentLastLetter = getCityLastLetter(currentCity);
+            if (data.getStatistics(currentLastLetter) <= 0.7 && data.getStatistics(currentLastLetter) >= 0.3) {
+                cities.add(currentCity);
+            }
+        }
+        return getRandomListElement(cities);
     }
 }

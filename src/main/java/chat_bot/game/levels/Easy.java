@@ -23,7 +23,7 @@ public class Easy extends GameLevel {
         while (myCities.hasNext()) {
             var currentCity = myCities.next();
             var currentLastLetter = getCityLastLetter(currentCity);
-            if (data.getStatistics(currentLastLetter) > max) {
+            if (data.getStatistics(currentLastLetter) > 0.7) {
                 max = data.getStatistics(currentLastLetter);
                 bestCities.clear();
                 bestCities.add(currentCity);
