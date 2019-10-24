@@ -20,7 +20,7 @@ public class TestMediumGameLevel {
                         new City ("Рига", 100),
                         new City ("Агдам",100)
                 });        var api = new TestingApi(new String[] {});
-        var level = new Medium(data, api);
+        var level = new Medium(data);
         Assert.assertNotNull(level.computeCity('А'));
     }
 
@@ -36,7 +36,7 @@ public class TestMediumGameLevel {
                         new City ("Рига", 100),
                         new City ("Агдам",100)
                 });        var api = new TestingApi(new String[] {});
-        var level = new Medium(data, api);
+        var level = new Medium(data);
         Assert.assertNull(level.computeCity('Б'));
     }
 
@@ -52,7 +52,7 @@ public class TestMediumGameLevel {
                         new City ("Рига", 100),
                         new City ("Агдам",100)
                 });        var api = new TestingApi(new String[] {});
-        var level = new Medium(data, api);
+        var level = new Medium(data);
         level.computeCity('А');
         Assert.assertNotNull(level.computeCity('А'));
     }
@@ -69,7 +69,7 @@ public class TestMediumGameLevel {
                         new City ("Рига", 100),
                         new City ("Агдам",100)
                 });        var api = new TestingApi(new String[] {});
-        var level = new Medium(data, api);
+        var level = new Medium(data);
         level.computeCity('А');
         level.computeCity('А');
         Assert.assertNull(level.computeCity('А'));
@@ -87,7 +87,7 @@ public class TestMediumGameLevel {
                         new City ("Рига", 100),
                         new City ("Агдам",100)
                 });        var api = new TestingApi(new String[] {});
-        var level = new Medium(data, api);
+        var level = new Medium(data);
         Assert.assertFalse(level.isStepCounterEmpty());
     }
 }

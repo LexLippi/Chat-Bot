@@ -18,7 +18,7 @@ class Test_Logic {
 						new City ("Мальорка", 100),
 						new City ("Актюбинск", 100)
 				});
-		var game = new CityGame(api, data);
+		var game = new CityGame(data);
 		Assert.assertEquals(GameExitType.PLAYER_WIN, game.startGame());
 	}
 
@@ -30,7 +30,7 @@ class Test_Logic {
 						new City ("Мальорка", 100),
 						new City ("Актюбинск", 100)
 				});
-		var game = new CityGame(api, data);
+		var game = new CityGame(data);
 		Assert.assertEquals(GameExitType.GAME_INTERRUPTED, game.startGame());
 	}
 
@@ -42,7 +42,7 @@ class Test_Logic {
 						new City ("Мальорка", 100),
 						new City ("Актюбинск", 100)
 				});
-		var game = new CityGame(api, data);
+		var game = new CityGame(data);
 		Assert.assertEquals(GameExitType.PLAYER_LOOSE, game.startGame());
 	}
 }

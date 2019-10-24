@@ -21,7 +21,7 @@ public class TestHardGameLevel {
                         new City ("Агдам",100)
                 });
         var api = new TestingApi(new String[] {});
-        var level = new Hard(data, api);
+        var level = new Hard(data);
         Assert.assertEquals("Анапа", level.computeCity('А'));
     }
 
@@ -37,7 +37,7 @@ public class TestHardGameLevel {
                         new City ("Рига", 100),
                         new City ("Агдам",100)
                 });        var api = new TestingApi(new String[] {});
-        var level = new Hard(data, api);
+        var level = new Hard(data);
         Assert.assertNull(level.computeCity('Б'));
     }
 
@@ -53,7 +53,7 @@ public class TestHardGameLevel {
                         new City ("Рига", 100),
                         new City ("Агдам",100)
                 });        var api = new TestingApi(new String[] {});
-        var level = new Hard(data, api);
+        var level = new Hard(data);
         level.computeCity('А');
         Assert.assertEquals("Агдам", level.computeCity('А'));
     }
@@ -70,7 +70,7 @@ public class TestHardGameLevel {
                         new City ("Рига", 100),
                         new City ("Агдам",100)
                 });        var api = new TestingApi(new String[] {});
-        var level = new Hard(data, api);
+        var level = new Hard(data);
         level.computeCity('А');
         level.computeCity('А');
         Assert.assertNull(level.computeCity('А'));
@@ -88,7 +88,7 @@ public class TestHardGameLevel {
                         new City ("Рига", 100),
                         new City ("Агдам",100)
                 });        var api = new TestingApi(new String[] {});
-        var level = new Hard(data, api);
+        var level = new Hard(data);
         Assert.assertFalse(level.isStepCounterEmpty());
     }
 }

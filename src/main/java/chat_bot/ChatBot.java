@@ -56,8 +56,9 @@ public class ChatBot {
 	}
 	
 	private void StartCityGame() {
-		game = new CityGame(api);
-		game.startGame();
+		game = new CityGame();
+		var answer = game.startGame();
+		react(answer);
 	}
 
 	private void incorrectCommand() {

@@ -22,7 +22,7 @@ public class TestEasyGameLevel {
                         new City ("Агдам",100)
                 });
         var api = new TestingApi(new String[] {});
-        var level = new Easy(data, api);
+        var level = new Easy(data);
         Assert.assertEquals("Агдам", level.computeCity('А'));
     }
 
@@ -39,7 +39,7 @@ public class TestEasyGameLevel {
                         new City ("Агдам",100)
                 });
         var api = new TestingApi(new String[] {});
-        var level = new Easy(data, api);
+        var level = new Easy(data);
         Assert.assertNull(level.computeCity('Б'));
     }
 
@@ -56,7 +56,7 @@ public class TestEasyGameLevel {
                         new City ("Агдам",100)
                 });
         var api = new TestingApi(new String[] {});
-        var level = new Easy(data, api);
+        var level = new Easy(data);
         level.computeCity('А');
         Assert.assertEquals("Анапа", level.computeCity('А'));
     }
@@ -74,7 +74,7 @@ public class TestEasyGameLevel {
                         new City ("Агдам",100)
                 });
         var api = new TestingApi(new String[] {});
-        var level = new Easy(data, api);
+        var level = new Easy(data);
         level.computeCity('А');
         level.computeCity('А');
         Assert.assertNull(level.computeCity('А'));
@@ -93,7 +93,7 @@ public class TestEasyGameLevel {
                         new City ("Агдам",100)
                 });
         var api = new TestingApi(new String[] {});
-        var level = new Easy(data, api);
+        var level = new Easy(data);
         Assert.assertFalse(level.isStepCounterEmpty());
     }
 }

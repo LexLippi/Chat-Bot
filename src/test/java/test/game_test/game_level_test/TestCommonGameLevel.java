@@ -17,7 +17,7 @@ public class TestCommonGameLevel {
                         new City ("Шабры", 100)
                 });
         var api = new TestingApi(new String[] {});
-        var level = new Medium(data, api);
+        var level = new Medium(data);
         Assert.assertEquals(java.util.Optional.of(level.getCityLastLetter("Марракеш")), java.util.Optional.of('Ш'));
     }
 
@@ -29,7 +29,7 @@ public class TestCommonGameLevel {
                         new City ("Екатеринбург", 100)
                 });
         var api = new TestingApi(new String[] {});
-        var level = new Medium(data, api);
+        var level = new Medium(data);
         Assert.assertEquals(java.util.Optional.of(level.getCityLastLetter("Марракеш")), java.util.Optional.of('Е'));
     }
 
@@ -40,7 +40,7 @@ public class TestCommonGameLevel {
                         new City ("Марракеш", 100)
                 });
         var api = new TestingApi(new String[] {});
-        var level = new Medium(data, api);
+        var level = new Medium(data);
         Assert.assertEquals(java.util.Optional.of(level.getCityLastLetter("Марракеш")), java.util.Optional.of('М'));
     }
 
@@ -51,8 +51,8 @@ public class TestCommonGameLevel {
                         new City ("Марракеш", 100)
                 });
         var api = new TestingApi(new String[] {"стоп"});
-        var level = new Medium(data, api);
-        Assert.assertEquals(GameExitType.GAME_INTERRUPTED, level.processingUserCourse());
+        var level = new Medium(data);
+        Assert.assertEquals(GameExitType.GAME_INTERRUPTED, level.processingUserCourse("стоп"));
     }
 
     @Test
@@ -62,15 +62,15 @@ public class TestCommonGameLevel {
                         new City ("Марракеш", 100)
                 });
         var api = new TestingApi(new String[] {"сдаюсь"});
-        var level = new Medium(data, api);
-        Assert.assertEquals(GameExitType.PLAYER_LOOSE, level.processingUserCourse());
+        var level = new Medium(data);
+        Assert.assertEquals(GameExitType.PLAYER_LOOSE, level.processingUserCourse("сдаюсь"));
     }
 
     @Test
     void testPlayerWin() {
         var data = new Data(new City[] {});
         var api = new TestingApi(new String[] {});
-        var level = new Medium(data, api);
+        var level = new Medium(data);
         Assert.assertEquals(GameExitType.PLAYER_WIN, level.getBotCourse());
     }
 
@@ -81,7 +81,7 @@ public class TestCommonGameLevel {
                         new City ("Марракеш", 100)
                 });
         var api = new TestingApi(new String[] {});
-        var level = new Medium(data, api);
+        var level = new Medium(data);
         Assert.assertNull(level.getBotCourse());
     }
 }
