@@ -54,10 +54,19 @@ public class CityGame implements IGame {
 				}
 			case GetDraw:
 				try {
-					var jump = (getDraw(inputString)) ? 2 : 1 ;
-					currentState = jumpTable[currentState.ordinal()][jump];
-					var answer = (jump == 2) ? "Ты победил, не ожидал от тебя такой прыти. Ходи!" :
-							"Ха-ха. Ходить буду я!";
+					var jump = (getDraw(inputString)) ? 0 : 1;
+					String answer;
+					if (jump == 1) {
+						answer = "Ха-ха. Ходить буду я!";
+						var gameResult = level.getBotCourse();
+						jump = (gameResult.getType() != null) ? 1 : 0;
+						currentState = jumpTable[currentState.ordinal()][jump];
+						return new GameReturnedValue(gameResult.getType(), gameResult.getMessages()[0], answer);
+					}
+					else {
+						answer = "Ты победил, не ожидал от тебя такой прыти. Ходи!";
+						currentState = jumpTable[currentState.ordinal()][jump];
+					}
 					return new GameReturnedValue(null, answer);
 				}
 				catch (IllegalArgumentException e) {
@@ -66,14 +75,9 @@ public class CityGame implements IGame {
 					var answer = "Кажется, ты выбрал не орла или решку, а что-то посерьезнее... Попробуй повторить!";
 					return new GameReturnedValue(null, answer);
 				}
-			case FirstBotCourse:
-				var gameResult = level.getBotCourse();
-				var jump = (gameResult.getType() != null) ? 1 : 0;
-				currentState = jumpTable[currentState.ordinal()][jump];
-				return gameResult;
 			case BotCourse:
-				gameResult = level.processingUserCourse(inputString);
-				jump =  (gameResult.getType() != null) ? 1 : 0;
+				var gameResult = level.processingUserCourse(inputString);
+				var jump =  (gameResult.getType() != null) ? 1 : 0;
 				currentState = jumpTable[currentState.ordinal()][jump];
 				return gameResult;
 			default:
@@ -100,17 +104,14 @@ public class CityGame implements IGame {
 	}
 
 	private void createJumpTable() {
-		jumpTable = new GameState[4][4];
+		jumpTable = new GameState[3][3];
 		jumpTable[0][0] = GameState.SelectLevel;
 		jumpTable[0][1] = GameState.GetDraw;
 		jumpTable[0][2] = GameState.Exit;
 		jumpTable[1][0] = GameState.GetDraw;
-		jumpTable[1][1] = GameState.FirstBotCourse;
-		jumpTable[1][2] = GameState.BotCourse;
-		jumpTable[1][3] = GameState.Exit;
+		jumpTable[1][1] = GameState.BotCourse;
+		jumpTable[1][2] = GameState.Exit;
 		jumpTable[2][0] = GameState.BotCourse;
 		jumpTable[2][1] = GameState.Exit;
-		jumpTable[3][0] = GameState.BotCourse;
-		jumpTable[3][1] = GameState.Exit;
 	}
 }

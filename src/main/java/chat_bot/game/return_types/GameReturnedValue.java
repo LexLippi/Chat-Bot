@@ -2,18 +2,18 @@ package chat_bot.game.return_types;
 
 public final class GameReturnedValue {
     private GameExitType type;
-    private String message;
+    private String[] messages;
 
-    public GameReturnedValue(GameExitType type, String message) {
+    public GameReturnedValue(GameExitType type, String ... message) {
         this.type = type;
-        this.message = message;
+        this.messages = message;
     }
 
     public GameExitType getType() {
         return type;
     }
 
-    public String getMessage() {
-        return message;
+    public String[] getMessages() {
+        return messages;
     }
 }

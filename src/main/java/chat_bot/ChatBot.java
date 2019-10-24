@@ -3,7 +3,6 @@ package chat_bot;
 
 import chat_bot.game.CityGame;
 import chat_bot.game.IGame;
-import chat_bot.game.return_types.GameExitType;
 import chat_bot.game.return_types.GameReturnedValue;
 
 public class ChatBot {
@@ -45,7 +44,7 @@ public class ChatBot {
 	}
 
 	private void react(GameReturnedValue answer){
-		say(answer.getMessage());
+		say(answer.getMessages());
 		if (answer.getType() != null){
 			game = null;
 		}
