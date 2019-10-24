@@ -44,7 +44,9 @@ public class ChatBot {
 	}
 
 	private void react(GameReturnedValue answer){
-		say(answer.getMessages());
+		for (var replica: answer.getMessages()) {
+			say(replica);
+		}
 		if (answer.getType() != null){
 			game = null;
 		}
