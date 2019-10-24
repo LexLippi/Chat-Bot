@@ -36,6 +36,7 @@ public class CityGame implements IGame {
 
 	@Override
 	public GameReturnedValue process(String inputString) {
+		inputString = inputString.toLowerCase();
 		switch (currentState){
 			case SelectLevel:
 				try {
