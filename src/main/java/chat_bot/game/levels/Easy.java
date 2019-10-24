@@ -1,11 +1,15 @@
 package chat_bot.game.levels;
 
-import chat_bot.Api;
 import chat_bot.Data;
 
 import java.util.ArrayList;
 
 public class Easy extends GameLevel {
+    public Easy() {
+        step_counter = 10;
+        this.data = new Data();
+    }
+
     public Easy(Data data) {
         step_counter = 10;
         this.data = data;

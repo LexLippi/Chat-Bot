@@ -1,12 +1,14 @@
 package chat_bot.game.levels;
 
-import chat_bot.Api;
 import chat_bot.Data;
-import chat_bot.game.levels.GameLevel;
-
 import java.util.ArrayList;
 
 public class Hard extends GameLevel {
+    public Hard() {
+        step_counter = 100;
+        this.data = new Data();
+    }
+
     public Hard(Data data) {
         step_counter = 100;
         this.data = data;

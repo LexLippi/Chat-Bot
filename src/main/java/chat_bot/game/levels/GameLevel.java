@@ -1,8 +1,6 @@
 package chat_bot.game.levels;
 
-import chat_bot.Api;
 import chat_bot.Data;
-import chat_bot.game.levels.DifficultLevel;
 import chat_bot.game.return_types.CityAnswerType;
 import chat_bot.game.return_types.GameExitType;
 import chat_bot.game.return_types.GameReturnedValue;
