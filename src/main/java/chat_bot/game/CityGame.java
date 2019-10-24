@@ -2,11 +2,12 @@ package chat_bot.game;
 
 import chat_bot.*;
 import chat_bot.game.levels.*;
+import chat_bot.game.return_types.GameReturnedValue;
 import chat_bot.game.return_types.GameState;
 
 import java.util.Random;
 
-public class CityGame {
+public class CityGame implements IGame {
 	private Api api;
 	private GameLevel level;
 	private GameState currentState;
@@ -35,7 +36,12 @@ public class CityGame {
 		createJumpTable();
 		currentState = GameState.SelectLevel;
 	}
-	
+
+	@Override
+	public GameReturnedValue process(String answer) {
+		return null;
+	}
+
 	public void startGame() {
 		switch (currentState){
 			case SelectLevel:
