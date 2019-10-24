@@ -54,19 +54,14 @@ public class CityGame implements IGame {
 				}
 			case GetDraw:
 				try {
-					var jump = (getDraw(inputString)) ? 0 : 1;
-					String answer;
-					if (jump == 1) {
+					var answer = "Ты победил, не ожидал от тебя такой прыти. Ходи!";
+					if (!getDraw(inputString)) {
 						answer = "Ха-ха. Ходить буду я!";
 						var gameResult = level.getBotCourse();
-						jump = (gameResult.getType() != null) ? 1 : 0;
-						currentState = jumpTable[currentState.ordinal()][jump];
+						currentState = jumpTable[currentState.ordinal()][1];
 						return new GameReturnedValue(gameResult.getType(), gameResult.getMessages()[0], answer);
 					}
-					else {
-						answer = "Ты победил, не ожидал от тебя такой прыти. Ходи!";
-						currentState = jumpTable[currentState.ordinal()][jump];
-					}
+					currentState = jumpTable[currentState.ordinal()][1];
 					return new GameReturnedValue(null, answer);
 				}
 				catch (IllegalArgumentException e) {
