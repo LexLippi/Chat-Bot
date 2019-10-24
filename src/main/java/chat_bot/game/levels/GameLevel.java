@@ -15,7 +15,6 @@ abstract public class GameLevel implements DifficultLevel {
     protected Character waitingLetter = null;
     protected Integer step_counter;
     private Random rnd = new Random();
-    protected Api api;
 
     abstract public String computeCity(Character lastLetter);
 

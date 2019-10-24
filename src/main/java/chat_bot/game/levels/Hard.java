@@ -7,10 +7,9 @@ import chat_bot.game.levels.GameLevel;
 import java.util.ArrayList;
 
 public class Hard extends GameLevel {
-    public Hard(Data data, Api api) {
+    public Hard(Data data) {
         step_counter = 100;
         this.data = data;
-        this.api = api;
     }
 
     @Override

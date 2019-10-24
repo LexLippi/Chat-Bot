@@ -8,14 +8,13 @@ import chat_bot.game.return_types.GameState;
 import java.util.Random;
 
 public class CityGame implements IGame {
-	private Api api;
 	private GameLevel level;
 	private GameState currentState;
 	private GameState[][] jumpTable;
 	private Data data;
 
 	public static void main(String[] args) {
-		var game = new CityGame(new Console(), new Data(new City[]
+		var game = new CityGame(new Data(new City[]
 				{
 						new City ("Москва", 1000000),
 						new City ("Минск", 50000)
@@ -23,87 +22,72 @@ public class CityGame implements IGame {
 		game.startGame();
 	}
 
-	public CityGame(Api api, Data data) {
-		this.api = api;
+	public CityGame(Data data) {
 		this.data = data;
 		createJumpTable();
 		currentState = GameState.SelectLevel;
 	}
 
-	public CityGame(Api api) {
+	public CityGame() {
 		this.data = new Data();
-		this.api = api;
 		createJumpTable();
 		currentState = GameState.SelectLevel;
 	}
 
 	@Override
-	public GameReturnedValue process(String answer) {
-		return null;
-	}
-
-	public void startGame() {
+	public GameReturnedValue process(String inputString) {
 		switch (currentState){
 			case SelectLevel:
 				try {
-					var returnedLevel = getDifficultLevel();
+					var returnedLevel = new LevelFactory(data).getLevel(inputString);;
 					var jump = 2;
 					if (returnedLevel != null) {
 						level = returnedLevel;
 						jump = 1;
 					}
 					currentState = jumpTable[currentState.ordinal()][jump];
+					return new GameReturnedValue(null, "Пора выбрать, кто будет ходить первым! Орёл или решка?");
 				}
 				catch (IllegalArgumentException e) {
 					currentState = jumpTable[currentState.ordinal()][0];
+					return new GameReturnedValue(null, "Я не знаю такого уровня, попробуй снова!");
 				}
-				break;
 			case GetDraw:
 				try {
-					var jump = (getDraw()) ? 2 : 1 ;
+					var jump = (getDraw(inputString)) ? 2 : 1 ;
 					currentState = jumpTable[currentState.ordinal()][jump];
 					var answer = (jump == 2) ? "Ты победил, не ожидал от тебя такой прыти. Ходи!" :
 							"Ха-ха. Ходить буду я!";
-					api.out(answer);
-					break;
+					return new GameReturnedValue(null, answer);
 				}
 				catch (IllegalArgumentException e) {
 					var jump = 0;
 					currentState = jumpTable[currentState.ordinal()][jump];
 					var answer = "Кажется, ты выбрал не орла или решку, а что-то посерьезнее... Попробуй повторить!";
-					api.out(answer);
+					return new GameReturnedValue(null, answer);
 				}
-				break;
 			case FirstBotCourse:
 				var gameResult = level.getBotCourse();
 				var jump = (gameResult.getType() != null) ? 1 : 0;
 				currentState = jumpTable[currentState.ordinal()][jump];
-				api.out(gameResult.getMessage());
-				break;
+				return gameResult;
 			case BotCourse:
-				var inputString = api.in().toLowerCase();
 				gameResult = level.processingUserCourse(inputString);
 				jump =  (gameResult.getType() != null) ? 1 : 0;
 				currentState = jumpTable[currentState.ordinal()][jump];
-				break;
-			case Exit:
-				break;
+				return gameResult;
 			default:
 				throw new IllegalArgumentException();
 		}
 	}
 
-	private GameLevel getDifficultLevel() {
-		api.out("Выбери уровень сложности: легкий, средний, тяжелый");
-		var userLevel = api.in().toLowerCase();
-		return new LevelFactory(data, api).getLevel(userLevel);
+	public GameReturnedValue startGame() {
+		return new GameReturnedValue(null, "Выбери уровень сложности: легкий, средний, тяжелый");
 	}
 
-	private boolean getDraw() {
-		api.out("Пора выбрать, кто будет ходить первым! Орёл или решка?");
-		var side = api.in().toLowerCase();
-		if (side.compareTo("орёл") == 0 || side.compareTo("решка") == 0) {
-			return getDrawResult(side);
+	private boolean getDraw(String inputString) {
+		if (inputString.compareTo("орёл") == 0 || inputString.compareTo("решка") == 0) {
+			return getDrawResult(inputString);
 		}
 		throw new IllegalArgumentException();
 	}

@@ -6,10 +6,9 @@ import chat_bot.Data;
 import java.util.ArrayList;
 
 public class Medium extends GameLevel {
-    public Medium(Data data, Api api) {
+    public Medium(Data data) {
         step_counter = 50;
         this.data = data;
-        this.api = api;
     }
 
     @Override
