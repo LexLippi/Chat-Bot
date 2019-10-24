@@ -2,6 +2,7 @@ package chat_bot.game.levels;
 
 public class LevelFactory {
     public GameLevel getLevel(String level) {
+        level = level.toLowerCase();
         if (level.compareTo("легкий") == 0) {
             return new Easy();
         }

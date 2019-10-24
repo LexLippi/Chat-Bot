@@ -2,34 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a0c3eca-f79f-4e9b-8c3d-8f8a63686671" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/states/BotCourse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/states/Draw.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/states/IState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/states/SelectLevel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/states/State.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/CityGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/CityGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Easy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Easy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/GameLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/GameLevel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Hard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Hard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/LevelFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/LevelFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Medium.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat_bot/game/levels/Medium.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat_bot/game/return_types/GameState.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/CityGame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/CityGame$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/CityGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/CityGame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Easy.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Easy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/GameLevel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/GameLevel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/GameLevel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/GameLevel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Hard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Hard.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/LevelFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/LevelFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Medium.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/chat_bot/game/levels/Medium.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/test/game_test/Test_Logic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/test/game_test/Test_Logic.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -83,7 +67,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Telegram">
+  <component name="RunManager" selected="JUnit.TestLevelFactory">
     <configuration name="ChatBot" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="12.0.2" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -121,8 +105,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestCommonGameLevel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="test" />
+    <configuration name="TestLevelFactory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Chat Bot" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="test.game_test.game_level_test.*" />
@@ -130,14 +114,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="test.game_test.game_level_test" />
-      <option name="MAIN_CLASS_NAME" value="test.game_test.game_level_test.TestCommonGameLevel" />
+      <option name="MAIN_CLASS_NAME" value="test.game_test.game_level_test.TestLevelFactory" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestEasyGameLevel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="test" />
+    <configuration name="TestLevelFactory.testAbracadabra" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Chat Bot" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="test.game_test.game_level_test.*" />
@@ -145,23 +129,9 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="test.game_test.game_level_test" />
-      <option name="MAIN_CLASS_NAME" value="test.game_test.game_level_test.TestEasyGameLevel" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestMediumGameLevel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="test.game_test.game_level_test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="test.game_test.game_level_test" />
-      <option name="MAIN_CLASS_NAME" value="test.game_test.game_level_test.TestMediumGameLevel" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="MAIN_CLASS_NAME" value="test.game_test.game_level_test.TestLevelFactory" />
+      <option name="METHOD_NAME" value="testAbracadabra" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -185,13 +155,14 @@
       <item itemvalue="Application.ChatBot" />
       <item itemvalue="Application.Telegram" />
       <item itemvalue="Application.CityGame" />
-      <item itemvalue="JUnit.TestEasyGameLevel" />
-      <item itemvalue="JUnit.TestMediumGameLevel" />
-      <item itemvalue="JUnit.TestCommonGameLevel" />
       <item itemvalue="JUnit.Test_Logic" />
+      <item itemvalue="JUnit.TestLevelFactory" />
+      <item itemvalue="JUnit.TestLevelFactory.testAbracadabra" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestLevelFactory" />
+        <item itemvalue="JUnit.TestLevelFactory.testAbracadabra" />
         <item itemvalue="Application.Telegram" />
         <item itemvalue="Application.CityGame" />
       </list>
