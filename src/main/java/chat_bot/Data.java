@@ -13,10 +13,17 @@ public class Data
     private HashSet<Character> stopLetters = new HashSet<Character>();
     private Integer totalCitiesCount = 0;
 
+    public static void main(String[] args)
+    {
+        var data = new Data();
+        System.out.println(data.cities);
+    }
+
     public Data()
     {
         initialize();
-        getData();
+        getDataFromFile();
+        //getDataFromSite();
     }
 
     public Data(City[] cities)
@@ -33,8 +40,28 @@ public class Data
         }
     }
 
-    private void getData()
+    private void getDataFromSite()
     {
+        try
+        {
+            var citiesString = PopulationData.getCities();
+            for (var city : citiesString) {
+                var population = PopulationData.getStatistics(city);
+                var firstLetter = city.charAt(0);
+                cities.get(firstLetter).put(city, population);
+                totalCitiesCount++;
+                countCities.put(firstLetter, countCities.get(firstLetter) + 1);
+                if (stopLetters.contains(firstLetter))
+                    stopLetters.remove(firstLetter);
+            }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private void getDataFromFile() {
         try
         {
             var reader = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\src\\main\\resources\\new_input.txt"));
