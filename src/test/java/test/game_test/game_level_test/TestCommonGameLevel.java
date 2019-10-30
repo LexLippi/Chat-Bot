@@ -2,6 +2,9 @@ package test.game_test.game_level_test;
 
 import chat_bot.City;
 import chat_bot.Data;
+import chat_bot.game.levels.Easy;
+import chat_bot.game.levels.GameLevel;
+import chat_bot.game.levels.Hard;
 import chat_bot.game.levels.Medium;
 import chat_bot.game.return_types.GameExitType;
 import org.junit.Assert;
@@ -11,77 +14,90 @@ import test.TestingApi;
 public class TestCommonGameLevel {
     @Test
     void testSimpleLastLetterFromCity() {
-        var data = new Data(new City[]
-                {
+        var data = new Data(new City[] {
                         new City ("Марракеш", 100),
                         new City ("Шабры", 100)
-                });
-        var api = new TestingApi(new String[] {});
-        var level = new Medium(data);
+        });
+        GameLevel level = new Medium(data);
+        Assert.assertEquals(java.util.Optional.of(level.getCityLastLetter("Марракеш")), java.util.Optional.of('Ш'));
+        level = new Easy(data);
+        Assert.assertEquals(java.util.Optional.of(level.getCityLastLetter("Марракеш")), java.util.Optional.of('Ш'));
+        level = new Hard(data);
         Assert.assertEquals(java.util.Optional.of(level.getCityLastLetter("Марракеш")), java.util.Optional.of('Ш'));
     }
 
     @Test
     void testNextLastLetterFromCity() {
-        var data = new Data(new City[]
-                {
+        var data = new Data(new City[] {
                         new City ("Марракеш", 100),
                         new City ("Екатеринбург", 100)
-                });
-        var api = new TestingApi(new String[] {});
-        var level = new Medium(data);
+        });
+        GameLevel level = new Medium(data);
+        Assert.assertEquals(java.util.Optional.of(level.getCityLastLetter("Марракеш")), java.util.Optional.of('Е'));
+        level = new Easy(data);
+        Assert.assertEquals(java.util.Optional.of(level.getCityLastLetter("Марракеш")), java.util.Optional.of('Е'));
+        level = new Hard(data);
         Assert.assertEquals(java.util.Optional.of(level.getCityLastLetter("Марракеш")), java.util.Optional.of('Е'));
     }
 
     @Test
     void testFirstLetterFromCity() {
-        var data = new Data(new City[]
-                {
-                        new City ("Марракеш", 100)
-                });
-        var api = new TestingApi(new String[] {});
-        var level = new Medium(data);
+        var data = new Data(new City[] { new City ("Марракеш", 100) });
+        GameLevel level = new Medium(data);
+        Assert.assertEquals(java.util.Optional.of(level.getCityLastLetter("Марракеш")), java.util.Optional.of('М'));
+        level = new Easy(data);
+        Assert.assertEquals(java.util.Optional.of(level.getCityLastLetter("Марракеш")), java.util.Optional.of('М'));
+        level = new Hard(data);
         Assert.assertEquals(java.util.Optional.of(level.getCityLastLetter("Марракеш")), java.util.Optional.of('М'));
     }
 
     @Test
     void testGameInterrupted() {
-        var data = new Data(new City[]
-                {
-                        new City ("Марракеш", 100)
-                });
-        var api = new TestingApi(new String[] {"стоп"});
-        var level = new Medium(data);
-        Assert.assertEquals(GameExitType.GAME_INTERRUPTED, level.processingUserCourse("стоп"));
+        var data = new Data(new City[] { new City ("Марракеш", 100) });
+        GameLevel level = new Medium(data);
+        Assert.assertEquals(GameExitType.GAME_INTERRUPTED, level.processingUserCourse("стоп").getType());
+        level = new Easy(data);
+        Assert.assertEquals(GameExitType.GAME_INTERRUPTED, level.processingUserCourse("стоп").getType());
+        level = new Hard(data);
+        Assert.assertEquals(GameExitType.GAME_INTERRUPTED, level.processingUserCourse("стоп").getType());
     }
 
     @Test
     void testPlayerLose() {
-        var data = new Data(new City[]
-                {
-                        new City ("Марракеш", 100)
-                });
-        var api = new TestingApi(new String[] {"сдаюсь"});
-        var level = new Medium(data);
-        Assert.assertEquals(GameExitType.PLAYER_LOOSE, level.processingUserCourse("сдаюсь"));
+        var data = new Data(new City[] { new City ("Марракеш", 100) });
+        GameLevel level = new Medium(data);
+        Assert.assertEquals(GameExitType.PLAYER_LOOSE, level.processingUserCourse("сдаюсь").getType());
+        level = new Easy(data);
+        Assert.assertEquals(GameExitType.PLAYER_LOOSE, level.processingUserCourse("сдаюсь").getType());
+        level = new Hard(data);
+        Assert.assertEquals(GameExitType.PLAYER_LOOSE, level.processingUserCourse("сдаюсь").getType());
     }
 
     @Test
     void testPlayerWin() {
         var data = new Data(new City[] {});
-        var api = new TestingApi(new String[] {});
-        var level = new Medium(data);
-        Assert.assertEquals(GameExitType.PLAYER_WIN, level.getBotCourse());
+        GameLevel level = new Medium(data);
+        Assert.assertEquals(GameExitType.PLAYER_WIN, level.getBotCourse().getType());
+        level = new Easy(data);
+        Assert.assertEquals(GameExitType.PLAYER_WIN, level.getBotCourse().getType());
+        level = new Hard(data);
+        Assert.assertEquals(GameExitType.PLAYER_WIN, level.getBotCourse().getType());
     }
 
     @Test
     void testBotFirstCourse() {
-        var data = new Data(new City[]
-                {
-                        new City ("Марракеш", 100)
-                });
-        var api = new TestingApi(new String[] {});
-        var level = new Medium(data);
-        Assert.assertNull(level.getBotCourse());
+        var data = new Data(new City[] { new City ("Марракеш", 100) });
+        GameLevel level = new Medium(data);
+        var result = level.getBotCourse();
+        Assert.assertEquals(GameExitType.PLAYER_WIN, result.getType());
+        Assert.assertEquals("Гена говорит: я проиграл :(", result.getMessages()[0]);
+        level = new Easy(data);
+        result = level.getBotCourse();
+        Assert.assertNull(null, result.getType());
+        Assert.assertEquals("Гена говорит: Марракеш", result.getMessages()[0]);
+        level = new Hard(data);
+        result = level.getBotCourse();
+        Assert.assertEquals(GameExitType.PLAYER_WIN, result.getType());
+        Assert.assertEquals("Гена говорит: я проиграл :(", result.getMessages()[0]);
     }
 }

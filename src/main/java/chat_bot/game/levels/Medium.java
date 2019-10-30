@@ -24,10 +24,14 @@ public class Medium extends GameLevel {
         while (myCities.hasNext()) {
             var currentCity = myCities.next();
             var currentLastLetter = getCityLastLetter(currentCity);
-            if (data.getStatistics(currentLastLetter) <= 0.7 && data.getStatistics(currentLastLetter) >= 0.3) {
+            if (data.getStatistics(currentLastLetter) <= 0.05 && data.getStatistics(currentLastLetter) >= 0.01) {
                 cities.add(currentCity);
             }
         }
+        if (cities.isEmpty()) {
+            return null;
+        }
+        System.out.println(cities);
         return getRandomListElement(cities);
     }
 }

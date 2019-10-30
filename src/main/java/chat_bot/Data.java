@@ -107,14 +107,17 @@ public class Data
         return stopLetters;
     }
 
-    public void updateStatistics (Character letter)
+    public void updateStatistics (Character letter, String cityName)
     {
         countCities.put(letter, countCities.get(letter) - 1);
+        totalCitiesCount--;
+        var firstLetter = cityName.charAt(0);
+        cities.get(firstLetter).remove(cityName);
     }
 
-    public Integer getStatistics(Character letter)
+    public Double getStatistics(Character letter)
     {
-        return countCities.get(letter) / totalCitiesCount;
+        return (double)countCities.get(letter) / totalCitiesCount;
     }
 
     private void initialize()

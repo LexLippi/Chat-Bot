@@ -18,23 +18,23 @@ public class Hard extends GameLevel {
     public String computeCity(Character lastLetter) {
         if (data.getCities().get(lastLetter).isEmpty())
             return null;
-        var min = Integer.MAX_VALUE;
         var myCities = data.getCities().get(lastLetter).keySet().iterator();
         var bestCities = new ArrayList<String>();
         while (myCities.hasNext())
         {
             var currentCity = myCities.next();
             var currentLastLetter = getCityLastLetter(currentCity);
-            if (data.getStatistics(currentLastLetter) < 0.3)
+            System.out.println(currentLastLetter);
+            System.out.println(data.getStatistics(currentLastLetter));
+            if (data.getStatistics(currentLastLetter) < 0.01)
             {
-                min = data.getStatistics(currentLastLetter);
-                bestCities.clear();
-                bestCities.add(currentCity);
-            }
-            else if (data.getStatistics(currentLastLetter) == min) {
                 bestCities.add(currentCity);
             }
         }
+        if (bestCities.isEmpty()) {
+            return null;
+        }
+        System.out.println(bestCities);
         return getRandomListElement(bestCities);
     }
 }

@@ -15,7 +15,7 @@ public class Draw extends State {
         if (!getDraw(inputString)) {
             answer = "Ха-ха. Ходить буду я!";
             var gameResult = level.getBotCourse();
-            return new GameReturnedValue(gameResult.getType(), gameResult.getMessages()[0], answer);
+            return new GameReturnedValue(gameResult.getType(), answer, gameResult.getMessages()[0]);
         }
         return new GameReturnedValue(null, answer);
     }

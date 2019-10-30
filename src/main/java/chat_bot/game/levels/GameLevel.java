@@ -17,6 +17,7 @@ abstract public class GameLevel implements DifficultLevel {
     abstract public String computeCity(Character lastLetter);
 
     public GameReturnedValue processingUserCourse(String inputString) throws IllegalStateException{
+        System.out.println(inputString);
         if (inputString.compareTo("стоп") == 0) {
             return new GameReturnedValue(GameExitType.GAME_INTERRUPTED, "Гена говорит: приходи еще!");
         }
@@ -40,6 +41,17 @@ abstract public class GameLevel implements DifficultLevel {
     }
 
     public GameReturnedValue getBotCourse() {
+        var cities = getCorrectCities();
+        if (cities.isEmpty()) {
+            return new GameReturnedValue(GameExitType.PLAYER_WIN, "Гена говорит: я проиграл :(");
+        }
+        var city = getRandomListElement(cities);
+        updateGameFields(city);
+        System.out.println(waitingLetter);
+        return new GameReturnedValue(null, "Гена говорит: " + city);
+    }
+
+    private ArrayList<String> getCorrectCities() {
         var cities = new ArrayList<String>();
         for (var i = 'А'; i <= 'Я'; ++i) {
             if (!data.getStopLetters().contains(i)) {
@@ -55,12 +67,7 @@ abstract public class GameLevel implements DifficultLevel {
                 cities.add(result);
             }
         }
-        if (cities.isEmpty()) {
-            return new GameReturnedValue(GameExitType.PLAYER_WIN, "Гена говорит: я проиграл :(");
-        }
-        var city = getRandomListElement(cities);
-        updateGameFields(city);
-        return new GameReturnedValue(null, "Гена говорит: " + city);
+        return cities;
     }
 
     public Character getCityLastLetter(String city) {
@@ -101,19 +108,18 @@ abstract public class GameLevel implements DifficultLevel {
         var lastLetter = getCityLastLetter(resultCity);
         incStepCounter();
         waitingLetter = lastLetter;
-        data.updateStatistics(lastLetter);
-        data.getCities().get(lastLetter).keySet().remove(resultCity);
+        data.updateStatistics(lastLetter, resultCity);;
     }
 
     private CityAnswerType checkAnswer(String city) {
-        var firstLetter = city.toUpperCase().charAt(0);
+        var firstLetter = getFirstLetter(city);
         var yourCity = firstLetter + city.toLowerCase().substring(1);
-        if (waitingLetter != null && waitingLetter != firstLetter)
+        if (isCityStartsOnIncorrectLetter(firstLetter)) {
             return CityAnswerType.INCORRECT_INPUT;
-        if (data.getCities().containsKey(firstLetter) && data.getCities().get(firstLetter).containsKey(yourCity))
+        }
+        if (isCityCorrect(yourCity))
         {
-            data.getCities().get(firstLetter).remove(yourCity);
-            data.updateStatistics(firstLetter);
+            data.updateStatistics(firstLetter, yourCity);
             return CityAnswerType.CORRECT_INPUT;
         }
         return CityAnswerType.INCORRECT_CITY;
@@ -124,4 +130,18 @@ abstract public class GameLevel implements DifficultLevel {
             step_counter--;
         }
     }
+
+    private Character getFirstLetter(String city) {
+        return city.toUpperCase().charAt(0);
+    }
+
+    private Boolean isCityStartsOnIncorrectLetter(Character firstLetter) {
+        return waitingLetter != null && waitingLetter.compareTo(firstLetter) != 0;
+    }
+
+    private Boolean isCityCorrect(String city) {
+        var firstLetter = getFirstLetter(city);
+        return data.getCities().containsKey(firstLetter) && data.getCities().get(firstLetter).containsKey(city);
+    }
+
 }
