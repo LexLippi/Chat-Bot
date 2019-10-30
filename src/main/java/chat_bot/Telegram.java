@@ -87,10 +87,12 @@ public class Telegram extends TelegramLongPollingBot {
         if (answers.containsKey(id)){
             bots.get(id).start();
         }
-        answers.put(id, new LinkedList<String>());
-        var api = new TelegramApi(id, this);
-        var bot = new ChatBot(api);
-        bots.put(id, bot);
+        else {
+            answers.put(id, new LinkedList<String>());
+            var api = new TelegramApi(id, this);
+            var bot = new ChatBot(api);
+            bots.put(id, bot);
+        }
     }
 
     @Override
