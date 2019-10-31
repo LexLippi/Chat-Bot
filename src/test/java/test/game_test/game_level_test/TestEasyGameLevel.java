@@ -9,9 +9,7 @@ import org.junit.jupiter.api.Test;
 public class TestEasyGameLevel {
     @Test
     void testSimpleComputeCity() {
-        //var data = new Data(new String[] {"Мальорка", "Москва", "Минск", "Анапа", "Краснодар", "Рига", "Агдам"});
-        var data = new Data(new City[]
-                {
+        var data = new Data(new City[] {
                         new City ("Мальорка", 100),
                         new City ("Москва",100),
                         new City ("Минск", 100),
@@ -19,15 +17,14 @@ public class TestEasyGameLevel {
                         new City("Краснодар", 100),
                         new City ("Рига", 100),
                         new City ("Агдам",100)
-                });
+        });
         var level = new Easy(data);
-        Assert.assertEquals("Агдам", level.computeCity('А'));
+        Assert.assertNotNull(level.computeCity('А'));
     }
 
     @Test
     void testComputeCityOnStopLetter() {
-        var data = new Data(new City[]
-                {
+        var data = new Data(new City[] {
                         new City ("Мальорка", 100),
                         new City ("Москва",100),
                         new City ("Минск", 100),
@@ -35,15 +32,14 @@ public class TestEasyGameLevel {
                         new City("Краснодар", 100),
                         new City ("Рига", 100),
                         new City ("Агдам",100)
-                });
+        });
         var level = new Easy(data);
         Assert.assertNull(level.computeCity('Б'));
     }
 
     @Test
-    void testComputeCityRemoveBestCity() {
-        var data = new Data(new City[]
-                {
+    void testTwoComputeBestCity() {
+        var data = new Data(new City[] {
                         new City ("Мальорка", 100),
                         new City ("Москва",100),
                         new City ("Минск", 100),
@@ -51,16 +47,15 @@ public class TestEasyGameLevel {
                         new City("Краснодар", 100),
                         new City ("Рига", 100),
                         new City ("Агдам",100)
-                });
+        });
         var level = new Easy(data);
         level.computeCity('А');
-        Assert.assertEquals("Анапа", level.computeCity('А'));
+        Assert.assertNotNull(level.computeCity('А'));
     }
 
     @Test
-    void testComputeCityRemoveBestCities() {
-        var data = new Data(new City[]
-                {
+    void testManyComputeBestCities() {
+        var data = new Data(new City[] {
                         new City ("Мальорка", 100),
                         new City ("Москва",100),
                         new City ("Минск", 100),
@@ -68,17 +63,16 @@ public class TestEasyGameLevel {
                         new City("Краснодар", 100),
                         new City ("Рига", 100),
                         new City ("Агдам",100)
-                });
+        });
         var level = new Easy(data);
-        level.computeCity('А');
-        level.computeCity('А');
-        Assert.assertNull(level.computeCity('А'));
+        for (var i = 0; i < 8; i++) {
+            Assert.assertNotNull(level.computeCity('А'));
+        }
     }
 
     @Test
     void testStepCounter() {
-        var data = new Data(new City[]
-                {
+        var data = new Data(new City[] {
                         new City ("Мальорка", 100),
                         new City ("Москва",100),
                         new City ("Минск", 100),
@@ -86,8 +80,9 @@ public class TestEasyGameLevel {
                         new City("Краснодар", 100),
                         new City ("Рига", 100),
                         new City ("Агдам",100)
-                });
+        });
         var level = new Easy(data);
+        level.computeCity('А');
         Assert.assertFalse(level.isStepCounterEmpty());
     }
 }

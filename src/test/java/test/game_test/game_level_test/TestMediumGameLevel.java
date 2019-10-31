@@ -3,6 +3,7 @@ package test.game_test.game_level_test;
 import chat_bot.City;
 import chat_bot.Data;
 import chat_bot.game.levels.Medium;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,7 @@ public class TestMediumGameLevel {
                         new City ("Агдам",100)
                 });
         var level = new Medium(data);
-        Assert.assertNotNull(level.computeCity('А'));
+        Assert.assertNotNull(level.computeCity('Р'));
     }
 
     @Test
@@ -40,7 +41,7 @@ public class TestMediumGameLevel {
     }
 
     @Test
-    void testComputeCityRemoveBestCity() {
+    void testComputeBestCityTwice() {
         var data = new Data(new City[]
                 {
                         new City ("Мальорка", 100),
@@ -52,12 +53,12 @@ public class TestMediumGameLevel {
                         new City ("Агдам",100)
                 });
         var level = new Medium(data);
-        level.computeCity('А');
+        Assert.assertNotNull(level.computeCity('А'));
         Assert.assertNotNull(level.computeCity('А'));
     }
 
     @Test
-    void testComputeCityRemoveBestCities() {
+    void testComputeManyBestCities() {
         var data = new Data(new City[]
                 {
                         new City ("Мальорка", 100),
@@ -69,9 +70,9 @@ public class TestMediumGameLevel {
                         new City ("Агдам",100)
                 });
         var level = new Medium(data);
-        level.computeCity('А');
-        level.computeCity('А');
-        Assert.assertNull(level.computeCity('А'));
+        for (var i = 0; i < 1000; ++i) {
+            Assert.assertNotNull(level.computeCity('А'));
+        }
     }
 
     @Test

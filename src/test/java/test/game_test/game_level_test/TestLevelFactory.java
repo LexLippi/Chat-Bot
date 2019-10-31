@@ -9,6 +9,8 @@ public class TestLevelFactory {
     void testCreateEasyLevel() {
         var level = new LevelFactory().getLevel("легкий");
         Assert.assertTrue(level instanceof Easy);
+        level = new LevelFactory().getLevel("лёгкий");
+        Assert.assertTrue(level instanceof Easy);
     }
 
     @Test
@@ -21,16 +23,20 @@ public class TestLevelFactory {
     void testCreateHardLevel() {
         var level = new LevelFactory().getLevel("тяжелый");
         Assert.assertTrue(level instanceof Hard);
+        level = new LevelFactory().getLevel("тяжёлый");
+        Assert.assertTrue(level instanceof Hard);
     }
 
     @Test
     void testAbracadabra() {
-        try {
-            new LevelFactory().getLevel("abracadabra");
-        }
-        catch (Exception e) {
-            Assert.assertTrue(e instanceof IllegalArgumentException);
-        }
+        var factory = new LevelFactory();
+        Assert.assertFalse(factory.checkInputString("abracadabra"));
+    }
+
+    @Test
+    void testAbracadabraOnRussian() {
+        var factory = new LevelFactory();
+        Assert.assertFalse(factory.checkInputString("абракадабра"));
     }
 
     @Test

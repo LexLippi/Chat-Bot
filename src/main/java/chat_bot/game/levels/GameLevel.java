@@ -15,6 +15,8 @@ abstract public class GameLevel implements DifficultLevel {
     protected Character waitingLetter = null;
     protected Integer step_counter;
     private Random rnd = new Random();
+    protected Double minPercent;
+    protected Double maxPercent;
 
     abstract public String computeCity(Character lastLetter);
 
@@ -91,6 +93,10 @@ abstract public class GameLevel implements DifficultLevel {
     protected String getRandomListElement(ArrayList<String> list) {
         var index = rnd.nextInt(list.size());
         return list.get(index);
+    }
+
+    protected Integer getLetterCount() {
+        return 33 - data.getStopLetters().size();
     }
 
     private GameReturnedValue getBotCourse(String userCity)

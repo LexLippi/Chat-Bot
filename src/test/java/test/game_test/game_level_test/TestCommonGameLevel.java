@@ -73,30 +73,23 @@ public class TestCommonGameLevel {
     }
 
     @Test
-    void testPlayerWin() {
-        var data = new Data(new City[] {});
-        GameLevel level = new Medium(data);
-        Assert.assertEquals(GameExitType.PLAYER_WIN, level.getBotCourse().getType());
-        level = new Easy(data);
-        Assert.assertEquals(GameExitType.PLAYER_WIN, level.getBotCourse().getType());
-        level = new Hard(data);
-        Assert.assertEquals(GameExitType.PLAYER_WIN, level.getBotCourse().getType());
-    }
-
-    @Test
     void testBotFirstCourse() {
-        var data = new Data(new City[] { new City ("Марракеш", 100) });
+        var data = new Data(new City[] {
+                new City ("Марракеш", 100),
+                new City ("Минск", 100),
+                new City ("Москва", 100)
+        });
         GameLevel level = new Medium(data);
         var result = level.getBotCourse();
-        Assert.assertEquals(GameExitType.PLAYER_WIN, result.getType());
-        Assert.assertEquals("Гена говорит: я проиграл :(", result.getMessages()[0]);
+        Assert.assertNull(result.getType());
+        Assert.assertNotNull(result.getMessages()[0]);
         level = new Easy(data);
         result = level.getBotCourse();
         Assert.assertNull(null, result.getType());
-        Assert.assertEquals("Гена говорит: Марракеш", result.getMessages()[0]);
+        Assert.assertNotNull(result.getMessages()[0]);
         level = new Hard(data);
         result = level.getBotCourse();
-        Assert.assertEquals(GameExitType.PLAYER_WIN, result.getType());
-        Assert.assertEquals("Гена говорит: я проиграл :(", result.getMessages()[0]);
+        Assert.assertNull(result.getType());
+        Assert.assertNotNull(result.getMessages()[0]);
     }
 }

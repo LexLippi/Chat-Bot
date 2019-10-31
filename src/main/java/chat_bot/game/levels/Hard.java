@@ -7,11 +7,13 @@ public class Hard extends GameLevel {
     public Hard() {
         step_counter = 100;
         this.data = new Data();
+        this.maxPercent = getMaxPercent();
     }
 
     public Hard(Data data) {
         step_counter = 100;
         this.data = data;
+        this.maxPercent = getMaxPercent();
     }
 
     @Override
@@ -24,9 +26,7 @@ public class Hard extends GameLevel {
         {
             var currentCity = myCities.next();
             var currentLastLetter = getCityLastLetter(currentCity);
-            System.out.println(currentLastLetter);
-            System.out.println(data.getStatistics(currentLastLetter));
-            if (data.getStatistics(currentLastLetter) < 0.01)
+            if (data.getStatistics(currentLastLetter) <= maxPercent)
             {
                 bestCities.add(currentCity);
             }
@@ -34,7 +34,12 @@ public class Hard extends GameLevel {
         if (bestCities.isEmpty()) {
             return null;
         }
-        System.out.println(bestCities);
         return getRandomListElement(bestCities);
+    }
+
+    private Double getMaxPercent() {
+        var percents = data.getPercents();
+        int index = getLetterCount() / 3;
+        return percents.get(index);
     }
 }

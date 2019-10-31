@@ -7,11 +7,17 @@ public class Medium extends GameLevel {
     public Medium() {
         step_counter = 50;
         this.data = new Data();
+        var boundPercents = getBoundPercents();
+        this.minPercent = boundPercents[0];
+        this.maxPercent = boundPercents[1];
     }
 
     public Medium(Data data) {
         step_counter = 50;
         this.data = data;
+        var boundPercents = getBoundPercents();
+        this.minPercent = boundPercents[0];
+        this.maxPercent = boundPercents[1];
     }
 
     @Override
@@ -24,14 +30,21 @@ public class Medium extends GameLevel {
         while (myCities.hasNext()) {
             var currentCity = myCities.next();
             var currentLastLetter = getCityLastLetter(currentCity);
-            if (data.getStatistics(currentLastLetter) <= 0.05 && data.getStatistics(currentLastLetter) >= 0.01) {
+            if (data.getStatistics(currentLastLetter) <= maxPercent && data.getStatistics(currentLastLetter) >= minPercent) {
                 cities.add(currentCity);
             }
         }
         if (cities.isEmpty()) {
             return null;
         }
-        System.out.println(cities);
         return getRandomListElement(cities);
+    }
+
+    private Double[] getBoundPercents() {
+        var percents = data.getPercents();
+        int minIndex = getLetterCount() / 3;
+        int maxIndex = percents.size() - 1 - minIndex;
+        return new Double[] {percents.get(minIndex), percents.get(maxIndex)};
+
     }
 }

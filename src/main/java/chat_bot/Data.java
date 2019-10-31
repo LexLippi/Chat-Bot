@@ -3,11 +3,11 @@ package chat_bot;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Data
 {
@@ -128,6 +128,20 @@ public class Data
 
     public HashSet<String> getUsedCities() {
         return usedCities;
+    }
+
+    private Integer[] getStatistics() {
+        return countCities.values().stream().sorted(Integer::compareTo).toArray(Integer[]::new);
+    }
+
+    public ArrayList<Double> getPercents() {
+        var percents = new ArrayList<Double>();
+        for (var stats: getStatistics()) {
+            if (stats > 0) {
+                percents.add((double)stats / totalCitiesCount);
+            }
+        }
+        return percents;
     }
 
     public Double getStatistics(Character letter) {

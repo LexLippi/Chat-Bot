@@ -8,11 +8,13 @@ public class Easy extends GameLevel {
     public Easy() {
         step_counter = 10;
         this.data = new Data();
+        this.minPercent = getMinPercent();
     }
 
     public Easy(Data data) {
         step_counter = 10;
         this.data = data;
+        this.minPercent = getMinPercent();
     }
 
     @Override
@@ -25,14 +27,19 @@ public class Easy extends GameLevel {
         while (myCities.hasNext()) {
             var currentCity = myCities.next();
             var currentLastLetter = getCityLastLetter(currentCity);
-            if (data.getStatistics(currentLastLetter) > 0.05) {
+            if (data.getStatistics(currentLastLetter) >= minPercent) {
                 bestCities.add(currentCity);
             }
         }
         if (bestCities.isEmpty()) {
             return null;
         }
-        System.out.println(bestCities);
         return getRandomListElement(bestCities);
+    }
+
+    private Double getMinPercent() {
+        var percents = data.getPercents();
+        int index = percents.size() - 1 - getLetterCount() / 3;
+        return data.getPercents().get(index);
     }
 }

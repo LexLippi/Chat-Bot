@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Test;
 public class TestHardGameLevel {
     @Test
     void testSimpleComputeCity() {
-        var data = new Data(new City[]
-                {
+        var data = new Data(new City[] {
                         new City ("Мальорка", 100),
                         new City ("Москва",100),
                         new City ("Минск", 100),
@@ -18,15 +17,14 @@ public class TestHardGameLevel {
                         new City("Краснодар", 100),
                         new City ("Рига", 100),
                         new City ("Агдам",100)
-                });
+        });
         var level = new Hard(data);
-        Assert.assertEquals("Анапа", level.computeCity('А'));
+        Assert.assertNotNull(level.computeCity('К'));
     }
 
     @Test
     void testComputeCityOnStopLetter() {
-        var data = new Data(new City[]
-                {
+        var data = new Data(new City[] {
                         new City ("Мальорка", 100),
                         new City ("Москва",100),
                         new City ("Минск", 100),
@@ -34,15 +32,14 @@ public class TestHardGameLevel {
                         new City("Краснодар", 100),
                         new City ("Рига", 100),
                         new City ("Агдам",100)
-                });
+        });
         var level = new Hard(data);
         Assert.assertNull(level.computeCity('Б'));
     }
 
     @Test
-    void testComputeCityRemoveBestCity() {
-        var data = new Data(new City[]
-                {
+    void testComputeBestCityTwice() {
+        var data = new Data(new City[] {
                         new City ("Мальорка", 100),
                         new City ("Москва",100),
                         new City ("Минск", 100),
@@ -50,16 +47,15 @@ public class TestHardGameLevel {
                         new City("Краснодар", 100),
                         new City ("Рига", 100),
                         new City ("Агдам",100)
-                });
+        });
         var level = new Hard(data);
-        level.computeCity('А');
-        Assert.assertEquals("Агдам", level.computeCity('А'));
+        Assert.assertNotNull(level.computeCity('К'));
+        Assert.assertNotNull(level.computeCity('К'));
     }
 
     @Test
-    void testComputeCityRemoveBestCities() {
-        var data = new Data(new City[]
-                {
+    void testComputeManyBestCities() {
+        var data = new Data(new City[] {
                         new City ("Мальорка", 100),
                         new City ("Москва",100),
                         new City ("Минск", 100),
@@ -67,17 +63,16 @@ public class TestHardGameLevel {
                         new City("Краснодар", 100),
                         new City ("Рига", 100),
                         new City ("Агдам",100)
-                });
+        });
         var level = new Hard(data);
-        level.computeCity('А');
-        level.computeCity('А');
-        Assert.assertNull(level.computeCity('А'));
+        for (var i = 0; i < 100; ++i) {
+            Assert.assertNotNull(level.computeCity('К'));
+        }
     }
 
     @Test
     void testStepCounter() {
-        var data = new Data(new City[]
-                {
+        var data = new Data(new City[] {
                         new City ("Мальорка", 100),
                         new City ("Москва",100),
                         new City ("Минск", 100),
@@ -85,7 +80,7 @@ public class TestHardGameLevel {
                         new City("Краснодар", 100),
                         new City ("Рига", 100),
                         new City ("Агдам",100)
-                });
+        });
         var level = new Hard(data);
         Assert.assertFalse(level.isStepCounterEmpty());
     }
