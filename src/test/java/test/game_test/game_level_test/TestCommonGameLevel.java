@@ -9,7 +9,6 @@ import chat_bot.game.levels.Medium;
 import chat_bot.game.return_types.GameExitType;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-import test.TestingApi;
 
 public class TestCommonGameLevel {
     @Test

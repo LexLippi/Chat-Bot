@@ -5,7 +5,6 @@ import chat_bot.Data;
 import chat_bot.game.levels.Medium;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-import test.TestingApi;
 
 public class TestMediumGameLevel {
     @Test
@@ -19,7 +18,7 @@ public class TestMediumGameLevel {
                         new City("Краснодар", 100),
                         new City ("Рига", 100),
                         new City ("Агдам",100)
-                });        var api = new TestingApi(new String[] {});
+                });
         var level = new Medium(data);
         Assert.assertNotNull(level.computeCity('А'));
     }
@@ -35,7 +34,7 @@ public class TestMediumGameLevel {
                         new City("Краснодар", 100),
                         new City ("Рига", 100),
                         new City ("Агдам",100)
-                });        var api = new TestingApi(new String[] {});
+                });
         var level = new Medium(data);
         Assert.assertNull(level.computeCity('Б'));
     }
@@ -51,7 +50,7 @@ public class TestMediumGameLevel {
                         new City("Краснодар", 100),
                         new City ("Рига", 100),
                         new City ("Агдам",100)
-                });        var api = new TestingApi(new String[] {});
+                });
         var level = new Medium(data);
         level.computeCity('А');
         Assert.assertNotNull(level.computeCity('А'));
@@ -68,7 +67,7 @@ public class TestMediumGameLevel {
                         new City("Краснодар", 100),
                         new City ("Рига", 100),
                         new City ("Агдам",100)
-                });        var api = new TestingApi(new String[] {});
+                });
         var level = new Medium(data);
         level.computeCity('А');
         level.computeCity('А');
@@ -86,7 +85,7 @@ public class TestMediumGameLevel {
                         new City("Краснодар", 100),
                         new City ("Рига", 100),
                         new City ("Агдам",100)
-                });        var api = new TestingApi(new String[] {});
+                });
         var level = new Medium(data);
         Assert.assertFalse(level.isStepCounterEmpty());
     }

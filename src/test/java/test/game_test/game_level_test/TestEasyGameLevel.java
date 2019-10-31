@@ -5,7 +5,6 @@ import chat_bot.Data;
 import chat_bot.game.levels.Easy;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-import test.TestingApi;
 
 public class TestEasyGameLevel {
     @Test
@@ -21,7 +20,6 @@ public class TestEasyGameLevel {
                         new City ("Рига", 100),
                         new City ("Агдам",100)
                 });
-        var api = new TestingApi(new String[] {});
         var level = new Easy(data);
         Assert.assertEquals("Агдам", level.computeCity('А'));
     }
@@ -38,7 +36,6 @@ public class TestEasyGameLevel {
                         new City ("Рига", 100),
                         new City ("Агдам",100)
                 });
-        var api = new TestingApi(new String[] {});
         var level = new Easy(data);
         Assert.assertNull(level.computeCity('Б'));
     }
@@ -55,7 +52,6 @@ public class TestEasyGameLevel {
                         new City ("Рига", 100),
                         new City ("Агдам",100)
                 });
-        var api = new TestingApi(new String[] {});
         var level = new Easy(data);
         level.computeCity('А');
         Assert.assertEquals("Анапа", level.computeCity('А'));
@@ -73,7 +69,6 @@ public class TestEasyGameLevel {
                         new City ("Рига", 100),
                         new City ("Агдам",100)
                 });
-        var api = new TestingApi(new String[] {});
         var level = new Easy(data);
         level.computeCity('А');
         level.computeCity('А');
@@ -92,7 +87,6 @@ public class TestEasyGameLevel {
                         new City ("Рига", 100),
                         new City ("Агдам",100)
                 });
-        var api = new TestingApi(new String[] {});
         var level = new Easy(data);
         Assert.assertFalse(level.isStepCounterEmpty());
     }

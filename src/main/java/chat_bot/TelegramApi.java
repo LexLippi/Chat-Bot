@@ -11,11 +11,6 @@ public class TelegramApi implements Api {
     }
 
     @Override
-    public String in(){
-        return telegram.getAnswer(id);
-    }
-
-    @Override
     public void out(String massage) {
         telegram.sendMsg(id, massage);
     }

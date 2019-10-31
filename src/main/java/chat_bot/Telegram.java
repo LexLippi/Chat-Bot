@@ -17,7 +17,6 @@ import java.util.Queue;
 
 public class Telegram extends TelegramLongPollingBot {
 
-    private HashMap<String, Queue<String>> answers = new HashMap<>();
     private HashMap<String, ChatBot> bots = new HashMap<>();
 
     public static void main(String[] args) {
@@ -55,7 +54,7 @@ public class Telegram extends TelegramLongPollingBot {
                     deleteBot(id);
                     break;
                 default:
-                    if (!answers.containsKey(id)){
+                    if (!bots.containsKey(id)){
                         sendMsg(id, "для начала напишите /start");
                     }
                     else{
@@ -66,29 +65,19 @@ public class Telegram extends TelegramLongPollingBot {
         }
     }
 
-    public String getAnswer(String id){
-        String answer = null;
-        while (answer == null){
-            answer = answers.get(id).poll();
-        }
-        return answer;
-    }
-
     private void deleteBot(String id){
         if (!bots.containsKey(id)){
             return;
         }
         bots.get(id).process("пока");
         bots.remove(id);
-        answers.remove(id);
     }
 
     private void registerNewBot(String id){
-        if (answers.containsKey(id)){
+        if (bots.containsKey(id)){
             bots.get(id).start();
         }
         else {
-            answers.put(id, new LinkedList<String>());
             var api = new TelegramApi(id, this);
             var bot = new ChatBot(api);
             bots.put(id, bot);
