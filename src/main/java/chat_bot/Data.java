@@ -13,24 +13,20 @@ public class Data
     private HashSet<Character> stopLetters = new HashSet<Character>();
     private Integer totalCitiesCount = 0;
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         var data = new Data();
         System.out.println(data.cities);
     }
 
-    public Data()
-    {
+    public Data() {
         initialize();
-        getDataFromFile();
-        //getDataFromSite();
+        //getDataFromFile();
+        getDataFromSite();
     }
 
-    public Data(City[] cities)
-    {
+    public Data(City[] cities) {
         initialize();
-        for (City city: cities)
-        {
+        for (City city: cities) {
             var firstLetter = city.name.toUpperCase().charAt(0);
             this.cities.get(firstLetter).put(city.name, city.population);
             countCities.put(firstLetter, countCities.get(firstLetter) + 1);
@@ -40,10 +36,8 @@ public class Data
         }
     }
 
-    private void getDataFromSite()
-    {
-        try
-        {
+    private void getDataFromSite() {
+        try {
             var citiesString = PopulationData.getCities();
             for (var city : citiesString) {
                 var population = PopulationData.getStatistics(city);
@@ -55,34 +49,28 @@ public class Data
                     stopLetters.remove(firstLetter);
             }
         }
-        catch (IOException e)
-        {
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     private void getDataFromFile() {
-        try
-        {
+        try {
             var reader = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\src\\main\\resources\\new_input.txt"));
             String line;
-            while((line = reader.readLine()) != null)
-            {
+            while((line = reader.readLine()) != null) {
                 var firstLetter = line.charAt(0);
                 var nameAndPopulation = line.split(" ");
                 var name = nameAndPopulation[0];
                 var population = 0;
-                if (nameAndPopulation.length > 2)
-                {
+                if (nameAndPopulation.length > 2) {
                     for (var i = 1; i < nameAndPopulation.length - 1; i++)
                         name += " " + nameAndPopulation[i];
                     population = Integer.parseInt(nameAndPopulation[nameAndPopulation.length - 1]);
                 }
-                else if (nameAndPopulation.length == 2)
-                {
+                else if (nameAndPopulation.length == 2) {
                     population = Integer.parseInt(nameAndPopulation[1]);
                 }
-
                 cities.get(firstLetter).put(name, population);
                 totalCitiesCount++;
                 countCities.put(firstLetter, countCities.get(firstLetter) + 1);
@@ -91,39 +79,32 @@ public class Data
             }
             reader.close();
         }
-        catch (IOException e)
-        {
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public HashMap<Character, HashMap<String, Integer>> getCities()
-    {
+    public HashMap<Character, HashMap<String, Integer>> getCities() {
         return cities;
     }
 
-    public HashSet<Character> getStopLetters()
-    {
+    public HashSet<Character> getStopLetters() {
         return stopLetters;
     }
 
-    public void updateStatistics (Character letter, String cityName)
-    {
+    public void updateStatistics (Character letter, String cityName) {
         countCities.put(letter, countCities.get(letter) - 1);
         totalCitiesCount--;
         var firstLetter = cityName.charAt(0);
         cities.get(firstLetter).remove(cityName);
     }
 
-    public Double getStatistics(Character letter)
-    {
+    public Double getStatistics(Character letter) {
         return (double)countCities.get(letter) / totalCitiesCount;
     }
 
-    private void initialize()
-    {
-        for (Character i = 'А'; i <= 'Я'; ++i)
-        {
+    private void initialize() {
+        for (Character i = 'А'; i <= 'Я'; ++i) {
             cities.put(i, new HashMap<String, Integer>());
             countCities.put(i, 0);
             stopLetters.add(i);
