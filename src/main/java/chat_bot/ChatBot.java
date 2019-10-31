@@ -29,7 +29,7 @@ public class ChatBot {
 
 	public void process(String command){
 		if (command.toLowerCase().compareTo("играть") == 0) {
-			StartCityGame();
+			startCityGame();
 		}
 		else if (command.toLowerCase().compareTo("пока") == 0) {
 			say("до встречи");
@@ -56,7 +56,7 @@ public class ChatBot {
 		api.out(massage);
 	}
 	
-	private void StartCityGame() {
+	private void startCityGame() {
 		game = new CityGame();
 		var answer = game.startGame();
 		react(answer);
