@@ -5,10 +5,12 @@ import chat_bot.Data;
 import chat_bot.game.return_types.CityAnswerType;
 import chat_bot.game.return_types.GameExitType;
 import chat_bot.game.return_types.GameReturnedValue;
+import com.google.common.base.CharMatcher;
 import org.telegram.telegrambots.api.objects.games.Game;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.stream.Stream;
 
 abstract public class GameLevel implements DifficultLevel {
     protected Data data;
@@ -38,7 +40,8 @@ abstract public class GameLevel implements DifficultLevel {
                 return new GameReturnedValue(null,
                         "Я не знаю такого города, попробуйте снова");
             case CORRECT_INPUT:
-                return getBotCourse(inputString);
+                var result = getBotCourse(inputString);
+                return result;
             case USED_CITY:
                 return new GameReturnedValue(null, "Решил обмануть меня, бродяга?! Этот город уже был!");
             default:
@@ -52,8 +55,10 @@ abstract public class GameLevel implements DifficultLevel {
             return new GameReturnedValue(GameExitType.PLAYER_WIN, "Я проиграл :(");
         }
         var city = getRandomListElement(cities);
+        var firstLetter = getFirstLetter(city);
+        var resultCity = data.getCities().get(firstLetter).get(city).name;
         updateGameFields(city);
-        return new GameReturnedValue(null, city);
+        return new GameReturnedValue(null, resultCity);
     }
 
     private ArrayList<String> getCorrectCities() {
@@ -109,8 +114,10 @@ abstract public class GameLevel implements DifficultLevel {
         if (resultCity == null) {
             return new GameReturnedValue(GameExitType.PLAYER_WIN, "Я проиграл :(");
         }
+        var firstLetter = getFirstLetter(resultCity);
+        var city = data.getCities().get(firstLetter).get(resultCity).name;
         updateGameFields(resultCity);
-        return new GameReturnedValue(null, resultCity);
+        return new GameReturnedValue(null, city);
     }
 
     private void updateGameFields(String resultCity) {
@@ -122,13 +129,12 @@ abstract public class GameLevel implements DifficultLevel {
 
     private CityAnswerType checkAnswer(String city) {
         var firstLetter = getFirstLetter(city);
-        var yourCity = firstLetter + city.toLowerCase().substring(1);
         if (isCityStartsOnIncorrectLetter(firstLetter)) {
             return CityAnswerType.INCORRECT_INPUT;
         }
-        if (isCityCorrect(yourCity))
+        if (isCityCorrect(city))
         {
-            data.updateStatistics(firstLetter, yourCity);
+            data.updateStatistics(firstLetter, city);
             return CityAnswerType.CORRECT_INPUT;
         }
         if (isCityUsed(city)) {
@@ -159,5 +165,4 @@ abstract public class GameLevel implements DifficultLevel {
         var firstLetter = getFirstLetter(city);
         return data.getCities().containsKey(firstLetter) && data.getCities().get(firstLetter).containsKey(city);
     }
-
 }

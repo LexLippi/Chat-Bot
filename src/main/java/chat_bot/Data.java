@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 public class Data
 {
-    private HashMap<Character, HashMap<String, Integer>> cities = new HashMap<Character, HashMap<String, Integer>>();
+    private HashMap<Character, HashMap<String, City>> cities = new HashMap<Character, HashMap<String, City>>();
     private HashMap<Character, Integer> countCities = new HashMap<Character, Integer>();
     private HashSet<Character> stopLetters = new HashSet<Character>();
     private HashSet<String> usedCities = new HashSet<>();
@@ -25,15 +25,15 @@ public class Data
 
     public Data() {
         initialize();
-        //getDataFromFile();
-        getDataFromSite();
+        getDataFromFile();
+        //getDataFromSite();
     }
 
     public Data(City[] cities) {
         initialize();
-        for (City city: cities) {
+        for (var city: cities) {
             var firstLetter = city.name.toUpperCase().charAt(0);
-            this.cities.get(firstLetter).put(city.name, city.population);
+            this.cities.get(firstLetter).put(city.name.toLowerCase(), new City(city.name, city.population));
             countCities.put(firstLetter, countCities.get(firstLetter) + 1);
             totalCitiesCount++;
             if (stopLetters.contains(firstLetter))
@@ -56,7 +56,7 @@ public class Data
                                     for (var city : citiesString) {
                                         var population = populationData.getStatistics(city);
                                         var firstLetter = city.charAt(0);
-                                        cities.get(firstLetter).put(city, population);
+                                        cities.get(firstLetter).put(city.toLowerCase(), new City(city, population));
                                         totalCitiesCount++;
                                         countCities.put(firstLetter, countCities.get(firstLetter) + 1);
                                         if (stopLetters.contains(firstLetter))
@@ -97,7 +97,7 @@ public class Data
                 else if (nameAndPopulation.length == 2) {
                     population = Integer.parseInt(nameAndPopulation[1]);
                 }
-                cities.get(firstLetter).put(name, population);
+                cities.get(firstLetter).put(name.toLowerCase(), new City(name, population));
                 totalCitiesCount++;
                 countCities.put(firstLetter, countCities.get(firstLetter) + 1);
                 if (stopLetters.contains(firstLetter))
@@ -110,7 +110,7 @@ public class Data
         }
     }
 
-    public HashMap<Character, HashMap<String, Integer>> getCities() {
+    public HashMap<Character, HashMap<String, City>> getCities() {
         return cities;
     }
 
@@ -121,9 +121,9 @@ public class Data
     public void updateStatistics (Character letter, String cityName) {
         countCities.put(letter, countCities.get(letter) - 1);
         totalCitiesCount--;
-        var firstLetter = cityName.charAt(0);
+        var firstLetter = cityName.toUpperCase().charAt(0);
         cities.get(firstLetter).remove(cityName);
-        usedCities.add(cityName.toLowerCase());
+        usedCities.add(cityName);
     }
 
     public HashSet<String> getUsedCities() {
@@ -150,12 +150,12 @@ public class Data
 
     private void initialize() {
         for (Character i = 'А'; i <= 'Я'; ++i) {
-            cities.put(i, new HashMap<String, Integer>());
+            cities.put(i, new HashMap<String, City>());
             countCities.put(i, 0);
             stopLetters.add(i);
         }
         stopLetters.add('Ё');
         countCities.put('Ё', 0);
-        cities.put('Ё', new HashMap<String, Integer>());
+        cities.put('Ё', new HashMap<String, City>());
     }
 }
