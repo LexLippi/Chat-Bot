@@ -132,6 +132,9 @@ abstract public class GameLevel implements DifficultLevel {
     }
 
     private Boolean isCityUsed(String city) {
+        System.out.println("Тута");
+        System.out.println(data.getUsedCities().contains(city));
+        System.out.println(data.getUsedCities());
         return data.getUsedCities().contains(city);
     }
 

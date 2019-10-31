@@ -123,7 +123,7 @@ public class Data
         totalCitiesCount--;
         var firstLetter = cityName.charAt(0);
         cities.get(firstLetter).remove(cityName);
-        usedCities.add(cityName);
+        usedCities.add(cityName.toLowerCase());
     }
 
     public HashSet<String> getUsedCities() {
