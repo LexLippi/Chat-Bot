@@ -3,8 +3,11 @@ package chat_bot;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.concurrent.*;
 
 public class Data
 {
@@ -16,6 +19,7 @@ public class Data
     public static void main(String[] args) {
         var data = new Data();
         System.out.println(data.cities);
+        System.out.println(data.totalCitiesCount);
     }
 
     public Data() {
@@ -37,21 +41,42 @@ public class Data
     }
 
     private void getDataFromSite() {
-        try {
-            var citiesString = PopulationData.getCities();
-            for (var city : citiesString) {
-                var population = PopulationData.getStatistics(city);
-                var firstLetter = city.charAt(0);
-                cities.get(firstLetter).put(city, population);
-                totalCitiesCount++;
-                countCities.put(firstLetter, countCities.get(firstLetter) + 1);
-                if (stopLetters.contains(firstLetter))
-                    stopLetters.remove(firstLetter);
+        String[] letters = new String[]{"A", "B", "V", "G", "D", "E", "Zh", "Z", "I", "Ii", "K", "L", "M", "N", "O", "P", "R", "S", "T", "U", "F", "H", "Ts", "Ch", "Sh", "Sch", "Ye", "Yu", "Ya"};
+        ExecutorService threadPool = Executors.newFixedThreadPool(letters.length);
+        List<Future<Integer>> futures = new ArrayList<>();
+        for (var letter: letters) {
+            final String l = letter;
+            futures.add(
+                    CompletableFuture.supplyAsync(
+                            () -> {
+                                try {
+                                    var populationData = new PopulationData();
+                                    var citiesString = populationData.getCities(l);
+                                    for (var city : citiesString) {
+                                        var population = populationData.getStatistics(city);
+                                        var firstLetter = city.charAt(0);
+                                        cities.get(firstLetter).put(city, population);
+                                        totalCitiesCount++;
+                                        countCities.put(firstLetter, countCities.get(firstLetter) + 1);
+                                        if (stopLetters.contains(firstLetter))
+                                            stopLetters.remove(firstLetter);
+                                    }
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                return null;
+                            },
+                            threadPool
+                    ));
+            }
+        for (Future<Integer> future : futures) {
+            try {
+                future.get();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+        threadPool.shutdown();
     }
 
     private void getDataFromFile() {
