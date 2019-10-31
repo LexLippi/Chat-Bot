@@ -35,6 +35,6 @@ public class CityGame implements IGame {
 	}
 
 	public GameReturnedValue startGame() {
-		return new GameReturnedValue(null, "Выбери уровень сложности: легкий, средний, тяжелый");
+		return new GameReturnedValue(null, "Выбери уровень сложности: лёгкий, средний, тяжёлый");
 	}
 }

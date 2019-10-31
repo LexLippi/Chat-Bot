@@ -1,9 +1,11 @@
 package chat_bot.game.levels;
 
+import chat_bot.City;
 import chat_bot.Data;
 import chat_bot.game.return_types.CityAnswerType;
 import chat_bot.game.return_types.GameExitType;
 import chat_bot.game.return_types.GameReturnedValue;
+import org.telegram.telegrambots.api.objects.games.Game;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -19,22 +21,24 @@ abstract public class GameLevel implements DifficultLevel {
     public GameReturnedValue processingUserCourse(String inputString) throws IllegalStateException{
         System.out.println(inputString);
         if (inputString.compareTo("стоп") == 0) {
-            return new GameReturnedValue(GameExitType.GAME_INTERRUPTED, "Гена говорит: приходи еще!");
+            return new GameReturnedValue(GameExitType.GAME_INTERRUPTED, "Приходи еще!");
         }
         else if (inputString.compareTo("сдаюсь") == 0) {
             return new GameReturnedValue(GameExitType.PLAYER_LOOSE,
-                    "Гена говорит: ничего, в другой раз повезет!");
+                    "Ничего, в другой раз повезет!");
         }
         var answer = checkAnswer(inputString);
         switch(answer)
         {
             case INCORRECT_INPUT:
-                return new GameReturnedValue(null, "Гена говорит: врешь, не уйдешь!");
+                return new GameReturnedValue(null, "Врёшь, не уйдешь!");
             case INCORRECT_CITY:
                 return new GameReturnedValue(null,
-                        "Гена говорит: я не знаю такого города, попробуйте снова");
+                        "Я не знаю такого города, попробуйте снова");
             case CORRECT_INPUT:
                 return getBotCourse(inputString);
+            case USED_CITY:
+                return new GameReturnedValue(null, "Решил обмануть меня, бродяга?! Этот город уже был!");
             default:
                 throw new IllegalStateException("incorrect CityAnswerType");
         }
@@ -43,12 +47,11 @@ abstract public class GameLevel implements DifficultLevel {
     public GameReturnedValue getBotCourse() {
         var cities = getCorrectCities();
         if (cities.isEmpty()) {
-            return new GameReturnedValue(GameExitType.PLAYER_WIN, "Гена говорит: я проиграл :(");
+            return new GameReturnedValue(GameExitType.PLAYER_WIN, "Я проиграл :(");
         }
         var city = getRandomListElement(cities);
         updateGameFields(city);
-        System.out.println(waitingLetter);
-        return new GameReturnedValue(null, "Гена говорит: " + city);
+        return new GameReturnedValue(null, city);
     }
 
     private ArrayList<String> getCorrectCities() {
@@ -93,15 +96,15 @@ abstract public class GameLevel implements DifficultLevel {
     private GameReturnedValue getBotCourse(String userCity)
     {
         if (isStepCounterEmpty()) {
-            return new GameReturnedValue(GameExitType.PLAYER_WIN, "Гена говорит: я проиграл :(");
+            return new GameReturnedValue(GameExitType.PLAYER_WIN, "Я проиграл :(");
         }
         var userLastLetter = getCityLastLetter(userCity);
         var resultCity = computeCity(userLastLetter);
         if (resultCity == null) {
-            return new GameReturnedValue(GameExitType.PLAYER_WIN, "Гена говорит: я проиграл :(");
+            return new GameReturnedValue(GameExitType.PLAYER_WIN, "Я проиграл :(");
         }
         updateGameFields(resultCity);
-        return new GameReturnedValue(null, "Гена говорит: " + resultCity);
+        return new GameReturnedValue(null, resultCity);
     }
 
     private void updateGameFields(String resultCity) {
@@ -122,7 +125,14 @@ abstract public class GameLevel implements DifficultLevel {
             data.updateStatistics(firstLetter, yourCity);
             return CityAnswerType.CORRECT_INPUT;
         }
+        if (isCityUsed(city)) {
+            return CityAnswerType.USED_CITY;
+        }
         return CityAnswerType.INCORRECT_CITY;
+    }
+
+    private Boolean isCityUsed(String city) {
+        return data.getUsedCities().contains(city);
     }
 
     private void incStepCounter() {

@@ -27,6 +27,7 @@ public class Draw extends State {
     }
 
     private boolean getDraw(String inputString) {
+        inputString = inputString.compareTo("орел") == 0 ? "орёл" : inputString;
         if (inputString.compareTo("орёл") == 0 || inputString.compareTo("решка") == 0) {
             return getDrawResult(inputString);
         }

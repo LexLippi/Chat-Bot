@@ -11,8 +11,10 @@ public class SelectLevel extends State {
 
     @Override
     public GameReturnedValue processCommand(String inputString, GameLevel level) {
-        new LevelFactory().getLevel(inputString);
-        return new GameReturnedValue(null, "Пора выбрать, кто будет ходить первым! Орёл или решка?");
+        if (new LevelFactory().checkInputString(inputString)) {
+            return new GameReturnedValue(null, "Пора выбрать, кто будет ходить первым! Орёл или решка?");
+        }
+        throw new IllegalArgumentException();
     }
 
     @Override

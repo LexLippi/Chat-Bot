@@ -14,6 +14,7 @@ public class Data
     private HashMap<Character, HashMap<String, Integer>> cities = new HashMap<Character, HashMap<String, Integer>>();
     private HashMap<Character, Integer> countCities = new HashMap<Character, Integer>();
     private HashSet<Character> stopLetters = new HashSet<Character>();
+    private HashSet<String> usedCities = new HashSet<>();
     private Integer totalCitiesCount = 0;
 
     public static void main(String[] args) {
@@ -122,6 +123,11 @@ public class Data
         totalCitiesCount--;
         var firstLetter = cityName.charAt(0);
         cities.get(firstLetter).remove(cityName);
+        usedCities.add(cityName);
+    }
+
+    public HashSet<String> getUsedCities() {
+        return usedCities;
     }
 
     public Double getStatistics(Character letter) {
