@@ -1,29 +1,31 @@
 package test.game_test.game_level_test;
 
+import chat_bot.Data;
 import chat_bot.game.levels.*;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 public class TestLevelFactory {
+    private Data data = new Data();
     @Test
     void testCreateEasyLevel() {
-        var level = new LevelFactory().getLevel("легкий");
+        var level = new LevelFactory().getLevel("легкий", data.clone());
         Assert.assertTrue(level instanceof Easy);
-        level = new LevelFactory().getLevel("лёгкий");
+        level = new LevelFactory().getLevel("лёгкий", data.clone());
         Assert.assertTrue(level instanceof Easy);
     }
 
     @Test
     void testCreateMediumLevel() {
-        var level = new LevelFactory().getLevel("средний");
+        var level = new LevelFactory().getLevel("средний", data.clone());
         Assert.assertTrue(level instanceof Medium);
     }
 
     @Test
     void testCreateHardLevel() {
-        var level = new LevelFactory().getLevel("тяжелый");
+        var level = new LevelFactory().getLevel("тяжелый", data.clone());
         Assert.assertTrue(level instanceof Hard);
-        level = new LevelFactory().getLevel("тяжёлый");
+        level = new LevelFactory().getLevel("тяжёлый", data.clone());
         Assert.assertTrue(level instanceof Hard);
     }
 
@@ -41,37 +43,37 @@ public class TestLevelFactory {
 
     @Test
     void testDifferentCaseEasyLevel() {
-        var level = new LevelFactory().getLevel("лЕгкий");
+        var level = new LevelFactory().getLevel("лЕгкий", data.clone());
         Assert.assertTrue(level instanceof Easy);
-        level = new LevelFactory().getLevel("лЕГкиЙ");
+        level = new LevelFactory().getLevel("лЕГкиЙ", data.clone());
         Assert.assertTrue(level instanceof Easy);
-        level = new LevelFactory().getLevel("Легкий");
+        level = new LevelFactory().getLevel("Легкий", data.clone());
         Assert.assertTrue(level instanceof Easy);
-        level = new LevelFactory().getLevel("ЛеГКиЙ");
+        level = new LevelFactory().getLevel("ЛеГКиЙ", data.clone());
         Assert.assertTrue(level instanceof Easy);
     }
 
     @Test
     void testDifferentCaseMediumLevel() {
-        var level = new LevelFactory().getLevel("сРедний");
+        var level = new LevelFactory().getLevel("сРедний", data.clone());
         Assert.assertTrue(level instanceof Medium);
-        level = new LevelFactory().getLevel("среднИЙ");
+        level = new LevelFactory().getLevel("среднИЙ", data.clone());
         Assert.assertTrue(level instanceof Medium);
-        level = new LevelFactory().getLevel("Средний");
+        level = new LevelFactory().getLevel("Средний", data.clone());
         Assert.assertTrue(level instanceof Medium);
-        level = new LevelFactory().getLevel("СреДНиЙ");
+        level = new LevelFactory().getLevel("СреДНиЙ", data.clone());
         Assert.assertTrue(level instanceof Medium);
     }
 
     @Test
     void testDifferentCaseHardLevel() {
-        var level = new LevelFactory().getLevel("тЯжелый");
+        var level = new LevelFactory().getLevel("тЯжелый", data.clone());
         Assert.assertTrue(level instanceof Hard);
-        level = new LevelFactory().getLevel("тяжеЛЫЙ");
+        level = new LevelFactory().getLevel("тяжеЛЫЙ", data.clone());
         Assert.assertTrue(level instanceof Hard);
-        level = new LevelFactory().getLevel("Тяжелый");
+        level = new LevelFactory().getLevel("Тяжелый", data.clone());
         Assert.assertTrue(level instanceof Hard);
-        level = new LevelFactory().getLevel("ТяЖеЛыЙ");
+        level = new LevelFactory().getLevel("ТяЖеЛыЙ", data.clone());
         Assert.assertTrue(level instanceof Hard);
     }
 }
