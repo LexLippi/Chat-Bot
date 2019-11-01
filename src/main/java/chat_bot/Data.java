@@ -11,7 +11,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Data
+public class Data implements Cloneable
 {
     private HashMap<Character, HashMap<String, City>> cities = new HashMap<Character, HashMap<String, City>>();
     private HashMap<Character, Integer> countCities = new HashMap<Character, Integer>();
@@ -20,9 +20,13 @@ public class Data
     private Integer totalCitiesCount = 0;
 
     public static void main(String[] args) {
-        var data = new Data();
-        System.out.println(data.cities);
-        System.out.println(data.totalCitiesCount);
+        var data1 = new Data();
+        var data2 = data1.clone();
+        data2.updateStatistics('А', "александров");
+        System.out.println(data2.cities.get('А').keySet());
+        System.out.println(data2.usedCities);
+        System.out.println(data1.cities.get('А').keySet());
+        System.out.println(data1.usedCities);
     }
 
     public Data() {
@@ -162,6 +166,20 @@ public class Data
     }
 
     public Data clone(){
-        return null;
+        try {
+            Data result = (Data) super.clone();
+            result.cities = (HashMap<Character, HashMap<String, City>>) cities.clone();
+            result.countCities = (HashMap<Character, Integer>) countCities.clone();
+            result.stopLetters = (HashSet<Character>) stopLetters.clone();
+            result.usedCities = (HashSet<String>) usedCities.clone();
+            var letters = cities.keySet();
+            for (var letter: letters){
+                result.cities.put(letter, (HashMap<String, City>) cities.get(letter).clone());
+            }
+            return result;
+        }
+        catch (CloneNotSupportedException e) {
+            return null;
+        }
     }
 }
