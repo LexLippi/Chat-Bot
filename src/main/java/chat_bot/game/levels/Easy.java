@@ -5,11 +5,6 @@ import chat_bot.Data;
 import java.util.ArrayList;
 
 public class Easy extends GameLevel {
-    public Easy() {
-        step_counter = 10;
-        this.data = new Data();
-        this.minPercent = getMinPercent();
-    }
 
     public Easy(Data data) {
         step_counter = 10;

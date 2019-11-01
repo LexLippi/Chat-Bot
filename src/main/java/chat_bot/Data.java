@@ -1,5 +1,7 @@
 package chat_bot;
 
+import jdk.jshell.spi.ExecutionControl;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -157,5 +159,9 @@ public class Data
         stopLetters.add('Ё');
         countCities.put('Ё', 0);
         cities.put('Ё', new HashMap<String, City>());
+    }
+
+    public Data clone(){
+        return null;
     }
 }

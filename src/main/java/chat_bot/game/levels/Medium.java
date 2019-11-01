@@ -4,13 +4,6 @@ import chat_bot.Data;
 import java.util.ArrayList;
 
 public class Medium extends GameLevel {
-    public Medium() {
-        step_counter = 50;
-        this.data = new Data();
-        var boundPercents = getBoundPercents();
-        this.minPercent = boundPercents[0];
-        this.maxPercent = boundPercents[1];
-    }
 
     public Medium(Data data) {
         step_counter = 50;

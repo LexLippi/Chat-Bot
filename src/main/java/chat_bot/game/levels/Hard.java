@@ -4,11 +4,6 @@ import chat_bot.Data;
 import java.util.ArrayList;
 
 public class Hard extends GameLevel {
-    public Hard() {
-        step_counter = 100;
-        this.data = new Data();
-        this.maxPercent = getMaxPercent();
-    }
 
     public Hard(Data data) {
         step_counter = 100;

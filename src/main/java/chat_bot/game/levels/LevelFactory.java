@@ -1,16 +1,18 @@
 package chat_bot.game.levels;
 
+import chat_bot.Data;
+
 public class LevelFactory {
-    public GameLevel getLevel(String level) {
+    public GameLevel getLevel(String level, Data data) {
         level = level.toLowerCase();
         if (level.compareTo("легкий") == 0 || level.compareTo("лёгкий") == 0) {
-            return new Easy();
+            return new Easy(data);
         }
         else if (level.compareTo("средний") == 0) {
-            return new Medium();
+            return new Medium(data);
         }
         else if (level.compareTo("тяжелый") == 0 || level.compareTo("тяжёлый") == 0) {
-            return new Hard();
+            return new Hard(data);
         }
         else {
             throw new IllegalArgumentException();

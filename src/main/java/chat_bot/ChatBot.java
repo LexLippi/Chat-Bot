@@ -2,21 +2,20 @@ package chat_bot;
 
 
 import chat_bot.game.CityGame;
+import chat_bot.game.GameFactory;
+import chat_bot.game.GameType;
 import chat_bot.game.IGame;
 import chat_bot.game.return_types.GameReturnedValue;
 
 public class ChatBot {
 	private Api api;
+	private GameFactory factory;
 
 	private IGame game = null;
-
-	public static void main(String[] args) {
-		var console = new Console();
-		new ChatBot(console);
-	}
 	
-	public ChatBot(Api api) {
+	public ChatBot(Api api, GameFactory factory) {
 		this.api = api;
+		this.factory = factory;
 		start();
 	}
 	
@@ -29,7 +28,7 @@ public class ChatBot {
 
 	public void process(String command){
 		if (command.toLowerCase().compareTo("играть") == 0) {
-			startCityGame();
+			startGame(GameType.CityGame);
 		}
 		else if (command.toLowerCase().compareTo("пока") == 0) {
 			say("до встречи");
@@ -55,9 +54,10 @@ public class ChatBot {
 	private void say(String massage) {
 		api.out(massage);
 	}
+
 	
-	private void startCityGame() {
-		game = new CityGame();
+	private void startGame(GameType type) {
+		game = factory.getGame(type);
 		var answer = game.startGame();
 		react(answer);
 	}

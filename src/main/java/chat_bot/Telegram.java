@@ -1,5 +1,6 @@
 package chat_bot;
 
+import chat_bot.game.GameFactory;
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.TelegramBotsApi;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
@@ -18,6 +19,7 @@ import java.util.Queue;
 public class Telegram extends TelegramLongPollingBot {
 
     private HashMap<String, ChatBot> bots = new HashMap<>();
+    private GameFactory gameFactory;
 
     public static void main(String[] args) {
         ApiContextInitializer.init();
@@ -27,6 +29,10 @@ public class Telegram extends TelegramLongPollingBot {
         } catch (TelegramApiRequestException e) {
             e.printStackTrace();
         }
+    }
+
+    public Telegram(){
+        gameFactory = new GameFactory();
     }
 
     public void sendMsg(String chatId, String text){
@@ -79,7 +85,7 @@ public class Telegram extends TelegramLongPollingBot {
         }
         else {
             var api = new TelegramApi(id, this);
-            var bot = new ChatBot(api);
+            var bot = new ChatBot(api, gameFactory);
             bots.put(id, bot);
         }
     }

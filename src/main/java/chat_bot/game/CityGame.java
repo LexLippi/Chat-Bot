@@ -1,5 +1,6 @@
 package chat_bot.game;
 
+import chat_bot.Data;
 import chat_bot.game.levels.*;
 import chat_bot.game.return_types.GameReturnedValue;
 import chat_bot.game.states.SelectLevel;
@@ -8,14 +9,11 @@ import chat_bot.game.states.State;
 public class CityGame implements IGame {
 	private GameLevel level;
 	private State currentState;
+	private Data data;
 
-	public static void main(String[] args) {
-		var game = new CityGame();
-		game.startGame();
-	}
-
-	public CityGame() {
-		currentState = new SelectLevel();
+	public CityGame(Data data) {
+	    currentState = new SelectLevel();
+	    this.data = data;
 	}
 
 	@Override
@@ -24,7 +22,7 @@ public class CityGame implements IGame {
 		try {
 			var result = currentState.processCommand(inputString, level);
 			if (currentState instanceof SelectLevel) {
-				level = new LevelFactory().getLevel(inputString);
+				level = new LevelFactory().getLevel(inputString, data);
 			}
 			currentState = currentState.nextState;
 			return result;
