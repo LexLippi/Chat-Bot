@@ -1,15 +1,9 @@
 package chat_bot;
 
-import jdk.jshell.spi.ExecutionControl;
+import chat_bot.dataProviders.DataProvider1000Mest;
+import chat_bot.dataProviders.DataProviderFile;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.*;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Data implements Cloneable
 {
@@ -31,8 +25,9 @@ public class Data implements Cloneable
 
     public Data() {
         initialize();
-        getDataFromFile();
-        //getDataFromSite();
+        var provider = new DataProviderFile();
+        //var provider = new DataProvider1000Mest();
+        provider.getData(this);
     }
 
     public Data(City[] cities) {
@@ -47,73 +42,12 @@ public class Data implements Cloneable
         }
     }
 
-    private void getDataFromSite() {
-        String[] letters = new String[]{"A", "B", "V", "G", "D", "E", "Zh", "Z", "I", "Ii", "K", "L", "M", "N", "O", "P", "R", "S", "T", "U", "F", "H", "Ts", "Ch", "Sh", "Sch", "Ye", "Yu", "Ya"};
-        ExecutorService threadPool = Executors.newFixedThreadPool(letters.length);
-        List<Future<Integer>> futures = new ArrayList<>();
-        for (var letter: letters) {
-            final String l = letter;
-            futures.add(
-                    CompletableFuture.supplyAsync(
-                            () -> {
-                                try {
-                                    var populationData = new PopulationData();
-                                    var citiesString = populationData.getCities(l);
-                                    for (var city : citiesString) {
-                                        var population = populationData.getStatistics(city);
-                                        var firstLetter = city.charAt(0);
-                                        cities.get(firstLetter).put(city.toLowerCase(), new City(city, population));
-                                        totalCitiesCount++;
-                                        countCities.put(firstLetter, countCities.get(firstLetter) + 1);
-                                        if (stopLetters.contains(firstLetter))
-                                            stopLetters.remove(firstLetter);
-                                    }
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                                return null;
-                            },
-                            threadPool
-                    ));
-            }
-        for (Future<Integer> future : futures) {
-            try {
-                future.get();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        threadPool.shutdown();
-    }
-
-    private void getDataFromFile() {
-        try {
-            var reader = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\src\\main\\resources\\new_input.txt"));
-            String line;
-            while((line = reader.readLine()) != null) {
-                var firstLetter = line.charAt(0);
-                var nameAndPopulation = line.split(" ");
-                var name = nameAndPopulation[0];
-                var population = 0;
-                if (nameAndPopulation.length > 2) {
-                    for (var i = 1; i < nameAndPopulation.length - 1; i++)
-                        name += " " + nameAndPopulation[i];
-                    population = Integer.parseInt(nameAndPopulation[nameAndPopulation.length - 1]);
-                }
-                else if (nameAndPopulation.length == 2) {
-                    population = Integer.parseInt(nameAndPopulation[1]);
-                }
-                cities.get(firstLetter).put(name.toLowerCase(), new City(name, population));
-                totalCitiesCount++;
-                countCities.put(firstLetter, countCities.get(firstLetter) + 1);
-                if (stopLetters.contains(firstLetter))
-                    stopLetters.remove(firstLetter);
-            }
-            reader.close();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void addCity(Character firstLetter, String city, Integer population){
+        cities.get(firstLetter).put(city.toLowerCase(), new City(city, population));
+        totalCitiesCount++;
+        countCities.put(firstLetter, countCities.get(firstLetter) + 1);
+        if (stopLetters.contains(firstLetter))
+            stopLetters.remove(firstLetter);
     }
 
     public HashMap<Character, HashMap<String, City>> getCities() {

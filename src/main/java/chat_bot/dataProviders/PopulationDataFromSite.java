@@ -1,34 +1,43 @@
-package chat_bot;
+package chat_bot.dataProviders;
 
 import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PopulationData {
-    private Pattern patternRawСities = Pattern.compile("<table><tbody>([А-ЯЕЁа-яеё<>trd/a href=\"a-z_()-.]+)</tbody>");
-    private Pattern patternCities = Pattern.compile("<tr>|<td>|<a href=\"[\\w-]+\">|</a>|</td>| \\([А-ЯЁЕа-яёе.]+\\)|/ [а-яеёА-ЯЕЁ]+");
-    private Pattern patternPopulation1 = Pattern.compile("class=\"infobox-header\" style=\"[\\w\\d:#;]+\">Население[</\\w\\d\\s>\":#;%=]+Население[</\\w\\d\\s>\":#;%-=]+[↘↗▲]?</span>([ 0-9&#;]+)");
-    private Pattern patternPopulation2 = Pattern.compile("class=\"infobox-header\" style=\"[\\w\\d:#;]+\">Население[</\\w\\d\\s>\":#;%=]+Население[</\\w\\d\\s>\":#;%-=]+[↘↗▲]?<span class=\"nowrap\">([ 0-9&#;]+)");
+public class PopulationDataFromSite {
+    private final Pattern patternRawCities;
+    private final Pattern patternCities;
+    private final Pattern patternPopulation1 = Pattern.compile("class=\"infobox-header\" style=\"[\\w\\d:#;]+\">Население[</\\w\\d\\s>\":#;%=]+Население[</\\w\\d\\s>\":#;%-=]+[↘↗▲]?</span>([ 0-9&#;]+)");
+    private final Pattern patternPopulation2 = Pattern.compile("class=\"infobox-header\" style=\"[\\w\\d:#;]+\">Население[</\\w\\d\\s>\":#;%=]+Население[</\\w\\d\\s>\":#;%-=]+[↘↗▲]?<span class=\"nowrap\">([ 0-9&#;]+)");
 
-    public String[] getCities(String letter) throws IOException {
-        ArrayList<String> cities = new ArrayList<String>();
-        URL url = new URL("http://www.1000mest.ru/city" + letter);
-        BufferedReader br = new BufferedReader(new InputStreamReader(url.openConnection().getInputStream()));
-        String s;
-        StringBuilder str = new StringBuilder();
-        while ((s = br.readLine()) != null)
-            str.append(s);
-        br.close();
-        Matcher matcher = patternRawСities.matcher(str.toString());
-        matcher.find();
-        var res = matcher.group(1).replace("</tr>", ",");
-        var citiesOnLetter = patternCities.matcher(res).replaceAll("").split(",");
-        return citiesOnLetter;
+    public PopulationDataFromSite(Pattern patternRawCities, Pattern patternCities){
+        this.patternRawCities = patternRawCities;
+        this.patternCities = patternCities;
     }
 
-    public Integer getStatistics(String city) throws IOException {
+    public String[] getCities(String site) {
+        try{
+            URL url = new URL(site);
+            BufferedReader br = new BufferedReader(new InputStreamReader(url.openConnection().getInputStream()));
+            String s;
+            StringBuilder str = new StringBuilder();
+            while ((s = br.readLine()) != null)
+                str.append(s);
+            br.close();
+            Matcher matcher = patternRawCities.matcher(str.toString());
+            matcher.find();
+            var res = matcher.group(1).replace("</tr>", ",");
+            var citiesOnLetter = patternCities.matcher(res).replaceAll("").split(",");
+            return citiesOnLetter;
+        }
+        catch (IOException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Integer getStatistics(String city) {
         String population = "0";
         var res = getCityPopulation(city);
         if (res != null)
@@ -42,7 +51,7 @@ public class PopulationData {
         return Integer.parseInt(population);
     }
 
-    private String getCityPopulation(String city) throws IOException {
+    private String getCityPopulation(String city) {
         StringBuilder str;
         var html = getHTML(city);
         if (html != null)
@@ -63,7 +72,7 @@ public class PopulationData {
         return res.replace("&#160;", "").replace("&#32;", "").replace(" ", "");
     }
 
-    private StringBuilder getHTML(String city) throws IOException {
+    private StringBuilder getHTML(String city)  {
         try {
             city = city.replace(" ", "_");
             URL url = new URL("https://ru.wikipedia.org/wiki/" + city);
@@ -75,7 +84,7 @@ public class PopulationData {
             br.close();
             return str;
         }
-        catch (FileNotFoundException e) {
+        catch (IOException e) {
             return null;
         }
     }
