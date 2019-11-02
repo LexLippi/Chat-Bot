@@ -2,7 +2,7 @@ package chat_bot.game;
 
 import chat_bot.Data;
 
-public class GameFactory {
+public class GameFactory implements IGameFactory{
     private Data data;
 
     public GameFactory(){

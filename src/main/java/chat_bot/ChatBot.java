@@ -1,19 +1,16 @@
 package chat_bot;
 
 
-import chat_bot.game.CityGame;
-import chat_bot.game.GameFactory;
-import chat_bot.game.GameType;
-import chat_bot.game.IGame;
+import chat_bot.game.*;
 import chat_bot.game.return_types.GameReturnedValue;
 
 public class ChatBot {
 	private Api api;
-	private GameFactory factory;
+	private IGameFactory factory;
 
 	private IGame game = null;
 	
-	public ChatBot(Api api, GameFactory factory) {
+	public ChatBot(Api api, IGameFactory factory) {
 		this.api = api;
 		this.factory = factory;
 		start();
