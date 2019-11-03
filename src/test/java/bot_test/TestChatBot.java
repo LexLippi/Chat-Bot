@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class TestChatBot {
 
     @Test
-    void testStart(){
+    void testStart() {
         var api = new TestingApi();
         var factory = new TestingGameFactory();
         var bot = new ChatBot(api, factory);
@@ -16,7 +16,7 @@ public class TestChatBot {
     }
 
     @Test
-    void testProcessPlay(){
+    void testProcessPlay() {
         var api = new TestingApi();
         var factory = new TestingGameFactory();
         var bot = new ChatBot(api, factory);
@@ -26,7 +26,7 @@ public class TestChatBot {
     }
 
     @Test
-    void testProcessBye(){
+    void testProcessBye() {
         var api = new TestingApi();
         var factory = new TestingGameFactory();
         var bot = new ChatBot(api, factory);
@@ -36,7 +36,7 @@ public class TestChatBot {
     }
 
     @Test
-    void testProcessIncorrectCommand(){
+    void testProcessIncorrectCommand() {
         var api = new TestingApi();
         var factory = new TestingGameFactory();
         var bot = new ChatBot(api, factory);

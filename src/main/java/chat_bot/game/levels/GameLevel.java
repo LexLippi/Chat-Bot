@@ -1,16 +1,11 @@
 package chat_bot.game.levels;
 
-import chat_bot.City;
 import chat_bot.Data;
 import chat_bot.game.return_types.CityAnswerType;
 import chat_bot.game.return_types.GameExitType;
 import chat_bot.game.return_types.GameReturnedValue;
-import com.google.common.base.CharMatcher;
-import org.telegram.telegrambots.api.objects.games.Game;
-
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.stream.Stream;
 
 abstract public class GameLevel implements DifficultLevel {
     protected Data data;
@@ -40,8 +35,7 @@ abstract public class GameLevel implements DifficultLevel {
                 return new GameReturnedValue(null,
                         "Я не знаю такого города, попробуйте снова");
             case CORRECT_INPUT:
-                var result = getBotCourse(inputString);
-                return result;
+                return getBotCourse(inputString);
             case USED_CITY:
                 return new GameReturnedValue(null, "Решил обмануть меня, бродяга?! Этот город уже был!");
             default:

@@ -7,7 +7,6 @@ import chat_bot.game.return_types.GameReturnedValue;
 public class ChatBot {
 	private Api api;
 	private IGameFactory factory;
-
 	private IGame game = null;
 	
 	public ChatBot(Api api, IGameFactory factory) {
@@ -23,7 +22,7 @@ public class ChatBot {
 		say(message);
 	}
 
-	public void process(String command){
+	public void process(String command) {
 		if (command.toLowerCase().compareTo("играть") == 0) {
 			startGame(GameType.CityGame);
 		}
@@ -39,7 +38,7 @@ public class ChatBot {
 		}
 	}
 
-	private void react(GameReturnedValue answer){
+	private void react(GameReturnedValue answer) {
 		for (var replica: answer.getMessages()) {
 			say(replica);
 		}

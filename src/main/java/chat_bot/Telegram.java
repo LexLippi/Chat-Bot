@@ -23,9 +23,9 @@ public class Telegram extends TelegramLongPollingBot {
 
     public static void main(String[] args) {
         ApiContextInitializer.init();
-        var botapi = new TelegramBotsApi();
+        var botApi = new TelegramBotsApi();
         try {
-            botapi.registerBot(new Telegram());
+            botApi.registerBot(new Telegram());
         } catch (TelegramApiRequestException e) {
             e.printStackTrace();
         }
@@ -35,14 +35,14 @@ public class Telegram extends TelegramLongPollingBot {
         gameFactory = new GameFactory();
     }
 
-    public void sendMsg(String chatId, String text){
+    public void sendMsg(String chatId, String text) {
         var sendMsg = new SendMessage();
         sendMsg.enableMarkdown(true);
         sendMsg.setChatId(chatId);
         sendMsg.setText(text);
         try{
             sendMessage(sendMsg);
-        } catch (TelegramApiException e){
+        } catch (TelegramApiException e) {
             e.printStackTrace();
         }
     }
@@ -50,7 +50,7 @@ public class Telegram extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         var msg = update.getMessage();
-        if (msg != null && msg.hasText()){
+        if (msg != null && msg.hasText()) {
             var id = msg.getChatId().toString();
             switch (msg.getText()) {
                 case "/start":
@@ -60,10 +60,10 @@ public class Telegram extends TelegramLongPollingBot {
                     deleteBot(id);
                     break;
                 default:
-                    if (!bots.containsKey(id)){
+                    if (!bots.containsKey(id)) {
                         sendMsg(id, "для начала напишите /start");
                     }
-                    else{
+                    else {
                         //answers.get(id).add(msg.getText());
                         bots.get(id).process(msg.getText());
                     }
@@ -71,16 +71,16 @@ public class Telegram extends TelegramLongPollingBot {
         }
     }
 
-    private void deleteBot(String id){
-        if (!bots.containsKey(id)){
+    private void deleteBot(String id) {
+        if (!bots.containsKey(id)) {
             return;
         }
         bots.get(id).process("пока");
         bots.remove(id);
     }
 
-    private void registerNewBot(String id){
-        if (bots.containsKey(id)){
+    private void registerNewBot(String id) {
+        if (bots.containsKey(id)) {
             bots.get(id).start();
         }
         else {

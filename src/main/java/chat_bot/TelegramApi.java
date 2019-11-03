@@ -5,7 +5,7 @@ public class TelegramApi implements Api {
     private String id;
     private Telegram telegram;
 
-    public TelegramApi(String chatID, Telegram telegram){
+    public TelegramApi(String chatID, Telegram telegram) {
         id = chatID;
         this.telegram = telegram;
     }

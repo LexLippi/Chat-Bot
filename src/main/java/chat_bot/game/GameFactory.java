@@ -20,7 +20,6 @@ public class GameFactory implements IGameFactory{
 
     private IGame getCityGame(){
         var new_data = data.clone();
-        var game = new CityGame(new_data);
-        return game;
+        return new CityGame(new_data);
     }
 }

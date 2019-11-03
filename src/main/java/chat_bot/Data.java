@@ -7,9 +7,9 @@ import java.util.*;
 
 public class Data implements Cloneable
 {
-    private HashMap<Character, HashMap<String, City>> cities = new HashMap<Character, HashMap<String, City>>();
-    private HashMap<Character, Integer> countCities = new HashMap<Character, Integer>();
-    private HashSet<Character> stopLetters = new HashSet<Character>();
+    private HashMap<Character, HashMap<String, City>> cities = new HashMap<>();
+    private HashMap<Character, Integer> countCities = new HashMap<>();
+    private HashSet<Character> stopLetters = new HashSet<>();
     private HashSet<String> usedCities = new HashSet<>();
     private Integer totalCitiesCount = 0;
 
@@ -37,8 +37,7 @@ public class Data implements Cloneable
             this.cities.get(firstLetter).put(city.name.toLowerCase(), new City(city.name, city.population));
             countCities.put(firstLetter, countCities.get(firstLetter) + 1);
             totalCitiesCount++;
-            if (stopLetters.contains(firstLetter))
-                stopLetters.remove(firstLetter);
+            stopLetters.remove(firstLetter);
         }
     }
 
@@ -46,8 +45,7 @@ public class Data implements Cloneable
         cities.get(firstLetter).put(city.toLowerCase(), new City(city, population));
         totalCitiesCount++;
         countCities.put(firstLetter, countCities.get(firstLetter) + 1);
-        if (stopLetters.contains(firstLetter))
-            stopLetters.remove(firstLetter);
+        stopLetters.remove(firstLetter);
     }
 
     public HashMap<Character, HashMap<String, City>> getCities() {
@@ -90,13 +88,13 @@ public class Data implements Cloneable
 
     private void initialize() {
         for (Character i = 'А'; i <= 'Я'; ++i) {
-            cities.put(i, new HashMap<String, City>());
+            cities.put(i, new HashMap<>());
             countCities.put(i, 0);
             stopLetters.add(i);
         }
         stopLetters.add('Ё');
         countCities.put('Ё', 0);
-        cities.put('Ё', new HashMap<String, City>());
+        cities.put('Ё', new HashMap<>());
     }
 
     public Data clone(){
