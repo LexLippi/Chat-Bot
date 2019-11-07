@@ -1,8 +1,8 @@
 package bot_test;
 
-import chat_bot.City;
-import chat_bot.Data;
-import chat_bot.game.CityGame;
+import chat_bot.game.city_game.City;
+import chat_bot.game.city_game.Data;
+import chat_bot.game.city_game.CityGame;
 import chat_bot.game.GameType;
 import chat_bot.game.IGame;
 import chat_bot.game.IGameFactory;

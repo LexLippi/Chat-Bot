@@ -1,6 +1,6 @@
 package chat_bot.dataProviders;
 
-import chat_bot.Data;
+import chat_bot.game.city_game.Data;
 
 import java.util.ArrayList;
 import java.util.List;

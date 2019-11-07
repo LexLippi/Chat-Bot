@@ -1,4 +1,4 @@
-package chat_bot;
+package chat_bot.game.city_game;
 
 public class City {
     public final String name;

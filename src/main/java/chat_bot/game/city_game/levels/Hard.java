@@ -1,28 +1,28 @@
-package chat_bot.game.levels;
+package chat_bot.game.city_game.levels;
 
-import chat_bot.Data;
-
+import chat_bot.game.city_game.Data;
 import java.util.ArrayList;
 
-public class Easy extends GameLevel {
+public class Hard extends GameLevel {
 
-    public Easy(Data data) {
-        step_counter = 10;
+    public Hard(Data data) {
+        step_counter = 100;
         this.data = data;
-        this.minPercent = getMinPercent();
+        this.maxPercent = getMaxPercent();
     }
 
     @Override
     public String computeCity(Character lastLetter) {
-        if (data.getCities().get(lastLetter).isEmpty()) {
+        if (data.getCities().get(lastLetter).isEmpty())
             return null;
-        }
         var myCities = data.getCities().get(lastLetter).keySet().iterator();
         var bestCities = new ArrayList<String>();
-        while (myCities.hasNext()) {
+        while (myCities.hasNext())
+        {
             var currentCity = myCities.next();
             var currentLastLetter = getCityLastLetter(currentCity);
-            if (data.getStatistics(currentLastLetter) >= minPercent) {
+            if (data.getStatistics(currentLastLetter) <= maxPercent)
+            {
                 bestCities.add(currentCity);
             }
         }
@@ -32,9 +32,9 @@ public class Easy extends GameLevel {
         return getRandomListElement(bestCities);
     }
 
-    private Double getMinPercent() {
+    private Double getMaxPercent() {
         var percents = data.getPercents();
-        int index = percents.size() - 1 - getLetterCount() / 3;
-        return data.getPercents().get(index);
+        int index = getLetterCount() / 3;
+        return percents.get(index);
     }
 }

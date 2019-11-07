@@ -1,6 +1,6 @@
-package chat_bot.game.levels;
+package chat_bot.game.city_game.levels;
 
-import chat_bot.Data;
+import chat_bot.game.city_game.Data;
 import java.util.ArrayList;
 
 public class Medium extends GameLevel {

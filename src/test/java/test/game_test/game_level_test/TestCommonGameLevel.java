@@ -1,11 +1,11 @@
 package test.game_test.game_level_test;
 
-import chat_bot.City;
-import chat_bot.Data;
-import chat_bot.game.levels.Easy;
-import chat_bot.game.levels.GameLevel;
-import chat_bot.game.levels.Hard;
-import chat_bot.game.levels.Medium;
+import chat_bot.game.city_game.City;
+import chat_bot.game.city_game.Data;
+import chat_bot.game.city_game.levels.Easy;
+import chat_bot.game.city_game.levels.GameLevel;
+import chat_bot.game.city_game.levels.Hard;
+import chat_bot.game.city_game.levels.Medium;
 import chat_bot.game.return_types.GameExitType;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;

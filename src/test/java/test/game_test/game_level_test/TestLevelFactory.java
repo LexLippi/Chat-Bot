@@ -1,7 +1,7 @@
 package test.game_test.game_level_test;
 
-import chat_bot.Data;
-import chat_bot.game.levels.*;
+import chat_bot.game.city_game.Data;
+import chat_bot.game.city_game.levels.*;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 

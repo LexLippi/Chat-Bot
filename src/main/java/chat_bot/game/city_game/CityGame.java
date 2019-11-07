@@ -1,10 +1,10 @@
-package chat_bot.game;
+package chat_bot.game.city_game;
 
-import chat_bot.Data;
-import chat_bot.game.levels.*;
+import chat_bot.game.IGame;
+import chat_bot.game.city_game.levels.*;
 import chat_bot.game.return_types.GameReturnedValue;
-import chat_bot.game.states.SelectLevel;
-import chat_bot.game.states.State;
+import chat_bot.game.city_game.states.SelectLevel;
+import chat_bot.game.city_game.states.State;
 
 public class CityGame implements IGame {
 	private GameLevel level;

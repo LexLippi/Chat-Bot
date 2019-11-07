@@ -1,6 +1,5 @@
-package chat_bot;
+package chat_bot.game.city_game;
 
-import chat_bot.dataProviders.DataProvider1000Mest;
 import chat_bot.dataProviders.DataProviderFile;
 
 import java.util.*;

@@ -1,4 +1,4 @@
-package chat_bot.game.return_types;
+package chat_bot.game.city_game;
 
 public enum CityAnswerType {
 	INCORRECT_INPUT,

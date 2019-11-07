@@ -1,6 +1,6 @@
-package chat_bot.game.states;
+package chat_bot.game.city_game.states;
 
-import chat_bot.game.levels.GameLevel;
+import chat_bot.game.city_game.levels.GameLevel;
 import chat_bot.game.return_types.GameReturnedValue;
 import java.util.Random;
 

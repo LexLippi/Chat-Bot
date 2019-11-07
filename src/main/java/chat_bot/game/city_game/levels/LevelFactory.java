@@ -1,6 +1,6 @@
-package chat_bot.game.levels;
+package chat_bot.game.city_game.levels;
 
-import chat_bot.Data;
+import chat_bot.game.city_game.Data;
 
 public class LevelFactory {
     public GameLevel getLevel(String level, Data data) {

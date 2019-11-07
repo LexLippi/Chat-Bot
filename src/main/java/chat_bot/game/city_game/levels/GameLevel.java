@@ -1,7 +1,7 @@
-package chat_bot.game.levels;
+package chat_bot.game.city_game.levels;
 
-import chat_bot.Data;
-import chat_bot.game.return_types.CityAnswerType;
+import chat_bot.game.city_game.Data;
+import chat_bot.game.city_game.CityAnswerType;
 import chat_bot.game.return_types.GameExitType;
 import chat_bot.game.return_types.GameReturnedValue;
 import java.util.ArrayList;
