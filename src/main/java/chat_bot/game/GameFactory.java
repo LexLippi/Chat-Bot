@@ -1,5 +1,6 @@
 package chat_bot.game;
 
+import chat_bot.game.board_game.BoardGame;
 import chat_bot.game.city_game.Data;
 import chat_bot.game.city_game.CityGame;
 
@@ -14,6 +15,8 @@ public class GameFactory implements IGameFactory{
         switch (type){
             case CityGame:
                 return getCityGame();
+            case BoardGame:
+                return new BoardGame();
             default:
                 throw new IllegalArgumentException("incorrect game type");
         }

@@ -18,13 +18,17 @@ public class ChatBot {
 	public void start() {
 		var message = "Привет, меня зовут Гена."
 				+ " Я чат бот, который умеет играть в города."
-				+ " Если хочешь играть в города, введи команду \"Играть\"";
+				+ " Если хочешь играть в города, введи команду \"Играть в города\""
+				+ " Если хочешь искать слова, введи команду \"Искать слова\"";
 		say(message);
 	}
 
 	public void process(String command) {
-		if (command.toLowerCase().compareTo("играть") == 0) {
+		if (command.toLowerCase().compareTo("играть в города") == 0) {
 			startGame(GameType.CityGame);
+		}
+		else if (command.toLowerCase().compareTo("Искать слова") == 0){
+			startGame(GameType.BoardGame);
 		}
 		else if (command.toLowerCase().compareTo("пока") == 0) {
 			say("до встречи");

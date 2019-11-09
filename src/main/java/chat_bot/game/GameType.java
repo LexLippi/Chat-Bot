@@ -1,5 +1,6 @@
 package chat_bot.game;
 
 public enum GameType {
-    CityGame
+    CityGame,
+    BoardGame
 }
