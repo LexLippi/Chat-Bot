@@ -6,6 +6,11 @@ import chat_bot.game.GameFactory;
 import chat_bot.game.GameType;
 import chat_bot.game.IGame;
 import chat_bot.game.return_types.GameReturnedValue;
+import chat_bot.game.states.BotCourse;
+import chat_bot.game.states.Draw;
+import chat_bot.game.states.SelectLevel;
+
+import java.util.ArrayList;
 
 public class ChatBot {
 	private Api api;
@@ -23,19 +28,54 @@ public class ChatBot {
 		var message = "Привет, меня зовут Гена."
 				+ " Я чат бот, который умеет играть в города."
 				+ " Если хочешь играть в города, введи команду \"Играть\"";
-		say(message);
+		ArrayList buttons = new ArrayList() {
+			{
+				add("Играть");
+			}};
+		api.outkeyboard(buttons, message);
 	}
 
 	public void process(String command){
 		if (command.toLowerCase().compareTo("играть") == 0) {
 			startGame(GameType.CityGame);
 		}
-		else if (command.toLowerCase().compareTo("пока") == 0) {
-			say("до встречи");
+		else if (command.toLowerCase().compareTo("сдаюсь") == 0 || command.toLowerCase().compareTo("стоп") == 0){
+			react(game.process(command));
+			var message = "Если хочешь играть в города, введи команду \"Играть\"";
+			ArrayList buttons = new ArrayList() {
+				{
+					add("Играть");
+				}};
+			api.outkeyboard(buttons, message);
 		}
 		else if (game != null){
-			var answer = game.process(command);
-			react(answer);
+			if (((CityGame)game).getCurrentState() instanceof SelectLevel) {
+				game.process(command);
+				ArrayList buttons = new ArrayList() {
+					{
+						add("Орел");
+						add("Решка");
+					}};
+				var message = "Пора выбрать, кто будет ходить первым! Орёл или решка?";
+				api.outkeyboard(buttons, message);
+			}
+			else if (((CityGame)game).getCurrentState() instanceof Draw) {
+				var answer = game.process(command);
+				ArrayList buttons = new ArrayList() {
+					{
+						add("Сдаюсь");
+						add("Стоп");
+					}};
+				var message = "";
+				for (var replica: answer.getMessages()) {
+					message += replica + "\n";
+				}
+				api.outkeyboard(buttons, message);
+			}
+			else {
+				var answer = game.process(command);
+				react(answer);
+			}
 		}
 		else {
 			incorrectCommand();
@@ -54,12 +94,17 @@ public class ChatBot {
 	private void say(String massage) {
 		api.out(massage);
 	}
-
 	
 	private void startGame(GameType type) {
 		game = factory.getGame(type);
-		var answer = game.startGame();
-		react(answer);
+		var buttons = new ArrayList() {
+			{
+				add("Легкий");
+				add("Средний");
+				add("Тяжелый");
+			}};
+		var message = "Выбери уровень сложности: лёгкий, средний, тяжёлый";
+		api.outkeyboard(buttons, message);
 	}
 
 	private void incorrectCommand() {

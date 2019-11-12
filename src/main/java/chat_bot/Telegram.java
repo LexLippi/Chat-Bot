@@ -4,17 +4,17 @@ import chat_bot.game.GameFactory;
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.TelegramBotsApi;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
-import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
+import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 import org.telegram.telegrambots.exceptions.TelegramApiRequestException;
-import org.telegram.telegrambots.logging.BotLogger;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.lang.reflect.Array;
+import java.util.*;
+import java.util.List;
 
 public class Telegram extends TelegramLongPollingBot {
 
@@ -52,9 +52,11 @@ public class Telegram extends TelegramLongPollingBot {
         var msg = update.getMessage();
         if (msg != null && msg.hasText()){
             var id = msg.getChatId().toString();
+            System.out.println(id + " " + msg);
             switch (msg.getText()) {
                 case "/start":
                     registerNewBot(id);
+                    //sendKeyboard(update.getMessage().getChatId());
                     break;
                 case "/stop":
                     deleteBot(id);
@@ -69,6 +71,22 @@ public class Telegram extends TelegramLongPollingBot {
                     }
             }
         }
+        else if (update.hasCallbackQuery()){
+            var a = update.getCallbackQuery();
+            var id = a.getMessage().getChatId().toString();
+            var data = a.getData();
+            System.out.println(id + " " + data);
+            bots.get(id).process(data);
+            /*final AnswerCallbackQuery answer = new AnswerCallbackQuery();
+            answer.setCallbackQueryId(update.getCallbackQuery().getId());
+            answer.setText("You've clicked at the button: " + update.getCallbackQuery().getData());
+            answer.setShowAlert(true);
+            try {
+                execute(answer);
+            } catch (TelegramApiException e) {
+                e.printStackTrace();
+            }*/
+        }
     }
 
     private void deleteBot(String id){
@@ -77,6 +95,44 @@ public class Telegram extends TelegramLongPollingBot {
         }
         bots.get(id).process("пока");
         bots.remove(id);
+    }
+
+    public void sendInlineKeyBoardMessage(Long chatId, List<String> buttons, String message) {
+        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+
+        replyKeyboardMarkup.setSelective(true);
+        replyKeyboardMarkup.setResizeKeyboard(true);
+        replyKeyboardMarkup.setOneTimeKeyboard(true);
+
+        List<KeyboardRow> keyboard = new ArrayList<>();
+        KeyboardRow keyboardFirstRow = new KeyboardRow();
+
+        for (var button: buttons){
+            keyboardFirstRow.add(button);
+        }
+        keyboard.add(keyboardFirstRow);
+        replyKeyboardMarkup.setKeyboard(keyboard);
+        SendMessage sendMessage = new SendMessage().setChatId(chatId).setText(message).setReplyMarkup(replyKeyboardMarkup);
+        try {
+            execute(sendMessage);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+        //return new SendMessage().setChatId(chatId).setText(message).setReplyMarkup(replyKeyboardMarkup);
+
+        /*InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<InlineKeyboardButton> keyboardButtonsRow = new ArrayList<>();
+        List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
+        for (var button: buttons){
+            InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton();
+            inlineKeyboardButton.setText(button);
+            inlineKeyboardButton.setCallbackData(button);
+            keyboardButtonsRow.add(inlineKeyboardButton);
+        }
+        rowList.add(keyboardButtonsRow);
+        inlineKeyboardMarkup.setKeyboard(rowList);
+
+        return new SendMessage().setChatId(chatId).setText(message).setReplyMarkup(inlineKeyboardMarkup);*/
     }
 
     private void registerNewBot(String id){

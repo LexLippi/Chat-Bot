@@ -16,6 +16,10 @@ public class CityGame implements IGame {
 	    this.data = data;
 	}
 
+	public State getCurrentState(){
+		return currentState;
+	}
+
 	@Override
 	public GameReturnedValue process(String inputString) {
 		inputString = inputString.toLowerCase();
