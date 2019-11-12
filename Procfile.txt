@@ -1,0 +1,1 @@
+worker: java -Dserver.port=$PORT -jar Chat_Bot_jar/Chat_bot.jar
