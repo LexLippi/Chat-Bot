@@ -1,2 +1,1 @@
-worker: jar -cvf Chat_Bot.jar MANIFEST.MF
-worker: java -jar Chat_Bot.jar
+worker: jar -cvf Chat_Bot.jar MANIFEST.MF & java -jar Chat_Bot.jar
