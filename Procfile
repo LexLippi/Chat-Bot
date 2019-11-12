@@ -1,1 +1,1 @@
-worker: java -jar Chat_Bot_jar/Chat_Bot.jar
+worker: java -jar Chat_Bot_jar.Chat_Bot.jar
