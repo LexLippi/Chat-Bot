@@ -12,4 +12,9 @@ public class TestingApi implements Api {
     public void out(String massage) {
         answers.add(massage);
     }
+
+    @Override
+    public void outkeyboard(ArrayList buttons, String message) {
+        //ignore
+    }
 }

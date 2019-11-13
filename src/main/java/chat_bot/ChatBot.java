@@ -2,7 +2,12 @@ package chat_bot;
 
 
 import chat_bot.game.*;
+import chat_bot.game.city_game.CityGame;
+import chat_bot.game.city_game.states.Draw;
+import chat_bot.game.city_game.states.SelectLevel;
 import chat_bot.game.return_types.GameReturnedValue;
+
+import java.util.ArrayList;
 
 public class ChatBot {
 	private Api api;
@@ -20,22 +25,64 @@ public class ChatBot {
 				+ " Я чат бот, который умеет играть в города."
 				+ " Если хочешь играть в города, введи команду \"Играть в города\""
 				+ " Если хочешь искать слова, введи команду \"Искать слова\"";
-		say(message);
+		ArrayList buttons = new ArrayList() {
+			{
+				add("Играть в города");
+				add("ИСкать слова");
+			}};
+		api.outkeyboard(buttons, message);
 	}
 
 	public void process(String command) {
 		if (command.toLowerCase().compareTo("играть в города") == 0) {
 			startGame(GameType.CityGame);
 		}
-		else if (command.toLowerCase().compareTo("Искать слова") == 0){
+		else if (command.toLowerCase().compareTo("искать слова") == 0){
 			startGame(GameType.BoardGame);
 		}
 		else if (command.toLowerCase().compareTo("пока") == 0) {
 			say("до встречи");
 		}
+
+		else if (command.toLowerCase().compareTo("сдаюсь") == 0 || command.toLowerCase().compareTo("стоп") == 0){
+			react(game.process(command));
+			var message = "Если хочешь играть в города, введи команду \"Играть в города\""
+					+ " Если хочешь искать слова, введи команду \"Искать слова\"";;
+			ArrayList buttons = new ArrayList() {
+				{
+					add("Играть в города");
+					add("ИСкать слова");
+				}};
+			api.outkeyboard(buttons, message);
+		}
 		else if (game != null){
-			var answer = game.process(command);
-			react(answer);
+			if (game instanceof CityGame && ((CityGame)game).getCurrentState() instanceof SelectLevel) {
+				game.process(command);
+				ArrayList buttons = new ArrayList() {
+					{
+						add("Орел");
+						add("Решка");
+					}};
+				var message = "Пора выбрать, кто будет ходить первым! Орёл или решка?";
+				api.outkeyboard(buttons, message);
+			}
+			else if (game instanceof CityGame && ((CityGame)game).getCurrentState() instanceof Draw) {
+				var answer = game.process(command);
+				ArrayList buttons = new ArrayList() {
+					{
+						add("Сдаюсь");
+						add("Стоп");
+					}};
+				var message = "";
+				for (var replica: answer.getMessages()) {
+					message += replica + "\n";
+				}
+				api.outkeyboard(buttons, message);
+			}
+			else {
+				var answer = game.process(command);
+				react(answer);
+			}
 		}
 		else {
 			incorrectCommand();
@@ -54,12 +101,24 @@ public class ChatBot {
 	private void say(String massage) {
 		api.out(massage);
 	}
-
 	
 	private void startGame(GameType type) {
 		game = factory.getGame(type);
-		var answer = game.startGame();
-		react(answer);
+		if (game instanceof CityGame) {
+			var buttons = new ArrayList() {
+				{
+					add("Легкий");
+					add("Средний");
+					add("Тяжелый");
+				}
+			};
+			var message = "Выбери уровень сложности: лёгкий, средний, тяжёлый";
+			api.outkeyboard(buttons, message);
+		}
+		else {
+			var answer = game.startGame();
+			react(answer);
+		}
 	}
 
 	private void incorrectCommand() {
