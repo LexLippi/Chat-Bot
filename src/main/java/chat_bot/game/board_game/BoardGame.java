@@ -42,10 +42,10 @@ public class BoardGame implements IGame {
                     "Ничего, в другой раз повезет!");
         }
         if (board.containsWord(answer)) {
-            return new GameReturnedValue(null, "нашел!", board.getFild());
+            return new GameReturnedValue(null, "нашел!", board.getField());
         }
         else {
-            return new GameReturnedValue(null, "такого слова нет :(", board.getFild());
+            return new GameReturnedValue(null, "такого слова нет :(", board.getField());
         }
     }
 
@@ -53,7 +53,7 @@ public class BoardGame implements IGame {
     public GameReturnedValue startGame() {
         var a1 = "тебе нужно найти все слова на доске";
         var a3 = "правда, закончиться эта игра пока не может";
-        var a2 = board.getFild();
+        var a2 = board.getField();
         return new GameReturnedValue(null, a1, a3, a2);
     }
 }

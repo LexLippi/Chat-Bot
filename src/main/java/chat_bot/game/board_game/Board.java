@@ -77,7 +77,7 @@ public class Board {
         return letters[index];
     }
 
-    public String getFild(){
+    public String getField(){
         if (generatedField == null){
             throw new IllegalArgumentException("generate field before getting it");
         }
