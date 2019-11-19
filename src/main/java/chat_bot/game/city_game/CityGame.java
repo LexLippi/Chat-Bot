@@ -10,10 +10,19 @@ public class CityGame implements IGame {
 	private GameLevel level;
 	private State currentState;
 	private Data data;
+	private String lastCity;
 
 	public CityGame(Data data) {
 	    currentState = new SelectLevel();
 	    this.data = data;
+	}
+
+	public String getLastCity() {
+		return lastCity;
+	}
+
+	public void setLastCity(String city) {
+		lastCity = city;
 	}
 
 	public State getCurrentState(){

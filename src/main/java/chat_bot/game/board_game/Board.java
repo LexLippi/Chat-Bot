@@ -68,7 +68,7 @@ public class Board {
     }
 
     public boolean containsWord(String word){
-        return word.contains(word.toUpperCase());
+        return words.contains(word.toUpperCase());
     }
 
     private Character getRandomLetter(){

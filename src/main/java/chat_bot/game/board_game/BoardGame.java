@@ -34,10 +34,10 @@ public class BoardGame implements IGame {
 
     @Override
     public GameReturnedValue process(String answer) {
-        if (answer.compareTo("стоп") == 0) {
+        if (answer.toLowerCase().compareTo("стоп") == 0) {
             return new GameReturnedValue(GameExitType.GAME_INTERRUPTED, "Приходи еще!");
         }
-        if (answer.compareTo("сдаюсь") == 0) {
+        if (answer.toLowerCase().compareTo("сдаюсь") == 0) {
             return new GameReturnedValue(GameExitType.PLAYER_LOOSE,
                     "Ничего, в другой раз повезет!");
         }
