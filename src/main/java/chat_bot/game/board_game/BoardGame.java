@@ -1,6 +1,7 @@
 package chat_bot.game.board_game;
 
 import chat_bot.game.IGame;
+import chat_bot.game.return_types.GameExitType;
 import chat_bot.game.return_types.GameReturnedValue;
 
 import java.util.Random;
@@ -33,10 +34,17 @@ public class BoardGame implements IGame {
 
     @Override
     public GameReturnedValue process(String answer) {
-        if (board.containsWord(answer)){
+        if (answer.toLowerCase().compareTo("стоп") == 0) {
+            return new GameReturnedValue(GameExitType.GAME_INTERRUPTED, "Приходи еще!");
+        }
+        if (answer.toLowerCase().compareTo("сдаюсь") == 0) {
+            return new GameReturnedValue(GameExitType.PLAYER_LOOSE,
+                    "Ничего, в другой раз повезет!");
+        }
+        if (board.containsWord(answer)) {
             return new GameReturnedValue(null, "нашел!", board.getFild());
         }
-        else{
+        else {
             return new GameReturnedValue(null, "такого слова нет :(", board.getFild());
         }
     }

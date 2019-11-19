@@ -4,17 +4,17 @@ import chat_bot.game.GameFactory;
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.TelegramBotsApi;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
-import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
+import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 import org.telegram.telegrambots.exceptions.TelegramApiRequestException;
-import org.telegram.telegrambots.logging.BotLogger;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.lang.reflect.Array;
+import java.util.*;
+import java.util.List;
 
 public class Telegram extends TelegramLongPollingBot {
 
@@ -52,22 +52,36 @@ public class Telegram extends TelegramLongPollingBot {
         var msg = update.getMessage();
         if (msg != null && msg.hasText()) {
             var id = msg.getChatId().toString();
+            System.out.println(id + " " + msg);
             switch (msg.getText()) {
                 case "/start":
                     registerNewBot(id);
+                    //sendKeyboard(update.getMessage().getChatId());
                     break;
                 case "/stop":
                     deleteBot(id);
                     break;
                 default:
                     if (!bots.containsKey(id)) {
-                        sendMsg(id, "для начала напишите /start");
+                        //sendMsg(id, "для начала напишите /start");
+                        ArrayList buttons = new ArrayList() {
+                            {
+                                add("/start");
+                            }};
+                        sendInlineKeyBoardMessage(Long.parseLong(id), buttons, "для начала напишите /start");
                     }
                     else {
                         //answers.get(id).add(msg.getText());
                         bots.get(id).process(msg.getText());
                     }
             }
+        }
+        else if (update.hasCallbackQuery()){
+            var a = update.getCallbackQuery();
+            var id = a.getMessage().getChatId().toString();
+            var data = a.getData();
+            System.out.println(id + " " + data);
+            bots.get(id).process(data);
         }
     }
 
@@ -79,8 +93,31 @@ public class Telegram extends TelegramLongPollingBot {
         bots.remove(id);
     }
 
-    private void registerNewBot(String id) {
-        if (bots.containsKey(id)) {
+    public void sendInlineKeyBoardMessage(Long chatId, List<String> buttons, String message) {
+        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+
+        replyKeyboardMarkup.setSelective(true);
+        replyKeyboardMarkup.setResizeKeyboard(true);
+        replyKeyboardMarkup.setOneTimeKeyboard(true);
+
+        List<KeyboardRow> keyboard = new ArrayList<>();
+        KeyboardRow keyboardFirstRow = new KeyboardRow();
+
+        for (var button: buttons){
+            keyboardFirstRow.add(button);
+        }
+        keyboard.add(keyboardFirstRow);
+        replyKeyboardMarkup.setKeyboard(keyboard);
+        SendMessage sendMessage = new SendMessage().setChatId(chatId).setText(message).setReplyMarkup(replyKeyboardMarkup);
+        try {
+            execute(sendMessage);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void registerNewBot(String id){
+        if (bots.containsKey(id)){
             bots.get(id).start();
         }
         else {
