@@ -15,14 +15,12 @@ import java.util.stream.IntStream;
 
 public class BoardData {
     private HashMap<Character, ArrayList<String>> words = new HashMap<>();
-    private final Pattern patternAllWord = Pattern.compile("");
-    private final Pattern patternWord = Pattern.compile("");
+    private final Pattern patternAllWord = Pattern.compile("<li><b>(.+?)</b>", Pattern.DOTALL);
     private final String[] letters = new String[]{"a", "b", "v", "g", "d", "je", "zh", "z",
             "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u",
             "f", "x", "c", "ch", "sh", "sch", "je", "ju", "ja", "jer"};
 
     public BoardData() {
-        initialize();
         getData();
     }
 
@@ -41,14 +39,7 @@ public class BoardData {
         var mainWord = getMainWord(keySet);
         var result = getBestWords(mainWord, keySet).stream().limit(count - 1).collect(Collectors.toList());
         result.add(mainWord);
-        return (String[]) result.toArray();
-    }
-
-    private void initialize() {
-        for (var i = 'А'; i <= 'Я'; ++i) {
-            this.words.put(i, new ArrayList<>());
-        }
-        this.words.put('Ё', new ArrayList<>());
+        return result.toArray(String[]::new);
     }
 
     private void getData() {
@@ -62,8 +53,11 @@ public class BoardData {
                                 var words = getWords("http://www.slovorod.ru/dic-dal/dal-" + l + ".htm");
                                 assert words != null;
                                 for (var word : words) {
-                                    this.words.get(getFirstLetter(word)).add(word);
-                                    System.out.println(word);
+                                    var firstLetter = getFirstLetter(word);
+                                    if (!this.words.containsKey(firstLetter)) {
+                                        this.words.put(firstLetter, new ArrayList<>());
+                                    }
+                                    this.words.get(firstLetter).add(word);
                                 }
                                 return null;
                             },
@@ -90,8 +84,19 @@ public class BoardData {
                 str.append(s);
             br.close();
             Matcher matcher = patternAllWord.matcher(str.toString());
-            var res = matcher.group(1).replace("</tr>", ",");
-            return patternWord.matcher(res).replaceAll("").split(",");
+            var res = new HashSet<>();
+            while (matcher.find()) {
+                var a = matcher.group(1)
+                        .split(",")[0]
+                        .split(" ")[1]
+                        .replace("?", "")
+                        .replace("!", "");
+                if (a.length() > 1) {
+                    res.add(a);
+                }
+            }
+            System.out.println(res);
+            return res.toArray(String[]::new);
         }
         catch (IOException e){
             e.printStackTrace();
@@ -134,12 +139,8 @@ public class BoardData {
     }
 
     private long getCountOfCommonSymbols(String firstWord, String secondWord) {
-        var firstSymbols = firstWord.chars().distinct();
-        var secondSymbols = secondWord.chars().distinct();
-        var firstSize = firstSymbols.count();
-        var secondSize = secondSymbols.count();
-        var commonSize = IntStream.concat(firstSymbols, secondSymbols).count();
-        return firstSize + secondSize - commonSize;
+        var uniqueSize = firstWord.concat(secondWord).chars().distinct().count();
+        return firstWord.length() + secondWord.length() - uniqueSize;
     }
 
     private long getJaccardIndex(long firstStringSize, long secondStringSize, long countOfCommonSymbols) {
