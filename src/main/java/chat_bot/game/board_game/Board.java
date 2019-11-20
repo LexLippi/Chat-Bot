@@ -61,7 +61,7 @@ public class Board {
     }
 
     public boolean containsWord(String word){
-        return word.contains(word.toUpperCase());
+        return words.contains(word.toUpperCase());
     }
 
     private Character getRandomLetter(){
@@ -70,7 +70,7 @@ public class Board {
         return letters[index];
     }
 
-    public String getFild(){
+    public String getField(){
         if (generatedField == null){
             throw new IllegalArgumentException("generate field before getting it");
         }
