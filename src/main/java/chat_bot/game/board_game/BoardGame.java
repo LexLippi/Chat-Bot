@@ -8,26 +8,13 @@ import java.util.Random;
 
 public class BoardGame implements IGame {
 
-    private String[] words = {"апельсин",
-            "груша",
-            "мандарин",
-            "яблоко",
-            "банан",
-            "киви",
-            "манго",
-            "арбуз",
-            "клубника",
-            "малина",
-            "огурец"};
-
     private Board board;
 
-    public BoardGame(){
-        var rand = new Random();
+    public BoardGame(BoardData data){
         board = new Board();
-        for (var i = 0; i < 5; i++){
-            var index = rand.nextInt(words.length);
-            board.addWord(words[index]);
+        var words = data.getWords(5);
+        for (var word: words){
+            board.addWord(word);
         }
         board.generateField();
     }
