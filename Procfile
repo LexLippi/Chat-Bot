@@ -1,1 +1,1 @@
-bot: java -jar /target/chat_bot-1.0.jar
+bot: java -jar /tmp/build_0d678f1cec44292d5372b63c20a46ce1/target/chat_bot-1.0.jar
