@@ -38,13 +38,6 @@ public class Board {
         }
     }
 
-    public static void main(String[] args) {
-        var board = new Board();
-        board.addWord("asdf");
-        board.addWord("asdf");
-        board.generateField();
-    }
-
     public void generateField(){
         StringBuilder result = new StringBuilder();
         for (var y = outerTop; y <= outerBottom; y++){
@@ -57,7 +50,7 @@ public class Board {
                 }
                 else{
                     result.append(' ');
-                    result.append(getRandomLetter());
+                    result.append(getRandomLetter().toString().toLowerCase());
                     result.append(' ');
                 }
             }
