@@ -11,7 +11,6 @@ import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class BoardData {
     private HashMap<Character, ArrayList<String>> words = new HashMap<>();
@@ -35,9 +34,16 @@ public class BoardData {
     }
 
     public String[] getWords(int count) {
+        if (count == 0) {
+            return null;
+        }
         var keySet = this.words.keySet();
         var mainWord = getMainWord(keySet);
-        var result = getBestWords(mainWord, keySet).stream().limit(count - 1).collect(Collectors.toList());
+        var resultWords = getBestWords(mainWord, keySet);
+        if (count > resultWords.size() + 1) {
+            throw new IllegalArgumentException("Count of words is too big");
+        }
+        var result = resultWords.stream().limit(count - 1).collect(Collectors.toList());
         result.add(mainWord);
         return result.toArray(String[]::new);
     }
