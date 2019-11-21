@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class Board {
     private final Character[] letters = {'A', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н',
-    'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я'};
+            'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я'};
     private HashMap<Coordinates, BoardCell> field;
     private String generatedField;
     private ArrayList<String> words;
@@ -159,5 +159,11 @@ public class Board {
             }
         }
         return theOne;
+    }
+
+    public double getSize(){
+        var x = outerRight - outerLeft;
+        var y = outerBottom - outerTop;
+        return Math.sqrt(x * x + y * y);
     }
 }

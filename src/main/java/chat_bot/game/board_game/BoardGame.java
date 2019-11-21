@@ -4,6 +4,8 @@ import chat_bot.game.IGame;
 import chat_bot.game.return_types.GameExitType;
 import chat_bot.game.return_types.GameReturnedValue;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class BoardGame implements IGame {
@@ -11,12 +13,36 @@ public class BoardGame implements IGame {
     private Board board;
 
     public BoardGame(BoardData data){
-        board = new Board();
         var words = data.getWords(5);
-        for (var word: words){
-            board.addWord(word);
+        var wordGroups = new ArrayList<ArrayList<String>>();
+        Permutate(new ArrayList<>(), words, wordGroups);
+        var best_length = 1000000000000000d;
+        Board board = new Board();
+        for (var group : wordGroups){
+            var current = new Board();
+            for (var word: words){
+                current.addWord(word);
+            }
+            if (current.getSize() < best_length){
+                board = current;
+                best_length = current.getSize();
+            }
         }
         board.generateField();
+    }
+
+    private void Permutate(ArrayList<String> current, String[] original, ArrayList<ArrayList<String>> result){
+        if (current.size() == original.length){
+            result.add(current);
+        }
+        for (var string : original){
+            if (current.contains(string)){
+                continue;
+            }
+            var newCurrent = (ArrayList<String>)current.clone();
+            newCurrent.add(string);
+            Permutate(newCurrent, original, result);
+        }
     }
 
     @Override
