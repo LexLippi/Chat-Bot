@@ -1,5 +1,6 @@
 package chat_bot.game.city_game;
 
+import chat_bot.dataProviders.DataProvider1000Mest;
 import chat_bot.dataProviders.DataProviderFile;
 
 import java.util.*;
@@ -15,17 +16,18 @@ public class Data implements Cloneable
     public static void main(String[] args) {
         var data1 = new Data();
         var data2 = data1.clone();
-        data2.updateStatistics('А', "александров");
+        var data3 = data2.clone();
+        /*data2.updateStatistics('А', "александров");
         System.out.println(data2.cities.get('А').keySet());
         System.out.println(data2.usedCities);
         System.out.println(data1.cities.get('А').keySet());
-        System.out.println(data1.usedCities);
+        System.out.println(data1.usedCities);*/
     }
 
     public Data() {
         initialize();
-        var provider = new DataProviderFile();
-        //var provider = new DataProvider1000Mest();
+        //var provider = new DataProviderFile();
+        var provider = new DataProvider1000Mest();
         provider.getData(this);
     }
 

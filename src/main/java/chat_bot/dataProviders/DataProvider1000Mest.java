@@ -28,7 +28,6 @@ public class DataProvider1000Mest implements IDataProvider {
                                     var population = populationData.getStatistics(city);
                                     var firstLetter = city.charAt(0);
                                     data.addCity(firstLetter,city, population);
-                                    System.out.println(city + " " + population);
                                 }
                                 return null;
                             },
