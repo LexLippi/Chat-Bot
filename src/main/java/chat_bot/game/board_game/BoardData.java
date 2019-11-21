@@ -97,7 +97,7 @@ public class BoardData {
                         .split(" ")[1]
                         .replace("?", "")
                         .replace("!", "");
-                if (a.length() > 1) {
+                if (a.length() > 1 && a.length() < 23) {
                     res.add(a);
                 }
             }
