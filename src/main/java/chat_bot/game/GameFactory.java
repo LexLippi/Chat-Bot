@@ -11,6 +11,7 @@ public class GameFactory implements IGameFactory{
 
     public GameFactory(){
         cityData = new Data();
+        System.out.print(cityData.getCities());
         boardData = new BoardData();
     }
 

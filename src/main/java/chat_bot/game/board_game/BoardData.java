@@ -101,7 +101,6 @@ public class BoardData {
                     res.add(a);
                 }
             }
-            System.out.println(res);
             return res.toArray(String[]::new);
         }
         catch (IOException e){
