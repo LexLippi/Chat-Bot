@@ -28,7 +28,8 @@ public class BoardGame implements IGame {
                 best_length = current.getSize();
             }
         }
-        board.generateField();
+        this.board = board;
+        this.board.generateField();
     }
 
     private void Permutate(ArrayList<String> current, String[] original, ArrayList<ArrayList<String>> result){
