@@ -63,16 +63,15 @@ public class ChatBot {
 			buttons.add("Сдаюсь");
 			buttons.add("Стоп");
 			buttons.add("Получить ссылку на город");
-
 			api.outkeyboard(buttons, message);
 		}
 
 		else if (game != null){
 			if (game instanceof CityGame && !(((CityGame)game).getCurrentState() instanceof BotCourse)){
 				var answer = game.process(command);
-				var message = "";
+				var message = new StringBuilder();
 				for (var replica: answer.getMessages()) {
-					message += replica + "\n";
+					message.append(replica + "\n");
 				}
 				ArrayList buttons = new ArrayList();
 				if (((CityGame)game).getCurrentState() instanceof SelectLevel) {
@@ -89,7 +88,7 @@ public class ChatBot {
 					buttons.add("Стоп");
 					buttons.add("Получить ссылку на город");
 				};
-				api.outkeyboard(buttons, message);
+				api.outkeyboard(buttons, message.toString());
 			}
 			else {
 				var answer = game.process(command);
@@ -104,11 +103,17 @@ public class ChatBot {
 	private void react(GameReturnedValue answer) {
 		for (var replica: answer.getMessages()) {
 			say(replica);
-			if (game instanceof CityGame)
-				 ((CityGame) game).setLastCity(replica);
 		}
 		if (answer.getType() != null){
 			game = null;
+			var message = "Если хочешь играть в города, введи команду \"Играть в города\""
+					+ " Если хочешь искать слова, введи команду \"Искать слова\"";;
+			ArrayList buttons = new ArrayList() {
+				{
+					add("Играть в города");
+					add("Искать слова");
+				}};
+			api.outkeyboard(buttons, message);
 		}
 	}
 

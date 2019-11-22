@@ -21,10 +21,6 @@ public class CityGame implements IGame {
 		return lastCity;
 	}
 
-	public void setLastCity(String city) {
-		lastCity = city;
-	}
-
 	public State getCurrentState(){
 		return currentState;
 	}
@@ -38,6 +34,9 @@ public class CityGame implements IGame {
 				level = new LevelFactory().getLevel(inputString, data);
 			}
 			currentState = currentState.nextState;
+			var message = result.getMessages();
+			if (data.getCities().get(message[message.length - 1].charAt(0)).containsKey(message.toString()))
+				lastCity = message[message.length-1].replace(' ', '_');
 			return result;
 		}
 		catch (IllegalArgumentException e) {
