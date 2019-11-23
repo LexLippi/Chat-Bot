@@ -43,21 +43,12 @@ public class ChatBot {
 		else if (command.toLowerCase().compareTo("искать слова") == 0){
 			startGame(GameType.BoardGame);
 		}
-		else if (command.toLowerCase().compareTo("пока") == 0) {
-			say("до встречи");
-		}
 		else if (command.toLowerCase().compareTo("сдаюсь") == 0 || command.toLowerCase().compareTo("стоп") == 0){
 			react(game.process(command));
-			var message = "Если хочешь играть в города, введи команду \"Играть в города\""
-					+ " Если хочешь искать слова, введи команду \"Искать слова\"";;
-			ArrayList buttons = new ArrayList() {
-				{
-					add("Играть в города");
-					add("Искать слова");
-				}};
-			api.outkeyboard(buttons, message);
 		}
-		else if (game instanceof CityGame && command.toLowerCase().compareTo("получить ссылку на город") == 0) {
+		else if (game instanceof CityGame &&
+				((CityGame)game).getCurrentState() instanceof BotCourse &&
+				command.toLowerCase().compareTo("получить ссылку на город") == 0) {
 			var message = "https://ru.wikipedia.org/wiki/" + ((CityGame)game).getLastCity();
 			ArrayList buttons = new ArrayList();
 			buttons.add("Сдаюсь");

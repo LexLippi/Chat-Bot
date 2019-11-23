@@ -35,8 +35,9 @@ public class CityGame implements IGame {
 			}
 			currentState = currentState.nextState;
 			var message = result.getMessages();
-			if (data.getCities().get(message[message.length - 1].charAt(0)).containsKey(message.toString()))
-				lastCity = message[message.length-1].replace(' ', '_');
+			var city = message[message.length - 1];
+			if (data.getUsedCities().contains(city.toLowerCase()))
+				lastCity = city.replace(' ', '_');
 			return result;
 		}
 		catch (IllegalArgumentException e) {

@@ -52,18 +52,15 @@ public class Telegram extends TelegramLongPollingBot {
         var msg = update.getMessage();
         if (msg != null && msg.hasText()) {
             var id = msg.getChatId().toString();
-            System.out.println(id + " " + msg);
             switch (msg.getText()) {
                 case "/start":
                     registerNewBot(id);
-                    //sendKeyboard(update.getMessage().getChatId());
                     break;
                 case "/stop":
                     deleteBot(id);
                     break;
                 default:
                     if (!bots.containsKey(id)) {
-                        //sendMsg(id, "для начала напишите /start");
                         ArrayList buttons = new ArrayList() {
                             {
                                 add("/start");
