@@ -51,6 +51,10 @@ public class BoardData {
         return result.toArray(String[]::new);
     }
 
+    public Boolean isDataContainsWord(String word) {
+        return words.get(getFirstLetter(word)).contains(word);
+    }
+
     private void getData() {
         var threadPool = Executors.newFixedThreadPool(letters.length);
         var futures = new ArrayList<Future<Integer>>();
