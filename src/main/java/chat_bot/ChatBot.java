@@ -132,11 +132,13 @@ public class ChatBot {
 					add("Сдаюсь");
 					add("Стоп");
 				}};
-			var message = "";
-			for (var replica: answer.getMessages()) {
-				message += replica + "\n";
+			var message = new StringBuilder();
+			var replics = answer.getMessages();
+			for (var i = 0; i < replics.length - 1; i++) {
+				message.append(replics[i] + "\n");
 			}
-			api.outkeyboard(buttons, message);
+			api.outkeyboard(buttons, message.toString());
+			say(replics[replics.length - 1]);
 		}
 	}
 

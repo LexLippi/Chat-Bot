@@ -57,7 +57,7 @@ public class Board {
             result.append('\n');
         }
         result.deleteCharAt(result.length() - 1);
-        generatedField = result.toString();
+        generatedField = "`" + result.toString() + "`";
     }
 
     public boolean containsWord(String word){

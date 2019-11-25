@@ -39,6 +39,7 @@ public class Telegram extends TelegramLongPollingBot {
         var sendMsg = new SendMessage();
         sendMsg.enableMarkdown(true);
         sendMsg.setChatId(chatId);
+        sendMsg.setParseMode("Markdown");
         sendMsg.setText(text);
         try{
             sendMessage(sendMsg);
