@@ -9,7 +9,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -52,7 +51,10 @@ public class BoardData {
     }
 
     public Boolean isDataContainsWord(String word) {
-        return words.get(getFirstLetter(word)).contains(word);
+        if (words.containsKey(getFirstLetter(word))) {
+            return words.get(getFirstLetter(word)).contains(word);
+        }
+        return false;
     }
 
     private void getData() {

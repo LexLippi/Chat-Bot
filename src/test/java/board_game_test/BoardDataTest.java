@@ -64,5 +64,34 @@ public class BoardDataTest {
         }
     }
 
+    @Test
+    void testDataContainsWord() {
+        var data = new BoardData(words);
+        Assert.assertTrue(data.isDataContainsWord("Арбуз"));
+        Assert.assertTrue(data.isDataContainsWord("Ананас"));
+        Assert.assertTrue(data.isDataContainsWord("Дыня"));
+        Assert.assertTrue(data.isDataContainsWord("Исключение"));
+        Assert.assertTrue(data.isDataContainsWord("Косметика"));
+        Assert.assertTrue(data.isDataContainsWord("Патишах"));
+        Assert.assertTrue(data.isDataContainsWord("Мул"));
+        Assert.assertTrue(data.isDataContainsWord("Ишак"));
+        Assert.assertTrue(data.isDataContainsWord("Осёл"));
+        Assert.assertTrue(data.isDataContainsWord("Попугай"));
+        Assert.assertTrue(data.isDataContainsWord("Медведь"));
+        Assert.assertTrue(data.isDataContainsWord("Ведро"));
+        Assert.assertTrue(data.isDataContainsWord("Колибри"));
+        Assert.assertTrue(data.isDataContainsWord("Слон"));
+        Assert.assertTrue(data.isDataContainsWord("Комета"));
+        Assert.assertTrue(data.isDataContainsWord("Шахматы"));
+        Assert.assertTrue(data.isDataContainsWord("Футбол"));
+        Assert.assertTrue(data.isDataContainsWord("Космос"));
+        Assert.assertTrue(data.isDataContainsWord("Апельсин"));
+    }
+
+    @Test
+    void testDataNotContainsWord() {
+        var data = new BoardData(words);
+        Assert.assertFalse(data.isDataContainsWord("abracadabra"));
+    }
 
 }
