@@ -6,14 +6,17 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class BoardData {
-    private HashMap<Character, ArrayList<String>> words = new HashMap<>();
+    private ConcurrentHashMap<Character, List<String>> words =
+            new ConcurrentHashMap<Character, List<String>>();
     private final Pattern patternAllWord = Pattern.compile("<li><b>(.+?)</b>", Pattern.DOTALL);
     private final String[] letters = new String[]{"a", "b", "v", "g", "d", "je", "zh", "z",
             "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u",
@@ -50,7 +53,7 @@ public class BoardData {
 
     private void getData() {
         var threadPool = Executors.newFixedThreadPool(letters.length);
-        List<Future<Integer>> futures = new ArrayList<>();
+        var futures = new ArrayList<Future<Integer>>();
         for (var letter: letters) {
             final String l = letter;
             futures.add(
@@ -61,16 +64,19 @@ public class BoardData {
                                 for (var word : words) {
                                     var firstLetter = getFirstLetter(word);
                                     if (!this.words.containsKey(firstLetter)) {
-                                        this.words.put(firstLetter, new ArrayList<>());
+                                        var list = Collections.synchronizedList(new ArrayList<String>());
+                                        this.words.computeIfAbsent(firstLetter, key -> list);
                                     }
-                                    this.words.get(firstLetter).add(word);
+                                    synchronized (this.words.get(firstLetter)) {
+                                        this.words.get(firstLetter).add(word);
+                                    }
                                 }
                                 return null;
                             },
                             threadPool
                     ));
         }
-        for (Future<Integer> future : futures) {
+        for (var future : futures) {
             try {
                 future.get();
             } catch (Exception e) {
@@ -90,7 +96,7 @@ public class BoardData {
                 str.append(s);
             br.close();
             Matcher matcher = patternAllWord.matcher(str.toString());
-            var res = new HashSet<>();
+            var res = new HashSet<String>();
             while (matcher.find()) {
                 var a = matcher.group(1)
                         .split(",")[0]
@@ -122,7 +128,7 @@ public class BoardData {
     }
 
     private ArrayList<String> sortDistances(HashMap<String, Long> distances) {
-        var entries = new ArrayList<>(distances.entrySet());
+        var entries = new ArrayList<Map.Entry<String, Long>>(distances.entrySet());
         entries.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
         var sortStrings = new ArrayList<String>();
         for (var entry: entries) {
