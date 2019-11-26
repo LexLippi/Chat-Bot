@@ -10,26 +10,22 @@ import java.util.Random;
 
 public class BoardGame implements IGame {
 
-    private Board board;
+    private BoardWithCompositions board;
 
     public BoardGame(BoardData data){
         var words = data.getWords(5);
+        for (var i = 0; i < words.length; i++) {
+            System.out.print(words[i]);
+            System.out.print(" ");
+        }
+        System.out.println();
         var wordGroups = new ArrayList<ArrayList<String>>();
         Permutate(new ArrayList<>(), words, wordGroups);
-        var best_length = 1000000000000000d;
-        Board board = new Board();
-        for (var group : wordGroups){
-            var current = new Board();
-            for (var word: words){
-                current.addWord(word);
-            }
-            if (current.getSize() < best_length){
-                board = current;
-                best_length = current.getSize();
-            }
+        board = new BoardWithCompositions(wordGroups.get(0));
+        for (var i = 1; i < wordGroups.size(); i++){
+            board.AddWords(wordGroups.get(i));
         }
-        this.board = board;
-        this.board.generateField();
+        this.board.generate();
     }
 
     private void Permutate(ArrayList<String> current, String[] original, ArrayList<ArrayList<String>> result){

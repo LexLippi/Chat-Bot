@@ -1,8 +1,5 @@
 package chat_bot.game.board_game;
 
-import com.google.inject.internal.asm.$TypePath;
-import com.google.inject.internal.cglib.core.$ObjectSwitchCallback;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -10,7 +7,7 @@ import java.util.Random;
 public class Board {
     private final Character[] letters = {'A', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н',
             'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я'};
-    private HashMap<Coordinates, BoardCell> field;
+    private HashMap<VectorInt, BoardCell> field;
     private String generatedField;
     private ArrayList<String> words;
     private int outerLeft = 0;
@@ -42,7 +39,7 @@ public class Board {
         StringBuilder result = new StringBuilder();
         for (var y = outerTop; y <= outerBottom; y++){
             for (var x = outerLeft; x <= outerRight; x++){
-                var pos = new Coordinates(x, y);
+                var pos = new VectorInt(x, y);
                 if (field.containsKey(pos)){
                     result.append(' ');
                     result.append(field.get(pos).getCharacter());
@@ -77,7 +74,7 @@ public class Board {
         return generatedField;
     }
 
-    private void placeWord(PlaceInfo word){
+    private void placeWord(WordInfo word){
         var dx = 0;
         var dy = 0;
         if (word.IsHorizontal){
@@ -88,28 +85,28 @@ public class Board {
         }
 
         for (var i = 0; i < word.word.length(); i++){
-            var pos = new Coordinates(word.X + dx * i, word.Y + dy * i);
+            var pos = new VectorInt(word.Position.X + dx * i, word.Position.Y + dy * i);
             if (!field.containsKey(pos)){
                 field.put(pos, new BoardCell());
             }
             field.get(pos).Set(word.word.charAt(i), word.IsHorizontal);
         }
         words.add(word.word);
-        outerLeft = Math.min(outerLeft, word.X);
-        outerTop = Math.min(outerTop, word.Y);
-        outerRight = Math.max(outerRight, word.X + word.word.length() * dx);
-        outerBottom = Math.max(outerBottom, word.Y + word.word.length() * dy);
+        outerLeft = Math.min(outerLeft, word.Position.X);
+        outerTop = Math.min(outerTop, word.Position.Y);
+        outerRight = Math.max(outerRight, word.Position.X + word.word.length() * dx);
+        outerBottom = Math.max(outerBottom, word.Position.Y + word.word.length() * dy);
         if (word.IsHorizontal){
-            innerTop = Math.min(innerTop, word.Y);
-            innerBottom = Math.max(innerBottom, word.Y);
+            innerTop = Math.min(innerTop, word.Position.Y);
+            innerBottom = Math.max(innerBottom, word.Position.Y);
         }
         else{
-            innerLeft = Math.min(innerLeft, word.X);
-            innerRight = Math.max(innerRight, word.X);
+            innerLeft = Math.min(innerLeft, word.Position.X);
+            innerRight = Math.max(innerRight, word.Position.X);
         }
     }
 
-    private PlaceInfo findPlace(String word, boolean isHorizontal){
+    private WordInfo findPlace(String word, boolean isHorizontal){
         var dx = 1;
         var dy = 0;
         var left = innerLeft - word.length() + 1;
@@ -124,16 +121,16 @@ public class Board {
             top = innerTop - word.length() + 1;
             bottom = innerBottom;
         }
-        var places = new ArrayList<PlaceInfo>();
+        var places = new ArrayList<WordInfo>();
         for (var x = left; x <= right; x++){ // "<=" здесь необходимо
             for (var y = top; y <= bottom; y++){ // и здесь тоже
                 var canPut = true;
-                var place = new PlaceInfo(x,
+                var place = new WordInfo(x,
                         y,
                         isHorizontal,
                         word);
                 for (var i = 0; i < word.length(); i++){
-                    var pos = new Coordinates(x + i * dx, y + i * dy);
+                    var pos = new VectorInt(x + i * dx, y + i * dy);
                     if (!field.containsKey(pos)){
                         continue;
                     }
@@ -149,7 +146,7 @@ public class Board {
                 places.add(place);
             }
         }
-        var theOne = new PlaceInfo(left - dy, // dy на месте
+        var theOne = new WordInfo(left - dy, // dy на месте
                 top - dx, // как и dx
                 isHorizontal,
                 word);
