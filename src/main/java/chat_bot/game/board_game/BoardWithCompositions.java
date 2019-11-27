@@ -56,7 +56,7 @@ public class BoardWithCompositions {
             if (y < size.bottom)
                 result.append('\n');
         }
-        generatedField = result.toString();
+        generatedField = "`" +  result.toString() + "`";
     }
 
     private Character getRandomLetter(){
