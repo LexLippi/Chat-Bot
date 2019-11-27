@@ -13,9 +13,16 @@ public class BoardWithCompositions {
     private int bestSize = 10000000;
 
     public BoardWithCompositions(ArrayList<String> words){
-        this.words = words;
+        this.words = new ArrayList<>();
+        for (var w : words) {
+            this.words.add(w.toUpperCase());
+        }
         best = null;
         AddWords(words);
+    }
+
+    public Composition getBestComposition(){
+        return best;
     }
 
     public void AddWords(ArrayList<String> words){

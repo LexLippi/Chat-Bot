@@ -52,6 +52,6 @@ public class Rectangle {
     }
 
     public int getArea(){
-        return (right - left) * (bottom - top);
+        return (right - left + 1) * (bottom - top + 1);
     }
 }
