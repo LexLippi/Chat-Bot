@@ -13,7 +13,7 @@ public class BoardGame implements IGame {
     private BoardWithCompositions board;
 
     public BoardGame(BoardData data){
-        var words = data.getWords(5);
+        var words = data.getWords(8);
         for (var i = 0; i < words.length; i++) {
             System.out.print(words[i]);
             System.out.print(" ");

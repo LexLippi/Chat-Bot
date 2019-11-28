@@ -144,8 +144,8 @@ public class BoardData {
     }
 
     private String getMainWord(Set<Character> keySet) {
-        var mainKey = (char) getRandomElementFromCollection(keySet);
-        return (String) getRandomElementFromCollection(this.words.get(mainKey));
+        var mainKey = getRandomElementFromCollection(keySet);
+        return getRandomElementFromCollection(this.words.get(mainKey));
     }
 
     private long getDistanceBetweenWords(String firstWord, String secondWord) {
@@ -164,7 +164,7 @@ public class BoardData {
         return countOfCommonSymbols / (firstStringSize + secondStringSize - countOfCommonSymbols);
     }
 
-    private Object getRandomElementFromCollection(Collection collection) {
+    private <T> T getRandomElementFromCollection(Collection<T> collection) {
         var size = collection.size();
         var searchIndex = new Random().nextInt(size);
         var i = 0;
