@@ -28,7 +28,7 @@ public class ChatBot {
 				+ " Я чат бот, который умеет играть в города, а еще делать кроссворды."
 				+ " Если хочешь играть в города, введи команду \"Играть в города\""
 				+ " Если хочешь искать слова, введи команду \"Искать слова\"";
-		ArrayList buttons = new ArrayList() {
+		var buttons = new ArrayList<String>() {
 			{
 				add("Играть в города");
 				add("Искать слова");
@@ -50,7 +50,7 @@ public class ChatBot {
 				((CityGame)game).getCurrentState() instanceof BotCourse &&
 				command.toLowerCase().compareTo("получить ссылку на город") == 0) {
 			var message = "https://ru.wikipedia.org/wiki/" + ((CityGame)game).getLastCity();
-			ArrayList buttons = new ArrayList();
+			var buttons = new ArrayList<String>();
 			buttons.add("Сдаюсь");
 			buttons.add("Стоп");
 			buttons.add("Получить ссылку на город");
