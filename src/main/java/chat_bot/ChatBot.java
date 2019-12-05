@@ -64,7 +64,7 @@ public class ChatBot {
 				for (var replica: answer.getMessages()) {
 					message.append(replica + "\n");
 				}
-				ArrayList buttons = new ArrayList();
+				var buttons = new ArrayList<String>();
 				if (((CityGame)game).getCurrentState() instanceof SelectLevel) {
 					buttons.add("Легкий");
 					buttons.add("Средний");
@@ -99,7 +99,7 @@ public class ChatBot {
 			game = null;
 			var message = "Если хочешь играть в города, введи команду \"Играть в города\""
 					+ " Если хочешь искать слова, введи команду \"Искать слова\"";;
-			ArrayList buttons = new ArrayList() {
+			var buttons = new ArrayList<String>() {
 				{
 					add("Играть в города");
 					add("Искать слова");
@@ -115,7 +115,7 @@ public class ChatBot {
 	private void startGame(GameType type) {
 		game = factory.getGame(type);
 		if (game instanceof CityGame) {
-			var buttons = new ArrayList() {
+			var buttons = new ArrayList<String>() {
 				{
 					add("Легкий");
 					add("Средний");
@@ -127,7 +127,7 @@ public class ChatBot {
 		}
 		else if (game instanceof BoardGame) {
 			var answer = game.startGame();
-			ArrayList buttons = new ArrayList() {
+			ArrayList buttons = new ArrayList<String>() {
 				{
 					add("Сдаюсь");
 					add("Стоп");

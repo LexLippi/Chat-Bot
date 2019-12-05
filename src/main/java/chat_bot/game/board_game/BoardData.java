@@ -14,8 +14,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class BoardData {
-    private ConcurrentHashMap<Character, List<String>> words =
-            new ConcurrentHashMap<Character, List<String>>();
+    private ConcurrentHashMap<Character, List<String>> words = new ConcurrentHashMap<Character, List<String>>();
     private final Pattern patternAllWord = Pattern.compile("<li><b>(.+?)</b>", Pattern.DOTALL);
     private final String[] letters = new String[]{"a", "b", "v", "g", "d", "je", "zh", "z",
             "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u",
