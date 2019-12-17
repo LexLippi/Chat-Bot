@@ -1,179 +1,84 @@
 package chat_bot.game.board_game;
 
+import chat_bot.game.board_game.board_levels.BoardLevel;
+
 import java.io.IOException;
 import java.net.URL;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class BoardData {
-    private ConcurrentHashMap<Character, List<String>> words = new ConcurrentHashMap<Character, List<String>>();
-    private final Pattern patternAllWord = Pattern.compile("<li><b>(.+?)</b>", Pattern.DOTALL);
-    private final String[] letters = new String[]{"a", "b", "v", "g", "d", "je", "zh", "z",
-            "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u",
-            "f", "x", "c", "ch", "sh", "sch", "je", "ju", "ja", "jer"};
+    private HashMap<Character, HashMap<String, Double>> words = new HashMap<>();
+    private final Pattern patternAllWord = Pattern.compile("&nbsp;&nbsp;</font></td><td>(.+?)</tr>", Pattern.DOTALL);
 
     public BoardData() {
         getData();
     }
 
-    public BoardData(String[] words) {
-        for (var word: words) {
+    public BoardData(HashMap<String, Double> wordsWithFrequency) {
+        for (var wordWithFrequency : wordsWithFrequency.entrySet()) {
+            var word = wordWithFrequency.getKey();
             var firstLetter = getFirstLetter(word);
+            var frequency = wordWithFrequency.getValue();
             if (!this.words.containsKey(firstLetter)) {
-                this.words.put(getFirstLetter(word), new ArrayList<>());
+                this.words.put(firstLetter, new HashMap<>());
             }
-            this.words.get(firstLetter).add(word);
+            this.words.get(firstLetter).put(word, frequency);
         }
-    }
-
-    public String[] getWords(int count) {
-        if (count == 0) {
-            return null;
-        }
-        var keySet = this.words.keySet();
-        var mainWord = getMainWord(keySet);
-        var resultWords = getBestWords(mainWord, keySet);
-        if (count > resultWords.size() + 1) {
-            throw new IllegalArgumentException("Count of words is too big");
-        }
-        var result = resultWords.stream().limit(count - 1).collect(Collectors.toList());
-        result.add(mainWord);
-        return result.toArray(String[]::new);
     }
 
     public Boolean isDataContainsWord(String word) {
         if (words.containsKey(getFirstLetter(word))) {
-            return words.get(getFirstLetter(word)).contains(word);
+            return words.get(getFirstLetter(word)).containsKey(word);
         }
         return false;
     }
 
-    private void getData() {
-        var threadPool = Executors.newFixedThreadPool(letters.length);
-        var futures = new ArrayList<Future<Integer>>();
-        for (var letter: letters) {
-            final String l = letter;
-            futures.add(
-                    CompletableFuture.supplyAsync(
-                            () -> {
-                                var words = getWords("http://www.slovorod.ru/dic-dal/dal-" + l + ".htm");
-                                assert words != null;
-                                for (var word : words) {
-                                    var firstLetter = getFirstLetter(word);
-                                    if (!this.words.containsKey(firstLetter)) {
-                                        var list = Collections.synchronizedList(new ArrayList<String>());
-                                        this.words.computeIfAbsent(firstLetter, key -> list);
-                                    }
-                                    synchronized (this.words.get(firstLetter)) {
-                                        this.words.get(firstLetter).add(word);
-                                    }
-                                }
-                                return null;
-                            },
-                            threadPool
-                    ));
-        }
-        for (var future : futures) {
-            try {
-                future.get();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        threadPool.shutdown();
+    public HashMap<Character, HashMap<String, Double>> getWords() {
+        return words;
     }
 
-    private String[] getWords(String site) {
-        try{
-            var url = new URL(site);
-            var br = new BufferedReader(new InputStreamReader(url.openConnection().getInputStream()));
+    private void getData() {
+        var words = getWordsAndWordsFrequency();
+        assert words != null;
+        for (var word : words.keySet()) {
+            var firstLetter = getFirstLetter(word);
+            if (!this.words.containsKey(firstLetter)) {
+                this.words.put(firstLetter, new HashMap<>());
+            }
+            this.words.get(firstLetter).put(word, words.get(word));
+        }
+    }
+
+    private HashMap<String, Double> getWordsAndWordsFrequency() {
+        try {
+            var url = new URL("http://dict.ruslang.ru/freq.php?act=show&dic=freq_freq&title=%D7%E0%F1%F2%EE%F2%ED%FB%E9%20%F1%EF%E8%F1%EE%EA%20%EB%E5%EC%EC");
+            var br = new BufferedReader(new InputStreamReader(url.openConnection().getInputStream(), "cp1251"));
             String s;
             var str = new StringBuilder();
             while ((s = br.readLine()) != null)
                 str.append(s);
             br.close();
             Matcher matcher = patternAllWord.matcher(str.toString());
-            var res = new HashSet<String>();
+            var res = new HashMap<String, Double>();
             while (matcher.find()) {
-                var a = matcher.group(1)
-                        .split(",")[0]
-                        .split(" ")[1]
-                        .replace("?", "")
-                        .replace("!", "");
-                if (a.length() > 1 && a.length() < 23) {
-                    res.add(a);
-                }
+                var wordListWithFrequency = Arrays.stream(matcher.group(1).split("</td><td>"))
+                        .distinct()
+                        .collect(Collectors.toList());
+                var format = NumberFormat.getInstance(Locale.UK);
+                res.put(wordListWithFrequency.get(0), format.parse(wordListWithFrequency.get(2)).doubleValue());
             }
-            return res.toArray(String[]::new);
-        }
-        catch (IOException e){
+            return res;
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
             return null;
         }
-    }
-
-    private ArrayList<String> getBestWords(String mainWord, Set<Character> keySet) {
-        var distances = new HashMap<String, Long>();
-        for (var key: keySet) {
-            for (var word: this.words.get(key)) {
-                if (word.compareTo(mainWord) != 0) {
-                    distances.put(word, getDistanceBetweenWords(mainWord, word));
-                }
-            }
-        }
-        return sortDistances(distances);
-    }
-
-    private ArrayList<String> sortDistances(HashMap<String, Long> distances) {
-        var entries = new ArrayList<Map.Entry<String, Long>>(distances.entrySet());
-        entries.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
-        var sortStrings = new ArrayList<String>();
-        for (var entry: entries) {
-            sortStrings.add(entry.getKey());
-        }
-        return sortStrings;
-    }
-
-    private String getMainWord(Set<Character> keySet) {
-        var mainKey = getRandomElementFromCollection(keySet);
-        return getRandomElementFromCollection(this.words.get(mainKey));
-    }
-
-    private long getDistanceBetweenWords(String firstWord, String secondWord) {
-        var firstSize = firstWord.length();
-        var secondSize = secondWord.length();
-        var countOfCommonSymbols = getCountOfCommonSymbols(firstWord, secondWord);
-        return getJaccardIndex(firstSize, secondSize, countOfCommonSymbols);
-    }
-
-    private long getCountOfCommonSymbols(String firstWord, String secondWord) {
-        var uniqueSize = firstWord.concat(secondWord).chars().distinct().count();
-        return firstWord.length() + secondWord.length() - uniqueSize;
-    }
-
-    private long getJaccardIndex(long firstStringSize, long secondStringSize, long countOfCommonSymbols) {
-        return countOfCommonSymbols / (firstStringSize + secondStringSize - countOfCommonSymbols);
-    }
-
-    private <T> T getRandomElementFromCollection(Collection<T> collection) {
-        var size = collection.size();
-        var searchIndex = new Random().nextInt(size);
-        var i = 0;
-        for (var obj : collection) {
-            if (i == searchIndex) {
-                return obj;
-            }
-            ++i;
-        }
-        throw new IllegalArgumentException("Collection doesn't have random element");
     }
 
     private Character getFirstLetter(String text) {
