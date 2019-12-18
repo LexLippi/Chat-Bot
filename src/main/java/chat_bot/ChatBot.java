@@ -74,6 +74,7 @@ public class ChatBot {
 			buttons.add("Играть по сети");
 			buttons.add("Отказаться от приглашения");
 		}
+		buttons.add("Играть в города с другом");
 		buttons.add("Играть в города");
 		buttons.add("Искать слова");
 		buttons.add("Получить статистику по игре в города");
@@ -150,10 +151,10 @@ public class ChatBot {
 			else if (command.toLowerCase().compareTo("искать слова") == 0){
 				startGame(GameType.BoardGame);
 			}
-			else if (command.toLowerCase().compareTo("Играть в города с другом") == 0){
+			else if (command.toLowerCase().compareTo("играть в города с другом") == 0){
 				startGame(GameType.MultiplayerCityGame);
 			}
-			else if (command.toLowerCase().compareTo("Играть по сети") == 0){
+			else if (command.toLowerCase().compareTo("играть по сети") == 0){
 				if (waitingBots.size() <= 0){
 					var message = "похоже, тебя никто не пригласил, но это ничего, ты можешь сам пригласить своего друга"
 							+ "для этого просто введи \"Играть в города с другом\"";
@@ -165,7 +166,7 @@ public class ChatBot {
 					game.startGame(api);
 				}
 			}
-			else if (command.toLowerCase().compareTo("Отказаться от приглашения") == 0){
+			else if (command.toLowerCase().compareTo("отказаться от приглашения") == 0){
 				if (waitingBots.size() <= 0){
 					var message = "похоже, тебя никто не пригласил, но это ничего, ты можешь сам пригласить своего друга"
 							+ "для этого просто введи \"Играть в города с другом\"";
