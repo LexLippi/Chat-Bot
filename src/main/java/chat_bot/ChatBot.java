@@ -32,8 +32,10 @@ public class ChatBot {
 		say("похоже, тебя приглашают в игру");
 	}
 
-	public void CancelWaiting(ChatBot bot){
+	public void CancelWaiting(ChatBot bot, boolean sayIt){
 		waitingBots.remove(bot);
+		if (!sayIt)
+			return;
 		say("приглашение отменили :(");
 	}
 
@@ -42,6 +44,7 @@ public class ChatBot {
 	}
 
 	public ChatBot(Api api, IGameFactory factory) {
+		System.out.println(this);
 		this.api = api;
 		this.factory = factory;
 		start();
@@ -163,7 +166,7 @@ public class ChatBot {
 				}
 				else{
 					game = waitingBots.poll().getGame();
-					game.startGame(api);
+					react(game.startGame(api));
 				}
 			}
 			else if (command.toLowerCase().compareTo("отказаться от приглашения") == 0){
@@ -253,6 +256,8 @@ public class ChatBot {
 			}
 			api.outkeyboard(buttons, message.toString());
 			say(replics[replics.length - 1]);
+		}else{
+			react(game.startGame(api));
 		}
 	}
 

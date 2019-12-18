@@ -30,8 +30,8 @@ public class TelegramApi implements Api {
     }
 
     @Override
-    public void cancelInvision() {
-        telegram.cancelInvision(this);
+    public void cancelInvision(boolean broadcast) {
+        telegram.cancelInvision(this, broadcast);
     }
 
     @Override

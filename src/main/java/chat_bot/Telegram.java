@@ -50,12 +50,20 @@ public class Telegram extends TelegramLongPollingBot {
         }
     }
 
+    public boolean checkName(String name){
+        return name.matches("@[A-Za-z0-9_]{5,100}");
+    }
+
     public boolean invite(String name, TelegramApi api){
+        if (!checkName(name))
+            return false;
         if (namesToIds.containsKey(name)){
             var id = namesToIds.get(name);
             var bot = bots.get(id);
-            bot.addWaitingBot(bot);
+            System.out.println();
             ApiToInvatedUsername.put(api, name);
+            bot.addWaitingBot(bots.get(api.getId()));
+
         }
         else{
             if (!invites.containsKey(name)){
@@ -67,7 +75,7 @@ public class Telegram extends TelegramLongPollingBot {
         return true;
     }
 
-    public void cancelInvision(TelegramApi api){
+    public void cancelInvision(TelegramApi api, boolean tellIt){
         if (!ApiToInvatedUsername.containsKey(api)) {
             return;
         }
@@ -79,7 +87,7 @@ public class Telegram extends TelegramLongPollingBot {
         var sender = bots.get(api.getId());
         if (namesToIds.containsKey(invitedName)){
             var invited = bots.get(namesToIds.get(invitedName));
-            invited.CancelWaiting(sender);
+            invited.CancelWaiting(sender, tellIt);
         }
     }
 
@@ -88,7 +96,7 @@ public class Telegram extends TelegramLongPollingBot {
         var msg = update.getMessage();
         if (msg != null && msg.hasText()) {
             var id = msg.getChatId().toString();
-            var username = msg.getFrom().getUserName();
+            var username ="@"+msg.getFrom().getUserName();
             switch (msg.getText()) {
                 case "/start":
                     registerNewBot(id, username);
@@ -128,7 +136,7 @@ public class Telegram extends TelegramLongPollingBot {
         namesToIds.remove(userName);
         var api = idToApi.get(id);
         idToApi.remove(id);
-        cancelInvision(api);
+        cancelInvision(api, true);
     }
 
     public void sendInlineKeyBoardMessage(Long chatId, List<String> buttons, String message) {

@@ -18,7 +18,7 @@ public class Console implements Api {
 	}
 
 	@Override
-	public void cancelInvision() {
+	public void cancelInvision(boolean broadcast) {
 		return;
 	}
 

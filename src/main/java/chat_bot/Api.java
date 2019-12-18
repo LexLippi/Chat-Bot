@@ -7,7 +7,7 @@ public interface Api {
 
 	public boolean invite(String name);
 
-	public void cancelInvision();
+	public void cancelInvision(boolean broadcast);
 
     public void outkeyboard(ArrayList buttons, String message);
 }

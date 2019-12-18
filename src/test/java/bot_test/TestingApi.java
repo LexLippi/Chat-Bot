@@ -19,7 +19,7 @@ public class TestingApi implements Api {
     }
 
     @Override
-    public void cancelInvision() {
+    public void cancelInvision(boolean broadcast) {
         return;
     }
 

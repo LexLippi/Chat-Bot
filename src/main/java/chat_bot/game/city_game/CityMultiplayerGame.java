@@ -26,13 +26,14 @@ public class CityMultiplayerGame implements IGame {
         if (!gameWasStarted && !invisionWasSent){
             invisionWasSent = api.invite(answer);
             if (invisionWasSent) {
+                invitedApi = api;
                 return new GameReturnedValue(null, "приглашение было отправлено");
             }
-            return new GameReturnedValue(null, "что-то пошло не так");
+            return new GameReturnedValue(null, "неправильное имя пользователя");
         }
         if (!gameWasStarted){
             if (lowerAnswer.equals("сдаюсь") || lowerAnswer.equals("стоп")){
-                invitedApi.cancelInvision();
+                invitedApi.cancelInvision(true);
                 return new GameReturnedValue(GameExitType.GAME_INTERRUPTED);
             }
             return new GameReturnedValue(null, "второй игрок еще не подключился, подождите немного");
@@ -51,7 +52,8 @@ public class CityMultiplayerGame implements IGame {
             winner.out("твой противник сдался");
             winner.out("ты победил");
             winner.out("введи что-нибудь, чтобы закончить игру");
-            invitedApi.cancelInvision();
+            System.out.println(invitedApi != api);
+            invitedApi.cancelInvision(false);
             return new GameReturnedValue(GameExitType.PLAYER_LOOSE, "ничего, в другой раз повезет");
         }
         if (api == otherPlayer)
