@@ -1,19 +1,24 @@
 package chat_bot.game.board_game;
 
+import chat_bot.Api;
 import chat_bot.game.IGame;
+import chat_bot.game.board_game.board_levels.BoardLevel;
 import chat_bot.game.return_types.GameExitType;
 import chat_bot.game.return_types.GameReturnedValue;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.HashMap;
 
 public class BoardGame implements IGame {
 
     private BoardWithCompositions board;
+    private BoardLevel level;
 
-    public BoardGame(BoardData data){
-        var words = data.getWords(8);
+    public BoardGame(){
+    }
+
+    private void generateBoard(int wordsNum){
+        var words = level.getWords(wordsNum);
         for (var i = 0; i < words.length; i++) {
             System.out.print(words[i]);
             System.out.print(" ");
@@ -43,27 +48,44 @@ public class BoardGame implements IGame {
     }
 
     @Override
-    public GameReturnedValue process(String answer) {
-        if (answer.toLowerCase().compareTo("стоп") == 0) {
-            return new GameReturnedValue(GameExitType.GAME_INTERRUPTED, "Приходи еще!");
-        }
-        if (answer.toLowerCase().compareTo("сдаюсь") == 0) {
-            return new GameReturnedValue(GameExitType.PLAYER_LOOSE,
-                    "Ничего, в другой раз повезет!");
-        }
-        if (board.containsWord(answer)) {
-            return new GameReturnedValue(null, "нашел!", board.getField());
+    public GameReturnedValue process(String answer, Api api) {
+        answer = answer.toLowerCase();
+        var words_num = 0;
+        if (level == null){
+            switch (answer){
+                case "легкий":
+                    words_num = 4;
+                    break;
+                case "средний":
+                    words_num = 8;
+                    break;
+                case "сложный":
+                    words_num = 16;
+                default:
+                    return new GameReturnedValue(null, "нет такого уровня!");
+            }
+            generateBoard(words_num);
+            return new GameReturnedValue(null, "тебе нужно найти " + words_num + "слов", board.getField());
         }
         else {
-            return new GameReturnedValue(null, "такого слова нет :(", board.getField());
+            if (answer.toLowerCase().compareTo("стоп") == 0) {
+                return new GameReturnedValue(GameExitType.GAME_INTERRUPTED, "Приходи еще!");
+            }
+            if (answer.toLowerCase().compareTo("сдаюсь") == 0) {
+                return new GameReturnedValue(GameExitType.PLAYER_LOOSE,
+                        "Ничего, в другой раз повезет!");
+            }
+            if (board.containsWord(answer)) {
+                return new GameReturnedValue(null, "нашел!", board.getField());
+            } else {
+                return new GameReturnedValue(null, "такого слова нет :(", board.getField());
+            }
         }
     }
 
     @Override
-    public GameReturnedValue startGame() {
-        var a1 = "тебе нужно найти все слова на доске";
-        var a3 = "правда, закончиться эта игра пока не может";
-        var a2 = board.getField();
-        return new GameReturnedValue(null, a1, a3, a2);
+    public GameReturnedValue startGame(Api api) {
+        var a1 = "выбери уровень сложности: легкий, средний, тяжелый";
+        return new GameReturnedValue(null, a1);
     }
 }
