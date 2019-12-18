@@ -1,4 +1,4 @@
-package test.game_test.game_level_test;
+package city_game_test.game_level_test;
 
 import chat_bot.game.city_game.City;
 import chat_bot.game.city_game.Data;

@@ -11,14 +11,16 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 import org.telegram.telegrambots.exceptions.TelegramApiRequestException;
 
-import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.List;
 
 public class Telegram extends TelegramLongPollingBot {
 
     private HashMap<String, ChatBot> bots = new HashMap<>();
+    private HashMap<String, String> namesToIds = new HashMap<>();
+    private HashMap<String, ArrayList<TelegramApi>> invites = new HashMap<>();
+    private HashMap<String, TelegramApi> idToApi = new HashMap<>();
+    private HashMap<TelegramApi, String> ApiToInvatedUsername = new HashMap<>();
     private GameFactory gameFactory;
 
     public static void main(String[] args) {
@@ -48,17 +50,51 @@ public class Telegram extends TelegramLongPollingBot {
         }
     }
 
+    public boolean invite(String name, TelegramApi api){
+        if (namesToIds.containsKey(name)){
+            var id = namesToIds.get(name);
+            var bot = bots.get(id);
+            bot.addWaitingBot(bot);
+            ApiToInvatedUsername.put(api, name);
+        }
+        else{
+            if (!invites.containsKey(name)){
+                invites.put(name, new ArrayList<>());
+            }
+            invites.get(name).add(api);
+            ApiToInvatedUsername.put(api, name);
+        }
+        return true;
+    }
+
+    public void cancelInvision(TelegramApi api){
+        if (!ApiToInvatedUsername.containsKey(api)) {
+            return;
+        }
+        var invitedName = ApiToInvatedUsername.get(api);
+        ApiToInvatedUsername.remove(api);
+        if (invites.containsKey(invitedName)) {
+            invites.get(invitedName).remove(api);
+        }
+        var sender = bots.get(api.getId());
+        if (namesToIds.containsKey(invitedName)){
+            var invited = bots.get(namesToIds.get(invitedName));
+            invited.CancelWaiting(sender);
+        }
+    }
+
     @Override
     public void onUpdateReceived(Update update) {
         var msg = update.getMessage();
         if (msg != null && msg.hasText()) {
             var id = msg.getChatId().toString();
+            var username = msg.getFrom().getUserName();
             switch (msg.getText()) {
                 case "/start":
-                    registerNewBot(id);
+                    registerNewBot(id, username);
                     break;
                 case "/stop":
-                    deleteBot(id);
+                    deleteBot(id, username);
                     break;
                 default:
                     if (!bots.containsKey(id)) {
@@ -83,12 +119,16 @@ public class Telegram extends TelegramLongPollingBot {
         }
     }
 
-    private void deleteBot(String id) {
+    private void deleteBot(String id, String userName) {
         if (!bots.containsKey(id)) {
             return;
         }
-        bots.get(id).process("пока");
+        bots.get(id).finish();
         bots.remove(id);
+        namesToIds.remove(userName);
+        var api = idToApi.get(id);
+        idToApi.remove(id);
+        cancelInvision(api);
     }
 
     public void sendInlineKeyBoardMessage(Long chatId, List<String> buttons, String message) {
@@ -114,14 +154,23 @@ public class Telegram extends TelegramLongPollingBot {
         }
     }
 
-    private void registerNewBot(String id){
+    private void registerNewBot(String id, String userName){
         if (bots.containsKey(id)){
             bots.get(id).start();
         }
         else {
             var api = new TelegramApi(id, this);
             var bot = new ChatBot(api, gameFactory);
+            if (invites.containsKey(userName)){
+                for (var a : invites.get(userName)){
+                    var newId = a.getId();
+                    var newBot = bots.get(newId);
+                    bot.addWaitingBot(newBot);
+                }
+            }
             bots.put(id, bot);
+            namesToIds.put(userName, id);
+            idToApi.put(id, api);
         }
     }
 

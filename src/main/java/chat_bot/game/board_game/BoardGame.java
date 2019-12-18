@@ -3,6 +3,9 @@ package chat_bot.game.board_game;
 import chat_bot.Api;
 import chat_bot.game.IGame;
 import chat_bot.game.board_game.board_levels.BoardLevel;
+import chat_bot.game.board_game.board_levels.Easy;
+import chat_bot.game.board_game.board_levels.Hard;
+import chat_bot.game.board_game.board_levels.Medium;
 import chat_bot.game.return_types.GameExitType;
 import chat_bot.game.return_types.GameReturnedValue;
 
@@ -54,13 +57,17 @@ public class BoardGame implements IGame {
         if (level == null){
             switch (answer){
                 case "легкий":
+                    level = new Easy();
                     words_num = 4;
                     break;
                 case "средний":
+                    level = new Medium();
                     words_num = 8;
                     break;
                 case "сложный":
+                    level = new Hard();
                     words_num = 16;
+                    break;
                 default:
                     return new GameReturnedValue(null, "нет такого уровня!");
             }

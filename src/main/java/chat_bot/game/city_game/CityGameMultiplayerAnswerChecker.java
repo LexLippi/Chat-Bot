@@ -2,16 +2,21 @@ package chat_bot.game.city_game;
 
 import chat_bot.game.city_game.states.MultiplayerStepResult;
 
-public class CityGameMultiplayer {
+public class CityGameMultiplayerAnswerChecker {
     private Data data;
 
-    public CityGameMultiplayer() {
-        data = new Data();
+    public CityGameMultiplayerAnswerChecker(Data data) {
+        this.data = data;
     }
 
     public MultiplayerStepResult isStepCorrect(String previousCity, String currentStep) {
         var firstLetter = getFirstLetter(currentStep);
-        var lastLetter = getLastLetter(previousCity);
+        Character lastLetter;
+        if (previousCity == null)
+            lastLetter = firstLetter;
+        else{
+            lastLetter = getLastLetter(previousCity);
+        }
         if (data.getCities().get(firstLetter).containsKey(currentStep) && firstLetter.compareTo(lastLetter) == 0) {
             data.updateStatistics(firstLetter, currentStep);
             return MultiplayerStepResult.CORRECT_STEP;

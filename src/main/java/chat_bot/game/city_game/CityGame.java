@@ -1,5 +1,6 @@
 package chat_bot.game.city_game;
 
+import chat_bot.Api;
 import chat_bot.game.IGame;
 import chat_bot.game.city_game.levels.*;
 import chat_bot.game.return_types.GameReturnedValue;
@@ -30,7 +31,7 @@ public class CityGame implements IGame {
 	}
 
 	@Override
-	public GameReturnedValue process(String inputString) {
+	public GameReturnedValue process(String inputString, Api api) {
 		inputString = inputString.toLowerCase();
 		try {
 			var result = currentState.processCommand(inputString, level);
@@ -49,7 +50,7 @@ public class CityGame implements IGame {
 		}
 	}
 
-	public GameReturnedValue startGame() {
+	public GameReturnedValue startGame(Api api) {
 		return new GameReturnedValue(null, "Выбери уровень сложности: лёгкий, средний, тяжёлый");
 	}
 }
