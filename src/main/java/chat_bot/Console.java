@@ -13,6 +13,16 @@ public class Console implements Api {
 	}
 
 	@Override
+	public boolean invite(String name) {
+		return false;
+	}
+
+	@Override
+	public void cancelInvision() {
+		return;
+	}
+
+	@Override
 	public void outkeyboard(ArrayList buttons, String message) {
 		//ignore
 	}

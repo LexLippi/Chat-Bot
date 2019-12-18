@@ -155,6 +155,7 @@ public class Telegram extends TelegramLongPollingBot {
     }
 
     private void registerNewBot(String id, String userName){
+        System.out.println(userName);
         if (bots.containsKey(id)){
             bots.get(id).start();
         }

@@ -15,13 +15,14 @@ import chat_bot.game.return_types.GameExitType;
 import chat_bot.game.return_types.GameReturnedValue;
 
 import java.util.AbstractQueue;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ChatBot {
 	private Api api;
 	private IGameFactory factory;
-	private AbstractQueue<ChatBot> waitingBots;
+	private ArrayDeque<ChatBot> waitingBots = new ArrayDeque<>();
 	private IGame game = null;
 	//private Statistic statistic = new Statistic();
 	private HashMap<String, Statistic> statistic = new HashMap<>();
