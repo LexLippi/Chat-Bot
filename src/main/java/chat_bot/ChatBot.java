@@ -251,12 +251,12 @@ public class ChatBot {
 				}};
 			var message = new StringBuilder();
 			var replics = answer.getMessages();
-			for (var i = 0; i < replics.length - 1; i++) {
+			for (var i = 0; i < replics.length; i++) {
 				message.append(replics[i] + "\n");
 			}
 			api.outkeyboard(buttons, message.toString());
-			say(replics[replics.length - 1]);
-		}else{
+		}
+		else{
 			react(game.startGame(api));
 		}
 	}

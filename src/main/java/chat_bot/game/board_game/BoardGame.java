@@ -62,17 +62,17 @@ public class BoardGame implements IGame {
                     break;
                 case "средний":
                     level = new Medium();
-                    words_num = 8;
+                    words_num = 4;
                     break;
                 case "сложный":
                     level = new Hard();
-                    words_num = 16;
+                    words_num = 4;
                     break;
                 default:
                     return new GameReturnedValue(null, "нет такого уровня!");
             }
             generateBoard(words_num);
-            return new GameReturnedValue(null, "тебе нужно найти " + words_num + "слов", board.getField());
+            return new GameReturnedValue(null, "тебе нужно найти " + words_num + " слов", board.getField());
         }
         else {
             if (answer.toLowerCase().compareTo("стоп") == 0) {
@@ -92,7 +92,7 @@ public class BoardGame implements IGame {
 
     @Override
     public GameReturnedValue startGame(Api api) {
-        var a1 = "выбери уровень сложности: легкий, средний, тяжелый";
+        var a1 = "выбери уровень сложности: легкий, средний, сложный";
         return new GameReturnedValue(null, a1);
     }
 }
