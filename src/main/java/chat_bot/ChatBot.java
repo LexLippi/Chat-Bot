@@ -4,6 +4,7 @@ package chat_bot;
 import chat_bot.game.*;
 import chat_bot.game.board_game.BoardGame;
 import chat_bot.game.city_game.CityGame;
+import chat_bot.game.city_game.CityMultiplayerGame;
 import chat_bot.game.city_game.Statistic;
 import chat_bot.game.city_game.levels.Easy;
 import chat_bot.game.city_game.levels.Hard;
@@ -24,7 +25,6 @@ public class ChatBot {
 	private IGameFactory factory;
 	private ArrayDeque<ChatBot> waitingBots = new ArrayDeque<>();
 	private IGame game = null;
-	//private Statistic statistic = new Statistic();
 	private HashMap<String, Statistic> statistic = new HashMap<>();
 
 	public void addWaitingBot(ChatBot bot){
@@ -57,6 +57,7 @@ public class ChatBot {
 				add("Easy");
 				add("Medium");
 				add("Hard");
+				add("Multiplayer");
 			}};
 		for (var level: levels)
 			statistic.put(level, new Statistic());
@@ -140,7 +141,8 @@ public class ChatBot {
 			if (command.toLowerCase().compareTo("получить статистику по игре в города") == 0) {
 				var message = "Легкий уровень\n " + statistic.get("Easy").getStatistic()
 						+ "\nСредний уровень\n " + statistic.get("Medium").getStatistic()
-						+ "\nСложный уровень\n " + statistic.get("Hard").getStatistic();
+						+ "\nСложный уровень\n " + statistic.get("Hard").getStatistic()
+						+ "\nПо сети\n " + statistic.get("Multiplayer").getStatistic();
 				var buttons = new ArrayList<String>();
 				buttons.add("Играть в города");
 				buttons.add("Искать слова");
@@ -220,6 +222,11 @@ public class ChatBot {
 				}
 				changeStatistic(strLevel, answerType);
 			}
+			else if (game instanceof CityMultiplayerGame) {
+				var answerType = answer.getType();
+				String strLevel = "Multiplayer";
+				changeStatistic(strLevel, answerType);
+			}
 			game = null;
 			getOptions();
 		}
@@ -251,10 +258,11 @@ public class ChatBot {
 				}};
 			var message = new StringBuilder();
 			var replics = answer.getMessages();
-			for (var i = 0; i < replics.length; i++) {
+			for (var i = 0; i < replics.length - 1; i++) {
 				message.append(replics[i] + "\n");
 			}
 			api.outkeyboard(buttons, message.toString());
+			say(replics[replics.length - 1]);
 		}
 		else{
 			react(game.startGame(api));
