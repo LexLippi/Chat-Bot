@@ -9,11 +9,11 @@ import java.util.Map;
 
 public class Hard extends BoardLevel {
     public Hard() {
-        data = new BoardData(sortData());
+        super();
     }
 
     @Override
-    public HashMap<String, Double> sortData() {
+    public HashMap<String, Double> getSortedData() {
         var pairs = new BoardData().getWords().values();
         var dict = new HashMap<String, Double>();
         for (var a: pairs)

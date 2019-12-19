@@ -8,7 +8,11 @@ import java.util.stream.Collectors;
 public abstract class BoardLevel {
     protected BoardData data;
 
-    public abstract HashMap<String, Double> sortData();
+    protected BoardLevel() {
+        data = new BoardData(getSortedData());
+    }
+
+    public abstract HashMap<String, Double> getSortedData();
 
     public String[] getWords(int count) {
         if (count == 0) {
