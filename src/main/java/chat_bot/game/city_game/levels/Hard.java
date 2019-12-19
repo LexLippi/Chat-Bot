@@ -32,6 +32,11 @@ public class Hard extends GameLevel {
         return getRandomListElement(bestCities);
     }
 
+    @Override
+    public String getStrName() {
+        return "Hard";
+    }
+
     private Double getMaxPercent() {
         var percents = data.getPercents();
         int index = getLetterCount() / 3;

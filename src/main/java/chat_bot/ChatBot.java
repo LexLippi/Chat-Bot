@@ -221,24 +221,14 @@ public class ChatBot {
 			say(replica);
 		}
 		if (answer.getType() != null){
+			var answerType = answer.getType();
 			if (game instanceof CityGame) {
 				var level = ((CityGame)game).getLevel();
-				var answerType = answer.getType();
-				String strLevel = "";
-				if (level instanceof Easy) {
-					strLevel = "Easy";
-				}
-				else if (level instanceof Medium) {
-					strLevel = "Medium";
-				}
-				else if (level instanceof Hard) {
-					strLevel = "Hard";
-				}
+				var strLevel = level.getStrName();
 				changeStatistic(strLevel, answerType);
 			}
 			else if (game instanceof CityMultiplayerGame) {
-				var answerType = answer.getType();
-				String strLevel = "Multiplayer";
+				var strLevel = "Multiplayer";
 				changeStatistic(strLevel, answerType);
 			}
 			game = null;

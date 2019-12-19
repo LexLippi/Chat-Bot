@@ -11,7 +11,7 @@ public class LevelFactory {
         else if (level.compareTo("средний") == 0) {
             return new Medium(data);
         }
-        else if (level.compareTo("сложный") == 0 || level.compareTo("сложный") == 0) {
+        else if (level.compareTo("сложный") == 0) {
             return new Hard(data);
         }
         else {

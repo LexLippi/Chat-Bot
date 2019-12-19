@@ -33,6 +33,11 @@ public class Medium extends GameLevel {
         return getRandomListElement(cities);
     }
 
+    @Override
+    public String getStrName() {
+        return "Medium";
+    }
+
     private Double[] getBoundPercents() {
         var percents = data.getPercents();
         int minIndex = getLetterCount() / 3;

@@ -32,6 +32,11 @@ public class Easy extends GameLevel {
         return getRandomListElement(bestCities);
     }
 
+    @Override
+    public String getStrName() {
+        return "Easy";
+    }
+
     private Double getMinPercent() {
         var percents = data.getPercents();
         int index = percents.size() - 1 - getLetterCount() / 3;

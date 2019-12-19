@@ -17,6 +17,8 @@ abstract public class GameLevel implements DifficultLevel {
 
     abstract public String computeCity(Character lastLetter);
 
+    abstract public String getStrName();
+
     public GameReturnedValue processingUserCourse(String inputString) throws IllegalStateException{
         if (inputString.compareTo("стоп") == 0) {
             return new GameReturnedValue(GameExitType.GAME_INTERRUPTED, "Приходи еще!");

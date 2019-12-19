@@ -17,22 +17,6 @@ public class Statistic {
                 + ", прерываний: " + interruptions;
     }
 
-    public Integer getDefeats() {
-        return defeats;
-    }
-
-    public Integer getTotalGames() {
-        return totalGames;
-    }
-
-    public Integer getWins() {
-        return wins;
-    }
-
-    public Integer getInterruptions() {
-        return interruptions;
-    }
-
     public void increaseDefeats() {
         this.defeats += 1;
     }
