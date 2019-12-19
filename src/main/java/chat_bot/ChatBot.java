@@ -32,7 +32,7 @@ public class ChatBot {
 		say("похоже, тебя приглашают в игру");
 	}
 
-	public void CancelWaiting(ChatBot bot, boolean sayIt){
+	public void cancelWaiting(ChatBot bot, boolean sayIt){
 		waitingBots.remove(bot);
 		if (!sayIt)
 			return;
@@ -69,7 +69,7 @@ public class ChatBot {
 				+ " Если хочешь играть в города с другом, введи команду \"Играть в города с другом\"";
 		var addButton = false;
 		if (waitingBots.size() > 0){
-			message = "с тобой хотят поиграть по сети, чтобы принять, введи команду \"Играть по сети\""
+			message = "С тобой хотят поиграть по сети, чтобы принять, введи команду \"Играть по сети\""
 					+ "чтобы отказаться - \"Отказаться от приглашения\""+ message;
 			addButton = true;
 		}
@@ -259,7 +259,7 @@ public class ChatBot {
 			var message = new StringBuilder();
 			var replics = answer.getMessages();
 			for (var i = 0; i < replics.length - 1; i++) {
-				message.append(replics[i] + "\n");
+				message.append(replics[i]).append("\n");
 			}
 			api.outkeyboard(buttons, message.toString());
 			say(replics[replics.length - 1]);

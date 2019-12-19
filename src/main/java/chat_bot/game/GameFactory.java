@@ -8,12 +8,10 @@ import chat_bot.game.city_game.CityGame;
 
 public class GameFactory implements IGameFactory{
     private Data cityData;
-    private BoardData boardData;
 
     public GameFactory(){
         cityData = new Data();
         System.out.print(cityData.getCities());
-        boardData = new BoardData();
     }
 
     public IGame getGame(GameType type){

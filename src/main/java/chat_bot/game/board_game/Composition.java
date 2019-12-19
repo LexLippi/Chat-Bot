@@ -10,7 +10,7 @@ public class Composition {
         words = new ArrayList<>();
         words.add(new WordInfo(0, 0, true, word));
         size = new Rectangle();
-        ResetPosition();
+        resetPosition();
     }
 
     public Rectangle getSize(){
@@ -103,7 +103,7 @@ public class Composition {
             newCompose.words.add(new WordInfo(VectorInt.summ(w.Position,  offset), w.IsHorizontal, w.word));
         }
         newCompose.words.addAll(c1.words);
-        newCompose.ResetPosition();
+        newCompose.resetPosition();
         return newCompose;
     }
 
@@ -114,7 +114,7 @@ public class Composition {
             var newInfo = new WordInfo(word.Position.Y, word.Position.X, !word.IsHorizontal, word.word);
             result.words.add(newInfo);
         }
-        result.ResetPosition();
+        result.resetPosition();
         return result;
     }
 
@@ -127,7 +127,7 @@ public class Composition {
         size.move(amount);
     }
 
-    private void ResetPosition(){
+    private void resetPosition(){
         for (var word : words){
             VectorInt tail;
             if (word.IsHorizontal){
