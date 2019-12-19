@@ -11,7 +11,7 @@ public class LevelFactory {
         else if (level.compareTo("средний") == 0) {
             return new Medium(data);
         }
-        else if (level.compareTo("тяжелый") == 0 || level.compareTo("тяжёлый") == 0) {
+        else if (level.compareTo("сложный") == 0 || level.compareTo("сложный") == 0) {
             return new Hard(data);
         }
         else {
@@ -21,7 +21,7 @@ public class LevelFactory {
 
     public Boolean checkInputString(String inputString) {
         return inputString.compareTo("легкий") == 0 || inputString.compareTo("лёгкий") == 0 ||
-                inputString.compareTo("тяжелый") == 0 || inputString.compareTo("тяжёлый") == 0 ||
+                inputString.compareTo("сложный") == 0 ||
                 inputString.compareTo("средний") == 0;
     }
 }
