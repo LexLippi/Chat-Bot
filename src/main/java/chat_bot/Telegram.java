@@ -87,7 +87,7 @@ public class Telegram extends TelegramLongPollingBot {
         var sender = bots.get(api.getId());
         if (namesToIds.containsKey(invitedName)){
             var invited = bots.get(namesToIds.get(invitedName));
-            invited.CancelWaiting(sender, tellIt);
+            invited.cancelWaiting(sender, tellIt);
         }
     }
 
