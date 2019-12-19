@@ -119,7 +119,7 @@ public class ChatBot {
 				if (((CityGame)game).getCurrentState() instanceof SelectLevel) {
 					buttons.add("Легкий");
 					buttons.add("Средний");
-					buttons.add("Тяжелый");
+					buttons.add("Сложный");
 				}
 				else if (((CityGame)game).getCurrentState() instanceof Draw) {
 					buttons.add("Орел");
@@ -132,6 +132,20 @@ public class ChatBot {
 				};
 				api.outkeyboard(buttons, message.toString());
 			}
+			else if (game instanceof BoardGame && ((BoardGame)game).getLevel() == null) {
+				var buttons = new ArrayList<String>();
+				buttons.add("Сдаюсь");
+				buttons.add("Стоп");
+				var answer = game.process(command, api);
+				var message = new StringBuilder();
+				var replics = answer.getMessages();
+				for (var i = 0; i < replics.length - 1; i++) {
+					message.append(replics[i]).append("\n");
+				}
+				api.outkeyboard(buttons, message.toString());
+				say(replics[replics.length - 1]);
+			}
+
 			else {
 				var answer = game.process(command, api);
 				react(answer);
@@ -238,31 +252,16 @@ public class ChatBot {
 
 	private void startGame(GameType type) {
 		game = factory.getGame(type);
-		if (game instanceof CityGame) {
+		if (game instanceof CityGame || game instanceof BoardGame) {
 			var buttons = new ArrayList<String>() {
 				{
 					add("Легкий");
 					add("Средний");
-					add("Тяжелый");
+					add("Сложный");
 				}
 			};
 			var message = "Выбери уровень сложности: лёгкий, средний, тяжёлый";
 			api.outkeyboard(buttons, message);
-		}
-		else if (game instanceof BoardGame) {
-			var answer = game.startGame(api);
-			ArrayList buttons = new ArrayList<String>() {
-				{
-					add("Сдаюсь");
-					add("Стоп");
-				}};
-			var message = new StringBuilder();
-			var replics = answer.getMessages();
-			for (var i = 0; i < replics.length - 1; i++) {
-				message.append(replics[i]).append("\n");
-			}
-			api.outkeyboard(buttons, message.toString());
-			say(replics[replics.length - 1]);
 		}
 		else{
 			react(game.startGame(api));

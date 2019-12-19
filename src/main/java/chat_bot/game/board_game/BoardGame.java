@@ -20,6 +20,10 @@ public class BoardGame implements IGame {
     public BoardGame(){
     }
 
+    public BoardLevel getLevel() {
+        return level;
+    }
+
     private void generateBoard(int wordsNum){
         var words = level.getWords(wordsNum);
         for (var i = 0; i < words.length; i++) {
