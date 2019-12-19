@@ -26,8 +26,8 @@ public class Data implements Cloneable
 
     public Data() {
         initialize();
-        var provider = new DataProviderFile();
-        //var provider = new DataProvider1000Mest();
+        //var provider = new DataProviderFile();
+        var provider = new DataProvider1000Mest();
         provider.getData(this);
     }
 

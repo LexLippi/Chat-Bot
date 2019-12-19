@@ -7,11 +7,11 @@ import java.util.*;
 
 public class Easy extends BoardLevel {
     public Easy() {
-        data = new BoardData(sortData());
+        super();
     }
 
     @Override
-    public HashMap<String, Double> sortData() {
+    public HashMap<String, Double> getSortedData() {
         var pairs = new BoardData().getWords().values();
         var dict = new HashMap<String, Double>();
         for (var a: pairs)
