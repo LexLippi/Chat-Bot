@@ -99,4 +99,19 @@ public class BoardGame implements IGame {
         var a1 = "выбери уровень сложности: легкий, средний, сложный";
         return new GameReturnedValue(null, a1);
     }
+
+    @Override
+    public ArrayList<String> getAnswerWariants() {
+        var buttons = new ArrayList<String>();
+        if (level == null) {
+            buttons.add("Легкий");
+            buttons.add("Средний");
+            buttons.add("Сложный");
+        }
+        else{
+            buttons.add("Сдаюсь");
+            buttons.add("Стоп");
+        }
+        return buttons;
+    }
 }

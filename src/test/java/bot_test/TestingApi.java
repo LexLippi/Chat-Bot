@@ -1,6 +1,7 @@
 package bot_test;
 
 import chat_bot.Api;
+import chat_bot.IButtonsProvider;
 
 import java.util.ArrayList;
 
@@ -15,12 +16,16 @@ public class TestingApi implements Api {
 
     @Override
     public boolean invite(String name) {
-        return false;
+        return true;
     }
 
     @Override
     public void cancelInvision(boolean broadcast) {
         return;
+    }
+
+    @Override
+    public void setButtonsProvider(IButtonsProvider provider) {
     }
 
     @Override

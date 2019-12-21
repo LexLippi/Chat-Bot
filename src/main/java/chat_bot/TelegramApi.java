@@ -9,6 +9,7 @@ public class TelegramApi implements Api {
 
     private String id;
     private Telegram telegram;
+    private IButtonsProvider provider;
 
     public TelegramApi(String chatID, Telegram telegram) {
         id = chatID;
@@ -21,7 +22,16 @@ public class TelegramApi implements Api {
 
     @Override
     public void out(String massage) {
-        telegram.sendMsg(id, massage);
+        ArrayList<String> buttons = null;
+        if (provider != null) {
+            buttons = provider.getButtons();
+        }
+        if (buttons == null) {
+            telegram.sendMsg(id, massage);
+        }
+        else{
+            outkeyboard(buttons, massage);
+        }
     }
 
     @Override
@@ -32,6 +42,11 @@ public class TelegramApi implements Api {
     @Override
     public void cancelInvision(boolean broadcast) {
         telegram.cancelInvision(this, broadcast);
+    }
+
+    @Override
+    public void setButtonsProvider(IButtonsProvider provider) {
+        this.provider = provider;
     }
 
     @Override

@@ -23,6 +23,10 @@ public class Console implements Api {
 	}
 
 	@Override
+	public void setButtonsProvider(IButtonsProvider provider) {
+	}
+
+	@Override
 	public void outkeyboard(ArrayList buttons, String message) {
 		//ignore
 	}

@@ -9,5 +9,7 @@ public interface Api {
 
 	public void cancelInvision(boolean broadcast);
 
+	public void setButtonsProvider(IButtonsProvider provider);
+
     public void outkeyboard(ArrayList buttons, String message);
 }

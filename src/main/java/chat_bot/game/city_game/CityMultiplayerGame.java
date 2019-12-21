@@ -4,7 +4,9 @@ import chat_bot.Api;
 import chat_bot.game.IGame;
 import chat_bot.game.return_types.GameExitType;
 import chat_bot.game.return_types.GameReturnedValue;
+import com.google.inject.internal.asm.$Attribute;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class CityMultiplayerGame implements IGame {
@@ -34,7 +36,7 @@ public class CityMultiplayerGame implements IGame {
         if (!gameWasStarted){
             if (lowerAnswer.equals("сдаюсь") || lowerAnswer.equals("стоп")){
                 invitedApi.cancelInvision(true);
-                return new GameReturnedValue(GameExitType.GAME_INTERRUPTED);
+                return new GameReturnedValue(GameExitType.GAME_INTERRUPTED, "игра завершена");
             }
             return new GameReturnedValue(null, "второй игрок еще не подключился, подождите немного");
         }
@@ -52,7 +54,6 @@ public class CityMultiplayerGame implements IGame {
             winner.out("твой противник сдался");
             winner.out("ты победил");
             winner.out("введи что-нибудь, чтобы закончить игру");
-            System.out.println(invitedApi != api);
             invitedApi.cancelInvision(false);
             return new GameReturnedValue(GameExitType.PLAYER_LOOSE, "ничего, в другой раз повезет");
         }
@@ -111,5 +112,17 @@ public class CityMultiplayerGame implements IGame {
             }
         }
         return new GameReturnedValue(GameExitType.GAME_INTERRUPTED, "похоже, в этой игре уже слишком много игроков");
+    }
+
+    @Override
+    public ArrayList<String> getAnswerWariants() {
+        var buttons = new ArrayList<String>();
+        if (otherPlayer == null){
+            buttons.add("Стоп");
+        }
+        else {
+            buttons.add("Сдаюсь");
+        }
+        return buttons;
     }
 }

@@ -6,21 +6,17 @@ import chat_bot.game.board_game.BoardGame;
 import chat_bot.game.city_game.CityGame;
 import chat_bot.game.city_game.CityMultiplayerGame;
 import chat_bot.game.city_game.Statistic;
-import chat_bot.game.city_game.levels.Easy;
-import chat_bot.game.city_game.levels.Hard;
-import chat_bot.game.city_game.levels.Medium;
 import chat_bot.game.city_game.states.BotCourse;
 import chat_bot.game.city_game.states.Draw;
 import chat_bot.game.city_game.states.SelectLevel;
 import chat_bot.game.return_types.GameExitType;
 import chat_bot.game.return_types.GameReturnedValue;
 
-import java.util.AbstractQueue;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ChatBot {
+public class ChatBot implements IButtonsProvider {
 	private Api api;
 	private IGameFactory factory;
 	private ArrayDeque<ChatBot> waitingBots = new ArrayDeque<>();
@@ -46,6 +42,7 @@ public class ChatBot {
 	public ChatBot(Api api, IGameFactory factory) {
 		System.out.println(this);
 		this.api = api;
+		api.setButtonsProvider(this);
 		this.factory = factory;
 		start();
 		initStatistic();
@@ -67,22 +64,11 @@ public class ChatBot {
 		var message = "Если хочешь играть в города, введи команду \"Играть в города\""
 				+ " Если хочешь искать слова, введи команду \"Искать слова\""
 				+ " Если хочешь играть в города с другом, введи команду \"Играть в города с другом\"";
-		var addButton = false;
 		if (waitingBots.size() > 0){
 			message = "С тобой хотят поиграть по сети, чтобы принять, введи команду \"Играть по сети\""
 					+ "чтобы отказаться - \"Отказаться от приглашения\""+ message;
-			addButton = true;
 		}
-		var buttons = new ArrayList<String>() {};
-		if (addButton){
-			buttons.add("Играть по сети");
-			buttons.add("Отказаться от приглашения");
-		}
-		buttons.add("Играть в города с другом");
-		buttons.add("Играть в города");
-		buttons.add("Искать слова");
-		buttons.add("Получить статистику по игре в города");
-		api.outkeyboard(buttons, message);
+		say(message);
 	}
 
 	public void start() {
@@ -99,57 +85,8 @@ public class ChatBot {
 
 	public void process(String command) {
 		if (game != null){
-			if (game instanceof CityGame &&
-				((CityGame)game).getCurrentState() instanceof BotCourse &&
-				command.toLowerCase().compareTo("получить ссылку на город") == 0) {
-			var message = "https://ru.wikipedia.org/wiki/" + ((CityGame)game).getLastCity();
-			var buttons = new ArrayList<String>();
-			buttons.add("Сдаюсь");
-			buttons.add("Стоп");
-			buttons.add("Получить ссылку на город");
-			api.outkeyboard(buttons, message);
-			}
-			else if (game instanceof CityGame && !(((CityGame)game).getCurrentState() instanceof BotCourse)){
-				var answer = game.process(command, api);
-				var message = new StringBuilder();
-				for (var replica: answer.getMessages()) {
-					message.append(replica + "\n");
-				}
-				var buttons = new ArrayList<String>();
-				if (((CityGame)game).getCurrentState() instanceof SelectLevel) {
-					buttons.add("Легкий");
-					buttons.add("Средний");
-					buttons.add("Сложный");
-				}
-				else if (((CityGame)game).getCurrentState() instanceof Draw) {
-					buttons.add("Орел");
-					buttons.add("Решка");
-				}
-				else {
-					buttons.add("Сдаюсь");
-					buttons.add("Стоп");
-					buttons.add("Получить ссылку на город");
-				};
-				api.outkeyboard(buttons, message.toString());
-			}
-			else if (game instanceof BoardGame && ((BoardGame)game).getLevel() == null) {
-				var buttons = new ArrayList<String>();
-				buttons.add("Сдаюсь");
-				buttons.add("Стоп");
-				var answer = game.process(command, api);
-				var message = new StringBuilder();
-				var replics = answer.getMessages();
-				for (var i = 0; i < replics.length - 1; i++) {
-					message.append(replics[i]).append("\n");
-				}
-				api.outkeyboard(buttons, message.toString());
-				say(replics[replics.length - 1]);
-			}
-
-			else {
-				var answer = game.process(command, api);
-				react(answer);
-			}
+			var answer = game.process(command, api);
+			react(answer);
 		}
 		else {
 			if (command.toLowerCase().compareTo("получить статистику по игре в города") == 0) {
@@ -157,12 +94,7 @@ public class ChatBot {
 						+ "\nСредний уровень\n " + statistic.get("Medium").getStatistic()
 						+ "\nСложный уровень\n " + statistic.get("Hard").getStatistic()
 						+ "\nПо сети\n " + statistic.get("Multiplayer").getStatistic();
-				var buttons = new ArrayList<String>();
-				buttons.add("Играть в города");
-				buttons.add("Искать слова");
-				buttons.add("Играть в города с другом");
-				buttons.add("Получить статистику по игре в города");
-				api.outkeyboard(buttons, message);
+				say(message);
 			}
 			else if (command.toLowerCase().compareTo("играть в города") == 0) {
 				startGame(GameType.CityGame);
@@ -178,7 +110,6 @@ public class ChatBot {
 					var message = "похоже, тебя никто не пригласил, но это ничего, ты можешь сам пригласить своего друга"
 							+ "для этого просто введи \"Играть в города с другом\"";
 					say(message);
-					getOptions();
 				}
 				else{
 					game = waitingBots.poll().getGame();
@@ -190,7 +121,6 @@ public class ChatBot {
 					var message = "похоже, тебя никто не пригласил, но это ничего, ты можешь сам пригласить своего друга"
 							+ "для этого просто введи \"Играть в города с другом\"";
 					say(message);
-					getOptions();
 				}
 				else{
 					var bot = waitingBots.poll();
@@ -242,24 +172,27 @@ public class ChatBot {
 
 	private void startGame(GameType type) {
 		game = factory.getGame(type);
-		if (game instanceof CityGame || game instanceof BoardGame) {
-			var buttons = new ArrayList<String>() {
-				{
-					add("Легкий");
-					add("Средний");
-					add("Сложный");
-				}
-			};
-			var message = "Выбери уровень сложности: лёгкий, средний, тяжёлый";
-			api.outkeyboard(buttons, message);
-		}
-		else{
-			react(game.startGame(api));
-		}
+		react(game.startGame(api));
 	}
 
 	private void incorrectCommand() {
 		say("Я ещё не умею делать то, что ты хочешь.");
 	}
 
+	@Override
+	public ArrayList<String> getButtons() {
+		if (game != null){
+			return game.getAnswerWariants();
+		}
+		var buttons = new ArrayList<String>() {};
+		if (waitingBots.size() > 0){
+			buttons.add("Играть по сети");
+			buttons.add("Отказаться от приглашения");
+		}
+		buttons.add("Играть в города с другом");
+		buttons.add("Играть в города");
+		buttons.add("Искать слова");
+		buttons.add("Получить статистику по игре в города");
+		return buttons;
+	}
 }
