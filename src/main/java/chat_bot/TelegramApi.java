@@ -30,7 +30,7 @@ public class TelegramApi implements Api {
             telegram.sendMsg(id, massage);
         }
         else{
-            outkeyboard(buttons, massage);
+            outkeyboard(massage, buttons);
         }
     }
 
@@ -50,7 +50,7 @@ public class TelegramApi implements Api {
     }
 
     @Override
-    public void outkeyboard(ArrayList buttons, String message) {
+    public void outkeyboard(String message, ArrayList... buttons ) {
         telegram.sendInlineKeyBoardMessage(Long.parseLong(id), message, buttons);
     }
 }

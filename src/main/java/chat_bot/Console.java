@@ -27,7 +27,7 @@ public class Console implements Api {
 	}
 
 	@Override
-	public void outkeyboard(ArrayList buttons, String message) {
+	public void outkeyboard(String message, ArrayList... buttons) {
 		//ignore
 	}
 

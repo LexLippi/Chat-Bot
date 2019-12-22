@@ -11,5 +11,5 @@ public interface Api {
 
 	public void setButtonsProvider(IButtonsProvider provider);
 
-    public void outkeyboard(ArrayList buttons, String message);
+    public void outkeyboard(String message, ArrayList... buttons);
 }
