@@ -92,7 +92,7 @@ public class Telegram extends TelegramLongPollingBot {
     }
 
     @Override
-    public void onUpdateReceived(Update update) {
+    public synchronized void onUpdateReceived(Update update) {
         var msg = update.getMessage();
         if (msg != null && msg.hasText()) {
             var id = msg.getChatId().toString();
