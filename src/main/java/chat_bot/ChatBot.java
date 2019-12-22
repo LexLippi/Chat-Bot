@@ -39,6 +39,10 @@ public class ChatBot implements IButtonsProvider {
 		return game;
 	}
 
+	public String getStatistic(String level) {
+		return statistic.get(level).getStatistic();
+	}
+
 	public ChatBot(Api api, IGameFactory factory) {
 		System.out.println(this);
 		this.api = api;

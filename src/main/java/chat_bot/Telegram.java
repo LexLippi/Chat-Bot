@@ -110,7 +110,7 @@ public class Telegram extends TelegramLongPollingBot {
                             {
                                 add("/start");
                             }};
-                        sendInlineKeyBoardMessage(Long.parseLong(id), buttons, "для начала напишите /start");
+                        sendInlineKeyBoardMessage(Long.parseLong(id), "для начала напишите /start", buttons);
                     }
                     else {
                         //answers.get(id).add(msg.getText());
@@ -139,7 +139,7 @@ public class Telegram extends TelegramLongPollingBot {
         cancelInvision(api, true);
     }
 
-    public void sendInlineKeyBoardMessage(Long chatId, List<String> buttons, String message) {
+    public void sendInlineKeyBoardMessage(Long chatId, String message, List<String> ... lines) {
         ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
 
         replyKeyboardMarkup.setSelective(true);
@@ -147,12 +147,15 @@ public class Telegram extends TelegramLongPollingBot {
         replyKeyboardMarkup.setOneTimeKeyboard(true);
 
         List<KeyboardRow> keyboard = new ArrayList<>();
-        KeyboardRow keyboardFirstRow = new KeyboardRow();
 
-        for (var button: buttons){
-            keyboardFirstRow.add(button);
+        for (var buttons: lines) {
+            KeyboardRow keyboardRow = new KeyboardRow();
+            for (var button: buttons){
+                keyboardRow.add(button);
+            }
+            keyboard.add(keyboardRow);
         }
-        keyboard.add(keyboardFirstRow);
+
         replyKeyboardMarkup.setKeyboard(keyboard);
         SendMessage sendMessage = new SendMessage().setChatId(chatId).setText(message).setReplyMarkup(replyKeyboardMarkup);
         try {

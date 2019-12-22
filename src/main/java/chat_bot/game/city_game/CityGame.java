@@ -26,12 +26,16 @@ public class CityGame implements IGame {
 		return lastCity;
 	}
 
-	public State getCurrentState(){
-		return currentState;
+	public void setCurrentState(State state){
+		currentState = state;
 	}
 
 	public GameLevel getLevel() {
 		return level;
+	}
+
+	public void setLevel(GameLevel level) {
+		this.level = level;
 	}
 
 	@Override

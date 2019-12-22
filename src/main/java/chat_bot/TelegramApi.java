@@ -51,6 +51,6 @@ public class TelegramApi implements Api {
 
     @Override
     public void outkeyboard(ArrayList buttons, String message) {
-        telegram.sendInlineKeyBoardMessage(Long.parseLong(id), buttons, message);
+        telegram.sendInlineKeyBoardMessage(Long.parseLong(id), message, buttons);
     }
 }
